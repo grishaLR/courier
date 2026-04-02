@@ -1,0 +1,34 @@
+.secrets/
+*.p8
+.env
+android/app/google-services.json
+
+# Android build artifacts
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+
+# iOS build artifacts
+ios/**/DerivedData/
+ios/**/build/
+*.xcuserdata
+
+# Web build artifacts
+web/node_modules/
+web/dist/
+
+# Go
+cmd/server/server
+
+# IDE
+android/.idea/
+.vscode/
+xcuserdata/
+*.xcuserstate
+
+# Backups & temp files
+ios/_Sources_backup/
+
+# OS
+.DS_Store

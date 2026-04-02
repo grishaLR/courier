@@ -1,0 +1,33 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Push notifications for the ATmosphere. Discover apps built on AT Protocol." } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content="https://courier.social" />
+    <style is:global>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: #f8f9fa;
+        color: #1a1a1a;
+        line-height: 1.5;
+      }
+      a { color: inherit; text-decoration: none; }
+    </style>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

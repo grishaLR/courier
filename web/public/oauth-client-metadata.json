@@ -1,0 +1,12 @@
+{
+  "client_id": "https://courier.social/oauth-client-metadata.json",
+  "client_name": "Courier",
+  "client_uri": "https://courier.social",
+  "redirect_uris": ["social.courier:/auth/callback", "https://api.courier.social/auth/callback"],
+  "scope": "atproto",
+  "grant_types": ["authorization_code", "refresh_token"],
+  "response_types": ["code"],
+  "token_endpoint_auth_method": "none",
+  "application_type": "native",
+  "dpop_bound_access_tokens": true
+}

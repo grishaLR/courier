@@ -1,0 +1,517 @@
+---
+const baseUrl = "https://api.courier.social";
+const endpoints = [
+  {
+    method: "GET",
+    path: "/catalog/user",
+    description: "GET the app catalog. actor and refresh params are optional. without params returns all apps. if actor param is included the respone returns the apps in two lists: apps that match the user's collections from describeRepo and 'discover' which are the rest of apps the user is seemingly not on. the refresh param will force the cache to reload and call describeRepo.",
+    params: [
+      { name: "actor", type: "string", required: false, description: "Handle or DID. Returns personalized view when provided." },
+      { name: "refresh", type: "boolean", required: false, description: "Force rebuild of cached catalog." },
+    ],
+    example: `curl "${baseUrl}/catalog/user?actor=<YOUR_HANDLE_HERE>"`,
+    response: `{
+  "yourApps": [
+    {
+      "category": "Social",
+      "apps": [
+        {
+          "collectionPrefix": "app.bsky",
+          "appName": "Blacksky",
+          "appUrl": "https://blacksky.community",
+          "category": "Social",
+          "description": "...",
+          "faviconUrl": "..."
+        }
+      ]
+    }
+  ],
+  "discoverApps": [...]
+}`
+  },
+  {
+    method: "GET",
+    path: "/catalog/alternatives",
+    description: "GET alternative apps for a shared lexicon (e.g., all atproto social clients).",
+    params: [
+      { name: "prefix", type: "string", required: true, description: "Collection prefix. e.g., app.bsky" },
+    ],
+    example: `curl "${baseUrl}/catalog/alternatives?prefix=app.bsky"`,
+    response: `[
+  { "collectionPrefix": "app.bsky", "appName": "Bluesky", "appUrl": "https://bsky.app", ... },
+  { "collectionPrefix": "app.graysky", "appName": "Bluesky", "alternativeFor": "app.bsky", ... },
+  ...
+]`
+  },
+  {
+    method: "GET",
+    path: "/app_catalog.json",
+    description: "Raw static JSON of the full app catalog. No server required — served from CDN.",
+    params: [],
+    example: `curl "https://courier.social/app_catalog.json"`,
+    response: `[
+  {
+    "collectionPrefix": "app.bsky",
+    "appName": "Bluesky",
+    "appUrl": "https://bsky.app",
+    "category": "Social",
+    "description": "...",
+    "faviconUrl": "...",
+    "alternativeFor": ""
+  },
+  ...
+] // 385 apps`
+  },
+];
+---
+
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="/favicon.png" media="(prefers-color-scheme: light)" />
+  <link rel="icon" type="image/png" href="/favicon-dark.png" media="(prefers-color-scheme: dark)" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <title>API — ATmosphere App Catalog</title>
+  <style is:global>
+    :root {
+      --bg: #e9e7e7; --bg-alt: #f5f3f3; --text: #100f0f; --text-muted: #706a6a;
+      --border: #d4d2d2; --link: #fe0075; --tag-bg: #d4d2d2; --tag-text: #706a6a;
+      --code-bg: #f5f3f3; --mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    }
+    [data-theme="dark"] {
+      --bg: #1f202a; --bg-alt: #282a36; --text: #f8f8f2; --text-muted: #b0b4c8;
+      --border: #414558; --link: #ff79c6; --tag-bg: #343746; --tag-text: #b0b4c8;
+      --code-bg: #282a36;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.6; font-size: 14px;
+    }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .header {
+      border-bottom: 1px solid var(--border); padding: 12px 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      position: sticky; top: 0; background: var(--bg); z-index: 10;
+    }
+    .header-left { display: flex; align-items: baseline; gap: 12px; }
+    .header h1 { font-size: 16px; font-weight: 600; }
+    .header-right { display: flex; align-items: center; gap: 12px; }
+    .nav-link { font-size: 13px; color: var(--text-muted); }
+    .theme-toggle {
+      background: none; border: 1px solid var(--border); border-radius: 6px;
+      padding: 4px 8px; cursor: pointer; font-size: 13px; color: var(--text-muted);
+    }
+
+    .content { max-width: 960px; margin: 0 auto; padding: 0 24px 60px; }
+
+    .section-header {
+      font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+      padding: 16px 0 8px; border-bottom: 1px solid var(--border); margin-top: 24px;
+    }
+    .endpoint { margin-bottom: 0; border-bottom: 1px solid var(--border); padding: 16px 0; }
+    .endpoint-header {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+    }
+    .method {
+      font-family: var(--mono); font-size: 11px; font-weight: 700; padding: 1px 5px;
+      border: 1px solid var(--border); color: var(--text-muted);
+    }
+    .path { font-family: var(--mono); font-size: 13px; }
+    .endpoint-desc { color: var(--text-muted); font-size: 13px; margin-bottom: 12px; }
+    .endpoint-body h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin: 12px 0 4px; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 12px; font-family: var(--mono); }
+    th { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 10px; text-transform: uppercase; font-family: inherit; }
+    td { padding: 4px 8px; border-bottom: 1px solid var(--border); }
+    td code { background: none; padding: 0; }
+    .required { color: #cf222e; font-size: 10px; }
+
+    .code-block { position: relative; margin: 4px 0; }
+    pre {
+      background: var(--bg-alt); border: 1px solid var(--border);
+      padding: 8px 36px 8px 8px; overflow-x: auto; font-family: var(--mono); font-size: 11px;
+      line-height: 1.4;
+    }
+    .copy-btn {
+      position: absolute; top: 50%; right: 4px; transform: translateY(-50%);
+      background: none; border: 1px solid var(--border);
+      padding: 2px 6px; cursor: pointer; font-size: 10px; color: var(--text-muted);
+      font-family: var(--mono);
+    }
+    .copy-btn:hover { color: var(--text); border-color: var(--accent); }
+    .copy-btn.copied { color: #1a7f37; border-color: #1a7f37; }
+
+    .tabs {
+      display: flex; gap: 0; border-bottom: 1px solid var(--border);
+      padding: 0 24px; background: var(--bg);
+    }
+    .tab {
+      background: none; border: none; border-bottom: 2px solid transparent;
+      padding: 8px 16px; cursor: pointer; font-size: 13px; color: var(--text-muted);
+      font-family: inherit;
+    }
+    .tab:hover { color: var(--text); }
+    .tab.active { color: var(--text); border-bottom-color: var(--link); }
+
+    .demo-explainer {
+      color: var(--text-muted); font-size: 12px; padding: 8px 0 12px;
+      line-height: 1.4;
+    }
+    .demo-input-row { display: flex; gap: 8px; align-items: center; max-width: 400px; }
+    .demo-input-row .search { flex: 1; }
+
+    .demo-section { margin-top: 24px; }
+    .demo-section h3 {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+      padding: 8px 0; border-bottom: 1px solid var(--border);
+    }
+    .demo-section .count-badge {
+      font-size: 11px; background: var(--tag-bg); color: var(--tag-text);
+      padding: 1px 6px; border-radius: 10px; font-weight: 400;
+    }
+    .app-list { list-style: none; }
+    .app-row {
+      display: flex; align-items: center; gap: 10px; padding: 8px 0;
+      border-bottom: 1px solid var(--border); font-size: 13px; cursor: pointer;
+    }
+    .app-row:hover { background: var(--bg-alt); margin: 0 -8px; padding: 8px 8px; border-radius: 4px; }
+    .app-icon {
+      width: 24px; height: 24px; border-radius: 4px; flex-shrink: 0;
+      object-fit: cover; background: var(--tag-bg);
+    }
+    .app-icon-placeholder {
+      width: 24px; height: 24px; border-radius: 4px; flex-shrink: 0;
+      background: var(--tag-bg); display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 600; color: var(--text-muted);
+    }
+    .app-name { font-weight: 500; min-width: 120px; }
+    .app-name a { color: var(--link); }
+    .app-prefix { font-family: var(--mono); font-size: 12px; color: var(--text-muted); flex: 1; }
+    .app-desc { color: var(--text-muted); flex: 2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .app-expand {
+      background: none; border: none; cursor: pointer; font-size: 11px;
+      color: var(--text-muted); padding: 2px 6px; border-radius: 4px;
+    }
+    .app-expand:hover { background: var(--tag-bg); color: var(--text); }
+    .app-detail {
+      display: none; padding: 12px 0 12px 34px;
+      border-bottom: 1px solid var(--border); font-size: 12px;
+    }
+    .app-detail.open { display: block; }
+    .app-detail dt { color: var(--text-muted); font-weight: 500; margin-top: 6px; }
+    .app-detail dd { font-family: var(--mono); word-break: break-all; }
+    .app-detail dd a { color: var(--link); }
+    .category { margin-top: 24px; }
+    .category-header {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 0; border-bottom: 1px solid var(--border);
+      cursor: pointer; user-select: none;
+    }
+    .category-header:hover { color: var(--link); }
+    .category-name { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .category-count {
+      font-size: 11px; background: var(--tag-bg); color: var(--tag-text);
+      padding: 1px 6px; border-radius: 10px;
+    }
+    .category-chevron { font-size: 10px; color: var(--text-muted); transition: transform 0.15s; }
+    .category.collapsed .category-chevron { transform: rotate(-90deg); }
+    .category.collapsed .app-list { display: none; }
+    .demo-section.collapsed .demo-section-body { display: none; }
+    .demo-section.collapsed .category-chevron { transform: rotate(-90deg); }
+  </style>
+  <script is:inline>
+    (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t;else if(window.matchMedia('(prefers-color-scheme:dark)').matches)document.documentElement.dataset.theme='dark'})();
+  </script>
+</head>
+<body>
+  <div class="header">
+    <div class="header-left">
+      <h1>API</h1>
+    </div>
+    <div class="header-right">
+      <a class="nav-link" href="/">Directory</a>
+      <a class="nav-link" href="/app_catalog.json">JSON</a>
+      <button class="theme-toggle" id="theme-toggle">dark</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="endpoints">Endpoints</button>
+    <button class="tab" data-tab="demo">Demo</button>
+  </div>
+
+  <div class="content" id="tab-endpoints">
+    <div class="section-header">Endpoints</div>
+    <p style="color: var(--text-muted); font-size: 12px; padding: 8px 0;">public and no auth required. free to use.</p>
+
+    {endpoints.map(ep => (
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="method">{ep.method}</span>
+          <span class="path">{ep.path}</span>
+        </div>
+        <div class="endpoint-desc">{ep.description}</div>
+        <div class="endpoint-body">
+
+          {ep.params.length > 0 && (
+            <>
+              <h4>Parameters</h4>
+              <table>
+                <thead><tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+                <tbody>
+                  {ep.params.map(p => (
+                    <tr>
+                      <td><code>{p.name}</code></td>
+                      <td>{p.type}</td>
+                      <td>{p.required ? <span class="required">yes</span> : 'no'}</td>
+                      <td>{p.description}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </>
+          )}
+
+          <h4>Example</h4>
+          <div class="code-block">
+            <pre>{ep.example}</pre>
+            <button class="copy-btn" data-copy={ep.example}>copy</button>
+          </div>
+
+          <h4>Response</h4>
+          <pre>{ep.response}</pre>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div class="content" id="tab-demo" style="display:none">
+    <div class="section-header">My Apps</div>
+    <p class="demo-explainer">See which ATmosphere apps you're on and discover new ones. Auth required so only you can look up the apps you're on.</p>
+
+    <div id="demo-auth">
+      <div id="demo-logged-out">
+        <div class="demo-input-row">
+          <input type="text" id="demo-handle" class="search" placeholder="your.social.handle" autocomplete="off" />
+          <button class="theme-toggle" id="demo-login">log in</button>
+        </div>
+      </div>
+      <div id="demo-logged-in" style="display:none">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <span id="demo-user" style="font-size:13px;color:var(--text-muted)"></span>
+          <button class="theme-toggle" id="demo-logout">log out</button>
+        </div>
+        <div id="demo-results"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const toggle = document.getElementById('theme-toggle')!;
+    const html = document.documentElement;
+    const stored = localStorage.getItem('theme');
+    if (stored) { html.dataset.theme = stored; toggle.textContent = stored === 'dark' ? 'light' : 'dark'; }
+    else if (window.matchMedia('(prefers-color-scheme: dark)').matches) { html.dataset.theme = 'dark'; toggle.textContent = 'light'; }
+    toggle.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; toggle.textContent = next === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('theme', next);
+    });
+
+    // Tabs
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const target = (tab as HTMLElement).dataset.tab;
+        document.getElementById('tab-endpoints')!.style.display = target === 'endpoints' ? '' : 'none';
+        document.getElementById('tab-demo')!.style.display = target === 'demo' ? '' : 'none';
+      });
+    });
+
+    // Demo
+    const API = window.location.hostname === 'localhost' ? 'http://localhost:8080' : 'https://api.courier.social';
+    const demoLogin = document.getElementById('demo-login')!;
+    const demoHandle = document.getElementById('demo-handle') as HTMLInputElement;
+    const demoLoggedOut = document.getElementById('demo-logged-out')!;
+    const demoLoggedIn = document.getElementById('demo-logged-in')!;
+    const demoUser = document.getElementById('demo-user')!;
+    const demoResults = document.getElementById('demo-results')!;
+
+    // Check for session token from OAuth redirect (in URL fragment)
+    const hash = window.location.hash;
+    const hashParams = new URLSearchParams(hash.replace('#', ''));
+    const sessionFromHash = hash.match(/session=([^&]+)/)?.[1];
+    if (sessionFromHash) {
+      localStorage.setItem('courier_session', sessionFromHash);
+      history.replaceState(null, '', '/api#demo');
+    }
+
+    // Switch to demo tab if #demo in URL
+    if (hash.includes('demo')) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelector('[data-tab="demo"]')!.classList.add('active');
+      document.getElementById('tab-endpoints')!.style.display = 'none';
+      document.getElementById('tab-demo')!.style.display = '';
+    }
+
+    // Check session on load
+    const sessionToken = localStorage.getItem('courier_session');
+    if (sessionToken) {
+      fetch(`${API}/auth/session`, {
+        headers: { 'Authorization': `Bearer ${sessionToken}` }
+      })
+        .then(r => r.ok ? r.json() : null)
+        .then(session => {
+          if (session?.did) {
+            showDemoLoggedIn(session.did, session.handle);
+          } else {
+            localStorage.removeItem('courier_session');
+          }
+        })
+        .catch(() => {});
+    }
+
+    demoLogin.addEventListener('click', () => {
+      const handle = demoHandle.value.trim();
+      if (!handle) { demoHandle.focus(); return; }
+      demoLogin.textContent = 'loading...';
+
+      // Dev mode: skip OAuth, load apps directly by handle
+      if (window.location.hostname === 'localhost') {
+        showDemoLoggedIn('', handle);
+        return;
+      }
+
+      fetch(`${API}/auth/oauth/start`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ handle }),
+      })
+        .then(r => r.json())
+        .then(data => {
+          if (data.authorizationURL) {
+            window.location.href = data.authorizationURL;
+          } else {
+            alert('Login failed');
+            demoLogin.textContent = 'log in';
+          }
+        })
+        .catch(() => {
+          alert('Login failed');
+          demoLogin.textContent = 'log in';
+        });
+    });
+
+    demoHandle.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter') demoLogin.click();
+    });
+
+    document.getElementById('demo-logout')!.addEventListener('click', () => {
+      localStorage.removeItem('courier_session');
+      demoLoggedIn.style.display = 'none';
+      demoLoggedOut.style.display = '';
+      demoResults.innerHTML = '';
+    });
+
+    function showDemoLoggedIn(did: string, handle: string) {
+      demoUser.textContent = handle || did;
+      demoLoggedOut.style.display = 'none';
+      demoLoggedIn.style.display = '';
+
+      // Switch to demo tab
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelector('[data-tab="demo"]')!.classList.add('active');
+      document.getElementById('tab-endpoints')!.style.display = 'none';
+      document.getElementById('tab-demo')!.style.display = '';
+
+      demoResults.innerHTML = '<p style="color:var(--text-muted);font-size:13px">Loading your apps...</p>';
+
+      fetch(`${API}/catalog/user?actor=${encodeURIComponent(did || handle)}`, { credentials: 'include' })
+        .then(r => r.json())
+        .then(data => {
+          let html = '';
+          let yourCount = 0;
+          let discoverCount = 0;
+
+          const renderSection = (groups: any[], title: string) => {
+            let totalCount = 0;
+            groups.forEach((g: any) => totalCount += g.apps.length);
+            let s = `<div class="demo-section"><h3 class="demo-section-header" data-section-toggle style="cursor:pointer;user-select:none"><span class="category-chevron">▼</span>${title} <span class="count-badge">${totalCount}</span></h3><div class="demo-section-body">`;
+            groups.forEach((group: any) => {
+              s += `<div class="category"><div class="category-header" data-toggle><span class="category-chevron">▼</span><span class="category-name">${group.category}</span><span class="category-count">${group.apps.length}</span></div><ul class="app-list">`;
+              group.apps.sort((a: any, b: any) => a.appName.localeCompare(b.appName)).forEach((app: any) => {
+                const icon = app.faviconUrl
+                  ? `<img class="app-icon" src="${app.faviconUrl}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="app-icon-placeholder" style="display:none">${app.appName[0]}</div>`
+                  : `<div class="app-icon-placeholder">${app.appName[0]}</div>`;
+                const desc = app.description ? app.description.slice(0, 80) + (app.description.length > 80 ? '...' : '') : '';
+                s += `<li><div class="app-row" data-app>${icon}<span class="app-name"><a href="${app.appUrl}" target="_blank" rel="noopener">${app.appName}</a></span><span class="app-prefix">${app.collectionPrefix}</span><span class="app-desc">${desc}</span><button class="app-expand" data-expand>···</button></div><div class="app-detail"><dl><dt>URL</dt><dd><a href="${app.appUrl}" target="_blank" rel="noopener">${app.appUrl}</a></dd><dt>Collection Prefix</dt><dd>${app.collectionPrefix}</dd><dt>Category</dt><dd>${app.category}</dd>${app.description ? `<dt>Description</dt><dd>${app.description}</dd>` : ''}</dl></div></li>`;
+              });
+              s += `</ul></div>`;
+            });
+            s += `</div></div>`;
+            return s;
+          };
+
+          if (data.yourApps?.length > 0) {
+            html += renderSection(data.yourApps, "Apps you're on");
+          }
+          if (data.discoverApps?.length > 0) {
+            html += renderSection(data.discoverApps, "Apps you could be on");
+          }
+          demoResults.innerHTML = html || '<p style="color:var(--text-muted)">No apps found.</p>';
+
+          // Wire up section collapse toggles
+          demoResults.querySelectorAll('[data-section-toggle]').forEach(header => {
+            header.addEventListener('click', () => {
+              header.parentElement!.classList.toggle('collapsed');
+            });
+          });
+
+          // Wire up category collapse toggles
+          demoResults.querySelectorAll('[data-toggle]').forEach(header => {
+            header.addEventListener('click', () => {
+              header.parentElement!.classList.toggle('collapsed');
+            });
+          });
+
+          // Wire up row expand (click anywhere except links)
+          demoResults.querySelectorAll('[data-app]').forEach(row => {
+            row.addEventListener('click', (e) => {
+              if ((e.target as HTMLElement).closest('a')) return;
+              const li = (row as HTMLElement).closest('li')!;
+              const detail = li.querySelector('.app-detail')!;
+              const btn = li.querySelector('[data-expand]') as HTMLElement;
+              detail.classList.toggle('open');
+              if (btn) btn.textContent = detail.classList.contains('open') ? '×' : '···';
+            });
+          });
+        })
+        .catch(() => { demoResults.innerHTML = '<p style="color:var(--text-muted)">Failed to load apps.</p>'; });
+    }
+
+    // Copy buttons
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const text = (btn as HTMLElement).dataset.copy || (btn as HTMLElement).previousElementSibling?.textContent || '';
+        await navigator.clipboard.writeText(text);
+        (btn as HTMLElement).textContent = 'copied!';
+        (btn as HTMLElement).classList.add('copied');
+        setTimeout(() => {
+          (btn as HTMLElement).textContent = 'copy';
+          (btn as HTMLElement).classList.remove('copied');
+        }, 1500);
+      });
+    });
+  </script>
+  <script>
+    import { inject } from '@vercel/analytics';
+    inject();
+  </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+ios/
+android/
+web/node_modules/
+web/.astro/
+web/dist/
+web/src/
+.secrets/
+.git/
+*.p8
+semblo.json
+semble.json
+Untitled
+.mcp.json
+*.md

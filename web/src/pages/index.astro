@@ -1,0 +1,373 @@
+---
+import catalog from '../../public/app_catalog.json';
+
+const byCategory: Record<string, typeof catalog> = {};
+for (const app of catalog) {
+  const cat = app.category || 'Other';
+  if (!byCategory[cat]) byCategory[cat] = [];
+  byCategory[cat].push(app);
+}
+
+const categoryOrder = Object.keys(byCategory)
+  .filter(c => c !== 'Other')
+  .sort()
+  .concat(byCategory['Other'] ? ['Other'] : []);
+
+const totalApps = catalog.length;
+---
+
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="/favicon.png" media="(prefers-color-scheme: light)" />
+  <link rel="icon" type="image/png" href="/favicon-dark.png" media="(prefers-color-scheme: dark)" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <title>ATmosphere App Catalog</title>
+  <meta name="description" content="A catalog of ever-growing apps built on AT Protocol." />
+  <meta property="og:image" content="https://courier.social/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://courier.social/og-image.png" />
+  <style>
+    :root {
+      --bg: #e9e7e7;
+      --bg-alt: #f5f3f3;
+      --text: #100f0f;
+      --text-muted: #706a6a;
+      --border: #d4d2d2;
+      --accent: #8e4162;
+      --link: #fe0075;
+      --tag-bg: #d4d2d2;
+      --tag-text: #706a6a;
+      --hover-bg: #f5f3f3;
+      --mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    }
+    [data-theme="dark"] {
+      --bg: #1f202a;
+      --bg-alt: #282a36;
+      --text: #f8f8f2;
+      --text-muted: #b0b4c8;
+      --border: #414558;
+      --accent: #bd93f9;
+      --link: #ff79c6;
+      --tag-bg: #343746;
+      --tag-text: #b0b4c8;
+      --hover-bg: #282a36;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      font-size: 14px;
+    }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .banner {
+      display: block;
+      text-align: center;
+      padding: 6px 0 0;
+      font-size: 11px;
+      color: var(--link);
+      width: 100%;
+    }
+    .banner:hover { text-decoration: underline; }
+
+    .sticky-top {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--bg);
+    }
+    .header {
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header-left { display: flex; align-items: baseline; gap: 12px; }
+    .header h1 { font-size: 16px; font-weight: 600; }
+    .header .subtitle { font-size: 12px; color: var(--text-muted); font-style: italic; }
+    .header-right { display: flex; align-items: center; gap: 12px; }
+    .theme-toggle {
+      background: none; border: 1px solid var(--border); border-radius: 6px;
+      padding: 4px 8px; cursor: pointer; font-size: 13px; color: var(--text-muted);
+    }
+    .theme-toggle:hover { color: var(--text); border-color: var(--accent); }
+    .json-link { font-size: 12px; font-family: var(--mono); color: var(--text-muted); }
+
+    .toolbar {
+      border-bottom: 1px solid var(--border);
+      padding: 8px 24px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      background: var(--bg-alt);
+      z-index: 9;
+    }
+    .search {
+      flex: 1;
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 13px;
+      background: var(--bg);
+      color: var(--text);
+      outline: none;
+      font-family: inherit;
+    }
+    .search:focus { border-color: var(--link); }
+    .count { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
+
+    .content { max-width: 960px; margin: 0 auto; padding: 0 24px 60px; }
+
+    .category {
+      margin-top: 24px;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      user-select: none;
+    }
+    .category-header:hover { color: var(--link); }
+    .category-name { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .category-count {
+      font-size: 11px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      padding: 1px 6px;
+      border-radius: 10px;
+    }
+    .category-chevron { font-size: 10px; color: var(--text-muted); transition: transform 0.15s; }
+    .category.collapsed .category-chevron { transform: rotate(-90deg); }
+    .category.collapsed .app-list { display: none; }
+
+    .app-list { list-style: none; }
+    .app-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .app-row:last-child { border-bottom: none; }
+    .app-row:hover { background: var(--hover-bg); margin: 0 -8px; padding: 8px 8px; border-radius: 4px; }
+
+    .app-icon {
+      width: 24px; height: 24px; border-radius: 4px; flex-shrink: 0;
+      object-fit: cover; background: var(--tag-bg);
+    }
+    .app-icon-placeholder {
+      width: 24px; height: 24px; border-radius: 4px; flex-shrink: 0;
+      background: var(--tag-bg); display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 600; color: var(--text-muted);
+    }
+    .app-name { font-weight: 500; min-width: 120px; }
+    .app-prefix { font-family: var(--mono); font-size: 12px; color: var(--text-muted); flex: 1; }
+    .app-desc { color: var(--text-muted); flex: 2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .app-expand {
+      background: none; border: none; cursor: pointer; font-size: 11px;
+      color: var(--text-muted); padding: 2px 6px; border-radius: 4px;
+    }
+    .app-expand:hover { background: var(--tag-bg); color: var(--text); }
+
+    .app-detail {
+      display: none;
+      padding: 12px 0 12px 34px;
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+    }
+    .app-detail.open { display: block; }
+    .app-detail dt { color: var(--text-muted); font-weight: 500; margin-top: 6px; }
+    .app-detail dd { font-family: var(--mono); word-break: break-all; }
+    .app-detail dd a { color: var(--link); }
+
+    .footer {
+      text-align: center; padding: 12px; font-size: 12px; color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      position: sticky; bottom: 0; background: var(--bg);
+    }
+
+    @media (max-width: 700px) {
+      .app-desc { display: none; }
+      .app-prefix { font-size: 11px; }
+    }
+  </style>
+  <script is:inline>
+    (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t;else if(window.matchMedia('(prefers-color-scheme:dark)').matches)document.documentElement.dataset.theme='dark'})();
+  </script>
+</head>
+<body>
+  <div class="sticky-top">
+  <div class="header">
+    <div class="header-left">
+      <h1>ATmosphere App Catalog</h1>
+      <span class="subtitle">a window into the atmosphere</span>
+    </div>
+    <div class="header-right">
+      <a class="json-link" href="/api">API</a>
+      <a class="json-link" href="/app_catalog.json">JSON</a>
+      <button class="theme-toggle" id="theme-toggle">dark</button>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <input type="text" id="search" class="search" placeholder="Filter by name, collection, description..." autocomplete="off" />
+    <span class="count" id="count">{totalApps} apps</span>
+    <a class="banner" href="https://discourse.atprotocol.community/t/a-community-app-lexicon/656" target="_blank" rel="noopener">
+      If you're enjoying this catalog, help build the on-protocol app directory. Join the conversation →
+    </a>
+  </div>
+  </div>
+
+  <div class="content" id="content">
+    {categoryOrder.map(category => (
+      <div class="category" data-category={category}>
+        <div class="category-header" data-toggle>
+          <span class="category-chevron">▼</span>
+          <span class="category-name">{category}</span>
+          <span class="category-count">{byCategory[category].length}</span>
+        </div>
+        <ul class="app-list">
+          {byCategory[category]
+            .sort((a, b) => a.appName.localeCompare(b.appName))
+            .map(app => (
+              <li>
+                <div class="app-row" data-app>
+                  {app.faviconUrl ? (
+                    <img class="app-icon" src={app.faviconUrl} alt="" loading="lazy"
+                      onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+                    <div class="app-icon-placeholder" style="display:none">{app.appName[0]}</div>
+                  ) : (
+                    <div class="app-icon-placeholder">{app.appName[0]}</div>
+                  )}
+                  <span class="app-name">
+                    <a href={app.appUrl} target="_blank" rel="noopener">{app.appName}</a>
+                  </span>
+                  <span class="app-prefix">{app.collectionPrefix}</span>
+                  <span class="app-desc">{app.description || ''}</span>
+                  <button class="app-expand" data-expand>···</button>
+                </div>
+                <div class="app-detail">
+                  <dl>
+                    <dt>URL</dt>
+                    <dd><a href={app.appUrl} target="_blank" rel="noopener">{app.appUrl}</a></dd>
+                    <dt>Collection Prefix</dt>
+                    <dd>{app.collectionPrefix}</dd>
+                    <dt>Category</dt>
+                    <dd>{app.category}</dd>
+                    {app.description && <dt>Description</dt>}
+                    {app.description && <dd>{app.description}</dd>}
+                    {app.faviconUrl && <dt>Favicon</dt>}
+                    {app.faviconUrl && <dd><a href={app.faviconUrl} target="_blank">{app.faviconUrl}</a></dd>}
+                    {app.alternativeFor && <dt>Alternative For</dt>}
+                    {app.alternativeFor && <dd>{app.alternativeFor}</dd>}
+                  </dl>
+                </div>
+              </li>
+            ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+
+  <div class="footer">
+    Data sourced from <a href="https://semble.so">Semble Collections</a> by
+    <a href="https://semble.so/profile/byarielm.fyi/collections/3mfdje7uuhu2r">@byarielm.fyi</a>
+    & <a href="https://semble.so/profile/psingletary.com/collections/3mabuiycpg626">@psingletary.com</a>
+    & data with categories from <a href="https://atproto.brussels/atproto-apps">atproto.brussels</a>
+  </div>
+
+  <script>
+    // Theme toggle
+    const toggle = document.getElementById('theme-toggle')!;
+    const html = document.documentElement;
+    const stored = localStorage.getItem('theme');
+    if (stored) {
+      html.dataset.theme = stored;
+      toggle.textContent = stored === 'dark' ? 'light' : 'dark';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      html.dataset.theme = 'dark';
+      toggle.textContent = 'light';
+    }
+    toggle.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next;
+      toggle.textContent = next === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('theme', next);
+      updateFavicon(next);
+    });
+
+    function updateFavicon(theme: string) {
+      const favicon = document.querySelector('link[rel="icon"][media*="light"]') as HTMLLinkElement;
+      const faviconDark = document.querySelector('link[rel="icon"][media*="dark"]') as HTMLLinkElement;
+      if (favicon && faviconDark) {
+        favicon.href = theme === 'dark' ? '/favicon-dark.png' : '/favicon.png';
+        faviconDark.href = theme === 'dark' ? '/favicon-dark.png' : '/favicon.png';
+      }
+    }
+    updateFavicon(html.dataset.theme || 'light');
+
+    // Category collapse
+    document.querySelectorAll('[data-toggle]').forEach(el => {
+      el.addEventListener('click', () => {
+        el.parentElement!.classList.toggle('collapsed');
+      });
+    });
+
+    // Expand details
+    // Expand from clicking anywhere on the row
+    document.querySelectorAll('[data-app]').forEach(row => {
+      row.addEventListener('click', (e) => {
+        // Don't toggle if clicking the link
+        if ((e.target as HTMLElement).closest('a')) return;
+        const li = (row as HTMLElement).closest('li')!;
+        const detail = li.querySelector('.app-detail')!;
+        const btn = li.querySelector('[data-expand]') as HTMLElement;
+        detail.classList.toggle('open');
+        if (btn) btn.textContent = detail.classList.contains('open') ? '×' : '···';
+      });
+    });
+
+    // Search
+    const search = document.getElementById('search') as HTMLInputElement;
+    const countEl = document.getElementById('count')!;
+    const categories = document.querySelectorAll('.category');
+    const totalAppCount = document.querySelectorAll('.category li').length;
+
+    search.addEventListener('input', () => {
+      const q = search.value.toLowerCase();
+      let visible = 0;
+      categories.forEach(cat => {
+        const items = cat.querySelectorAll('li');
+        let catVisible = 0;
+        items.forEach(li => {
+          const text = li.textContent?.toLowerCase() || '';
+          const show = !q || text.includes(q);
+          (li as HTMLElement).style.display = show ? '' : 'none';
+          if (show) catVisible++;
+        });
+        (cat as HTMLElement).style.display = catVisible > 0 ? '' : 'none';
+        visible += catVisible;
+      });
+      countEl.textContent = q ? `${visible} / ${totalAppCount} apps` : `${totalAppCount} apps`;
+    });
+  </script>
+  <script>
+    import { inject } from '@vercel/analytics';
+    inject();
+  </script>
+</body>
+</html>

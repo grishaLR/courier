@@ -1,0 +1,94 @@
+---
+interface Props {
+  appName: string;
+  appUrl: string;
+  category: string;
+  description?: string;
+  faviconUrl?: string;
+  collectionPrefix: string;
+}
+
+const { appName, appUrl, category, description, faviconUrl, collectionPrefix } = Astro.props;
+---
+
+<a class="card" href={appUrl} target="_blank" rel="noopener">
+  <div class="card-header">
+    {faviconUrl ? (
+      <img class="card-icon" src={faviconUrl} alt="" loading="lazy" />
+    ) : (
+      <div class="card-icon-placeholder">{appName[0]}</div>
+    )}
+    <span class="card-name">{appName}</span>
+    <span class="card-category">{category}</span>
+  </div>
+  {description && <div class="card-desc">{description}</div>}
+  <div class="card-prefix">{collectionPrefix}</div>
+</a>
+
+<style>
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid #eee;
+    transition: all 0.15s;
+    cursor: pointer;
+    display: block;
+  }
+  .card:hover {
+    border-color: #7c3aed;
+    box-shadow: 0 2px 12px rgba(124, 58, 237, 0.08);
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .card-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    object-fit: cover;
+    background: #f0f0f0;
+    flex-shrink: 0;
+  }
+  .card-icon-placeholder {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #999;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  .card-name { font-weight: 600; font-size: 0.95rem; }
+  .card-category {
+    font-size: 0.7rem;
+    background: #f0f0f0;
+    padding: 2px 8px;
+    border-radius: 100px;
+    color: #777;
+    margin-left: auto;
+    white-space: nowrap;
+  }
+  .card-desc {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .card-prefix {
+    font-size: 0.75rem;
+    color: #aaa;
+    margin-top: 6px;
+    font-family: monospace;
+  }
+</style>

@@ -1,0 +1,3285 @@
+[
+  {
+    "collectionPrefix": "app.blebbit",
+    "appName": "@blebbit",
+    "appUrl": "https://blebbit.app",
+    "category": "Other",
+    "description": "community spaces on @atproto",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "com.diffdown",
+    "appName": "A Markdown Editor on AT Protocol \u2014 Diffd",
+    "appUrl": "https://diffdown.com",
+    "category": "Other",
+    "description": "Diffdown \u2014 collaborative markdown editing on AT Protocol.",
+    "faviconUrl": "https://diffdown.com/favicon/android-chrome-512x512.png"
+  },
+  {
+    "collectionPrefix": "wtf.mysky",
+    "appName": "A Place for Friends | MySky",
+    "appUrl": "https://mysky.wtf",
+    "category": "Other",
+    "description": "MySky is a social networking website offering an interactive,\n                us",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "social.skylounge",
+    "appName": "A space to converse and connect.",
+    "appUrl": "https://www.skylounge.social",
+    "category": "Other",
+    "description": "An X/Twitter Spaces alternative for Bluesky and the open web. Creating good vibe",
+    "faviconUrl": "https://www.skylounge.social/skylounge-share.png"
+  },
+  {
+    "collectionPrefix": "at.monomarks",
+    "appName": "About - Monomarks",
+    "appUrl": "https://monomarks.at/about",
+    "category": "Other",
+    "description": "link-sharing for internet archaelogists",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "computer.aetheros",
+    "appName": "Aether OS",
+    "appUrl": "https://www.aetheros.computer",
+    "category": "Social",
+    "description": "An AT Protocol desktop experience with OAuth browser authentication and a retro ",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "com.atpairport",
+    "appName": "Airport",
+    "appUrl": "https://atpairport.com",
+    "category": "Other",
+    "description": "Airport is an AT Protocol PDS Migration Tool that allows you to seamlessly migrate your account from one PDS to another.",
+    "faviconUrl": "https://atpairport.com/og-image.jpg",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "co.aktivi",
+    "appName": "aktivi - discover events",
+    "appUrl": "https://aktivi.co",
+    "category": "Other",
+    "description": "Web site created using create-tsrouter-app",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "net.alternativeproto",
+    "appName": "AlternativeProto - Decentralized Web Cat",
+    "appUrl": "https://alternativeproto.net",
+    "category": "Other",
+    "description": "Discover decentralized alternatives to popular websites and webapps built on the AT Protocol",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.dropanchor",
+    "appName": "Anchor - Location-based Social Network",
+    "appUrl": "https://dropanchor.app",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "app.anisota",
+    "appName": "Anisota",
+    "appUrl": "https://anisota.app",
+    "category": "Client",
+    "description": "An art-centric Bluesky client optimized for discovering and sharing visual work.",
+    "faviconUrl": "https://anisota.app/anisota-512.png",
+    "alternativeFor": "app.bsky"
+  },
+  {
+    "collectionPrefix": "net.anisota",
+    "appName": "Anisota for Bluesky & ATProto",
+    "appUrl": "https://anisota.net",
+    "category": "Other",
+    "description": "A radical yet peaceful user interface for using Bluesky, ATProto, and other ATmosphere-based social media more intentionally.",
+    "faviconUrl": "https://anisota.net/anisota-game-cartridge.png"
+  },
+  {
+    "collectionPrefix": "net.asadaame5121.at-circle",
+    "appName": "AT CIRCLE - Home",
+    "appUrl": "https://at-circle.asadaame5121.net",
+    "category": "Other",
+    "description": "AT CIRCLE is a webring system for personal sites leveraging ATProto. Connect with like-minded creators and build your community with Bluesky.",
+    "faviconUrl": "https://at-circle.asadaame5121.net/assets/ogp.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "social.atexplore",
+    "appName": "AT Explore",
+    "appUrl": "https://atexplore.social",
+    "category": "Other",
+    "description": "Explore and discover AT Protocol data with our fast, user-friendly browser. Search posts, profiles, and feeds across the decentralized social web \u2014 including apps like Bluesky.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "com.atprofile",
+    "appName": "AT Profile",
+    "appUrl": "https://atprofile.com",
+    "category": "Other",
+    "description": "Custom profiles built on top of AT Protocol",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "io.github.romiojoseph",
+    "appName": "AT Proto Explorer and Bluesky Insights",
+    "appUrl": "https://romiojoseph.github.io/atproto-explorer",
+    "category": "Other",
+    "description": "Free AT Proto ecosystem explorer \u2014 repository browsing, Bluesky analytics, content exports, video downloads, advanced search, and screenshot tools.",
+    "faviconUrl": "https://romiojoseph.github.io/atproto-explorer/social-image.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "im.selem.at",
+    "appName": "AT Protocol Playground",
+    "appUrl": "https://at.selem.im",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.vercel.at-digital-garden",
+    "appName": "AT Publish",
+    "appUrl": "https://at-digital-garden.vercel.app",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "es.webtil",
+    "appName": "AT Tiles Browser",
+    "appUrl": "https://webtil.es/browser",
+    "category": "Other",
+    "description": "It's still pretty early days and we're still in the process of making\n        demos. There isn't much yet \u2014 but we'll keep adding, and you can add\n        yours too!",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.attodo",
+    "appName": "AT Todo - Decentralized Todo App on AT P",
+    "appUrl": "https://attodo.app",
+    "category": "Other",
+    "description": "Manage your tasks on the AT Protocol with complete data ownership. A simple, decentralized todo app powered by Bluesky.",
+    "faviconUrl": "https://attodo.app/static/icon-192.png"
+  },
+  {
+    "collectionPrefix": "blue.2048",
+    "appName": "at://2048",
+    "appUrl": "https://2048.blue",
+    "category": "Games",
+    "description": "A clean 2048 clone with ATproto identity support, playable in the browser.",
+    "faviconUrl": "https://2048.blue/android-chrome-512x512.png"
+  },
+  {
+    "collectionPrefix": "codes.advent",
+    "appName": "at://advent",
+    "appUrl": "https://advent.codes",
+    "category": "Other",
+    "description": "at://advent is a daily challenge to learn atproto in an interactive way. Similar to the advent of code. There are challenges for you to complete by writing code, but instead of strictly writing code you will be completing the challenges on atproto and learning more about it.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "place.atwork",
+    "appName": "at://work",
+    "appUrl": "https://atwork.place",
+    "category": "Jobs",
+    "description": "Your Career. Your Data. Your Place. A decentralized job board powered by the ATProtocol",
+    "faviconUrl": "https://atwork.place/static/apple-touch-icon.png"
+  },
+  {
+    "collectionPrefix": "com.google.chromewebstore",
+    "appName": "at://wormhole - Chrome Web Store",
+    "appUrl": "https://chromewebstore.google.com/detail/atwormhole/aihndpeeoneojofmliffjknbegmipbim",
+    "category": "Other",
+    "description": "Open at:// links or the active tab URL in various AT Protocol tools and Bluesky clients.",
+    "faviconUrl": "https://lh3.googleusercontent.com/2jpYxfkwxcByxgKgj_n_pNgRNk6VRCoL8RR-5Pevb1dpHDegoaRsGQvgFVLIYEqEvhfMrxnE9FDZOWtCgENq8Hmp=s128-rj-sc0x00ffffff",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "space.atbb.forums",
+    "appName": "atBB Community Forum \u2014 atBB Forum",
+    "appUrl": "https://forums.atbb.space",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "io.atcr",
+    "appName": "ATCR - Distributed Container Registry",
+    "appUrl": "https://atcr.io",
+    "category": "Other",
+    "description": "Push and pull Docker images on the AT Protocol. Same Docker, decentralized.",
+    "faviconUrl": "https://atcr.io/og/home"
+  },
+  {
+    "collectionPrefix": "app.atim",
+    "appName": "ATIM Instant Messenger",
+    "appUrl": "https://atim.app",
+    "category": "Other",
+    "description": "Chat, post, read your feed, and favorite on your BlueSky account with ATIM.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "uk.madebydanny.atimg",
+    "appName": "atimg.madebydanny.uk",
+    "appUrl": "https://atimg.madebydanny.uk",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "city.atls",
+    "appName": "ATlas",
+    "appUrl": "https://atls.city",
+    "category": "Other",
+    "description": "ATlas is a community-building tool for the ATmosphere designed to refine content feeds by integrating voluntary location data. By opting in, people allow their accounts to be labeled with geographic metadata, enabling developers to build region-specific feeds that more accurately highlight the needs and interests of local communities.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "dev.jazco.bsky",
+    "appName": "Atlas - Engagement-Based Social Graph fo",
+    "appUrl": "https://bsky.jazco.dev/stats",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "pics.atmo.atlas",
+    "appName": "atlas.atmo.pics",
+    "appUrl": "https://atlas.atmo.pics",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "fyi.byarielm.atlast",
+    "appName": "ATLast: Sync Your TikTok Follows \u2192 ATmos",
+    "appUrl": "https://atlast.byarielm.fyi",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "net.atlogin",
+    "appName": "ATLogin - OIDC for ATProto/Bluesky",
+    "appUrl": "https://atlogin.net",
+    "category": "Other",
+    "description": "ATLogin lets you use your ATProto/Bluesky identity to log in to any application that supports OIDC.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "community.lexicon.calendar",
+    "appName": "atmo.rsvp",
+    "appUrl": "https://atmo.rsvp",
+    "category": "Events",
+    "description": "A decentralized events calendar for the AT Protocol. Create, discover, and join ",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "tools.atmo",
+    "appName": "atmo.tools",
+    "appUrl": "https://atmo.tools",
+    "category": "Other",
+    "description": "atmo.tools",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "xyz.atmopins",
+    "appName": "atmopins",
+    "appUrl": "https://atmopins.xyz",
+    "category": "Photos",
+    "description": "Share and discover visual content on the AT Protocol. A platform for curating and exploring images and visual posts.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "xyz.atmoprints",
+    "appName": "atmoprints - 3D Models on AT Protocol",
+    "appUrl": "https://atmoprints.xyz",
+    "category": "Other",
+    "description": "A decentralized 3D model hosting platform built on AT Protocol. Share, discover,",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "cv.atmos",
+    "appName": "Atmos",
+    "appUrl": "https://atmos.cv",
+    "category": "Social",
+    "description": "A professional network for creatives built on AT Protocol, combining portfolios,",
+    "faviconUrl": "https://atmos.cv/apple-touch-icon.png"
+  },
+  {
+    "collectionPrefix": "place.wisp.superconnectors",
+    "appName": "ATmosphere Connections",
+    "appUrl": "https://superconnectors.wisp.place",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "pics.atp",
+    "appName": "atp.pics",
+    "appUrl": "https://atp.pics",
+    "category": "Other",
+    "description": "Got an Atmosphere handle? Need their profile pic? Want it resized, reformatted, and cached?",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "one.atpage",
+    "appName": "ATPage",
+    "appUrl": "https://atpage.one/atpage.one",
+    "category": "Other",
+    "description": "One page on atproto",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "net.easrng.atpkgs",
+    "appName": "atpkgs",
+    "appUrl": "https://atpkgs.easrng.net",
+    "category": "Other",
+    "description": "Atpkgs is compatible with the NPM Registry API, so it works with most Node.js pa",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "blue.atplay",
+    "appName": "ATPlay - Games",
+    "appUrl": "https://atplay.blue",
+    "category": "Other",
+    "description": "Play classic arcade games with ATProto attestation.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "com.lukeacl.atproto-did-web",
+    "appName": "ATProto - did:web",
+    "appUrl": "https://atproto-did-web.lukeacl.com",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.vercel.atproto-browser",
+    "appName": "ATProto Browser",
+    "appUrl": "https://atproto-browser.vercel.app",
+    "category": "Other",
+    "description": "Browse the atmosphere.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "camp.atproto",
+    "appName": "ATProto Camp",
+    "appUrl": "https://atproto.camp",
+    "category": "Other",
+    "description": "ATProto Camp is a badge and recognition source.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "garden.atproto",
+    "appName": "ATProto Garden",
+    "appUrl": "https://atproto.garden",
+    "category": "Other",
+    "description": "A curated directory of apps, tools, and libraries built on the AT Protocol",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "cam.hose.debug",
+    "appName": "atproto PDS & account debugger",
+    "appUrl": "https://debug.hose.cam",
+    "category": "Other",
+    "description": "Quick diagnostics for PDS hosts, handles, relay connections, handles, DIDs, ...",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "com.atprotofans",
+    "appName": "ATProtoFans",
+    "appUrl": "https://atprotofans.com",
+    "category": "Support",
+    "description": "Decentralized supporter attestation service for the ATProtocol ecosystem. Support creators with cryptographically verifiable relationships.",
+    "faviconUrl": "https://atprotofans.com/apple-touch-icon.png"
+  },
+  {
+    "collectionPrefix": "io.github.cooperation-org",
+    "appName": "atstats - ATProto Lexicon Usage",
+    "appUrl": "https://cooperation-org.github.io/lexistats",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "dev.at-studio",
+    "appName": "ATStudio",
+    "appUrl": "https://at-studio.dev",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "social.attic",
+    "appName": "attic.social",
+    "appUrl": "https://attic.social",
+    "category": "Other",
+    "description": "Attic is a cozy space with lofty ambitions",
+    "faviconUrl": "https://attic.social/images/ogimage.png"
+  },
+  {
+    "collectionPrefix": "to.aturi",
+    "appName": "aturi.to",
+    "appUrl": "https://aturi.to",
+    "category": "Tools",
+    "description": "Universal links for the ATmosphere. Share ATProto content with anyone and let them choose their preferred client to view it. Works across all major ATProto apps.",
+    "faviconUrl": "https://aturi.to/favicon.png"
+  },
+  {
+    "collectionPrefix": "dev.atvouch",
+    "appName": "atvouch",
+    "appUrl": "https://atvouch.dev",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "app.azsky",
+    "appName": "AzSky - Long-form Discussion powered by",
+    "appUrl": "https://azsky.app",
+    "category": "Other",
+    "description": "Join vibrant communities and engage in\n                discussions with people who share your interests.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "app.batesky",
+    "appName": "Batesky",
+    "appUrl": "https://batesky.app",
+    "category": "Other",
+    "description": "See what your bate bros are posting on Bluesky.",
+    "faviconUrl": "https://batesky.app/social-card-default-gradient.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.beaconbits",
+    "appName": "Beacon Bits",
+    "appUrl": "https://www.beaconbits.app",
+    "category": "Tools",
+    "description": "A tool for the Bluesky and AT Protocol ecosystem.",
+    "faviconUrl": "https://www.beaconbits.app/icon-512.png"
+  },
+  {
+    "collectionPrefix": "bond.biblio",
+    "appName": "biblio.bond",
+    "appUrl": "https://biblio.bond",
+    "category": "Social",
+    "description": "Decentralized peer-to-peer reading attestation. Keep track of books you've read,",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "club.bibliome",
+    "appName": "Bibliome - Building the very best readin",
+    "appUrl": "https://bibliome.club",
+    "category": "Other",
+    "description": "Create collaborative bookshelves, discover new books, and build reading communit",
+    "faviconUrl": "https://bibliome.club/static/bibliome_transparent.png"
+  },
+  {
+    "collectionPrefix": "community.blacksky",
+    "appName": "Blacksky",
+    "appUrl": "https://blacksky.community",
+    "category": "Communities",
+    "description": "Decentralized social media built for community power, culture, and collective freedom.",
+    "faviconUrl": "https://blacksky.community/static/favicon-32x32.png",
+    "alternativeFor": "app.bsky"
+  },
+  {
+    "collectionPrefix": "community.blacksky.staging",
+    "appName": "Blacksky",
+    "appUrl": "https://staging.blacksky.community",
+    "category": "Other",
+    "description": "Decentralized social media built for community power, culture, and collective freedom.",
+    "faviconUrl": "https://blacksky.community/static/social-card-default-gradient.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "community.blacksky.move",
+    "appName": "BlackSky Algorithms - Tektite Migration ",
+    "appUrl": "https://move.blacksky.community",
+    "category": "Other",
+    "description": "Migrate your ATProto account to BlackSky PDS - A decentralized tool for creating safe, independent online spaces.",
+    "faviconUrl": "https://tektite.cc/assets/banner-1456-1000-3f680aae0709e6e6.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "cc.tektite",
+    "appName": "BlackSky Algorithms - Tektite Migration ",
+    "appUrl": "https://tektite.cc",
+    "category": "Other",
+    "description": "Migrate your ATProto account to BlackSky PDS - A decentralized tool for creating safe, independent online spaces.",
+    "faviconUrl": "https://tektite.cc/assets/banner-1456-1000-3f680aae0709e6e6.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "club.blatball",
+    "appName": "BlATBall - Interdimensional Baseball on ",
+    "appUrl": "https://blatball.club",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.blento",
+    "appName": "Blento",
+    "appUrl": "https://blento.app",
+    "category": "Hosting",
+    "description": "Create your own beautiful personal website with your data saved to your Bluesky profile, powered by AT Protocol.",
+    "faviconUrl": "https://cdn.bsky.app/img/avatar/plain/did:plc:4fdwezqvlw4mu2qwn7wqsmej/bafkreif6sn7r5cjufefrputz3zcqz2ebzuintclpigcndaw6hdghomrf4y@jpeg"
+  },
+  {
+    "collectionPrefix": "ski.blu",
+    "appName": "Blu.ski - Short links to BlueSky profile",
+    "appUrl": "https://blu.ski/community-reports",
+    "category": "Other",
+    "description": "Create short, memorable links for your Bluesky profile. Look up DIDs, manage custom domains, and more.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "io.github.jiftechnify",
+    "appName": "Blue Mirage",
+    "appUrl": "https://jiftechnify.github.io/blue-mirage",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "com.pythonanywhere.bluethread",
+    "appName": "Blue Thread - Connection",
+    "appUrl": "https://bluethread.pythonanywhere.com",
+    "category": "Other",
+    "description": "Note : for security reasons, don't use the main password for your Bluesky account, but generate an app password that you'll use only for this application.You can manage your app passwords on this page : Settings > Advanced > App Passwords.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "boo.sky.thumbs",
+    "appName": "blue thumbs",
+    "appUrl": "https://thumbs.sky.boo",
+    "category": "Other",
+    "description": "Explore the history of links posted on bluesky",
+    "faviconUrl": "https://thumbs.sky.boo/share_image.jpg",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.bluecast",
+    "appName": "Bluecast",
+    "appUrl": "https://www.bluecast.app",
+    "category": "Other",
+    "description": "Audio Communication for Bluesky",
+    "faviconUrl": "https://www.bluecast.app/opengraph-image.jpg?647cd52553bc9310"
+  },
+  {
+    "collectionPrefix": "dev.eamer.dr",
+    "appName": "Bluedrop",
+    "appUrl": "https://dr.eamer.dev/downloads/bluedrop",
+    "category": "Other",
+    "description": "Zen Bluesky messenger.",
+    "faviconUrl": "https://dr.eamer.dev/downloads/bluedrop/social-card.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.bluefeed",
+    "appName": "Bluefeed",
+    "appUrl": "https://www.bluefeed.app",
+    "category": "Other",
+    "description": "Feed Builder & Viewer for Bluesky.",
+    "faviconUrl": "https://www.bluefeed.app/opengraph-image.jpg?1f1c829a467c5e27",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.bsky",
+    "appName": "Bluefeed / SkyFeed",
+    "appUrl": "https://skyfeed.app",
+    "category": "Client",
+    "description": "A powerful alternative Bluesky client with advanced custom feed building and curation tools.",
+    "faviconUrl": "https://skyfeed.app/android-chrome-512x512.png"
+  },
+  {
+    "collectionPrefix": "app.bluemotion",
+    "appName": "Bluemotion",
+    "appUrl": "https://www.bluemotion.app",
+    "category": "Other",
+    "description": "Upload your video with Bluesky Account!",
+    "faviconUrl": "https://bluemotion.vercel.app/opengraph-image.jpg?6bb9a8cac19716b3"
+  },
+  {
+    "collectionPrefix": "social.bluenotes",
+    "appName": "Bluenotes",
+    "appUrl": "https://bluenotes.social",
+    "category": "Other",
+    "description": "Bluesky with Community Notes. This a fully-featured clone of the main Bluesky frontend, but with Community Notes!",
+    "faviconUrl": "https://bluenotes.social/static/social-card-default-gradient.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "computer.simone",
+    "appName": "Bluerain",
+    "appUrl": "https://simone.computer/bluerain",
+    "category": "Other",
+    "description": "Bluesky firehose visualized in a Matrix-style rain",
+    "faviconUrl": "https://raw.githubusercontent.com/syxanash/bluerain/refs/heads/main/assets/images/banner.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.bsky",
+    "appName": "Bluesky",
+    "appUrl": "https://bsky.app",
+    "category": "Social",
+    "description": "The flagship microblogging social network built on AT Protocol for posting, following, and discovering conversations.",
+    "faviconUrl": "https://web-cdn.bsky.app/static/apple-touch-icon.png"
+  },
+  {
+    "collectionPrefix": "dev.bsky.main",
+    "appName": "Bluesky",
+    "appUrl": "https://main.bsky.dev",
+    "category": "Other",
+    "description": "Social media as it should be. Find your community among millions of users, unleash your creativity, and have some fun again.",
+    "faviconUrl": "https://bsky.app/static/social-card-default-gradient.png"
+  },
+  {
+    "collectionPrefix": "land.midori",
+    "appName": "Bluesky",
+    "appUrl": "https://midori.land",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "eu.wsocial.stage",
+    "appName": "Bluesky",
+    "appUrl": "https://stage.wsocial.eu",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "dev.ocbwoy3.crack",
+    "appName": "Bluesky",
+    "appUrl": "https://crack.ocbwoy3.dev",
+    "category": "Other",
+    "description": "Social media as it should be. Find your community among millions of users, unleash your creativity, and have some fun again.",
+    "faviconUrl": "https://bsky.app/static/social-card-default-gradient.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "dev.maelstrom.antlers",
+    "appName": "Bluesky",
+    "appUrl": "https://antlers.maelstrom.dev",
+    "category": "Other",
+    "description": "Social media as it should be. Find your community among millions of users, unleash your creativity, and have some fun again.",
+    "faviconUrl": "https://bsky.app/static/social-card-default-gradient.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "com.blueskycounter",
+    "appName": "Bluesky Counter (Free Bluesky Analytics)",
+    "appUrl": "https://blueskycounter.com/marckohlbrugge.com",
+    "category": "Other",
+    "description": "Marc K\u00f6hlbrugge's Bluesky profile stats and follower analytics",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "com.blueskyfeedcreator",
+    "appName": "Bluesky Feed Creator",
+    "appUrl": "https://blueskyfeedcreator.com",
+    "category": "Other",
+    "description": "Bluesky Feed Creator is a modern cloud-based feed management system for Bluesky communities.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "run.val.web.mozzius-gif_upload",
+    "appName": "Bluesky GIF Uploader",
+    "appUrl": "https://mozzius-gif_upload.web.val.run",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "be.pixeline",
+    "appName": "Bluesky List Manager - Find & Manage Pro",
+    "appUrl": "https://pixeline.be/bluesky-list-manager",
+    "category": "Other",
+    "description": "Find and manage profiles in your Bluesky lists",
+    "faviconUrl": "https://pixeline.be/bluesky-list-manager/static/bluesky-profile-catcher-og.jpg",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "io.theo.bluesky-map",
+    "appName": "Bluesky Map",
+    "appUrl": "https://bluesky-map.theo.io",
+    "category": "Other",
+    "description": "Interactive map of 3.4 million Bluesky users, visualised by their follower pattern.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "fyi.atp",
+    "appName": "Bluesky network map",
+    "appUrl": "https://atp.fyi/network",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.lovable.pfchange",
+    "appName": "Bluesky Photo Rotator",
+    "appUrl": "https://pfchange.lovable.app",
+    "category": "Other",
+    "description": "Keep your Bluesky profile fresh with automatic photo rotation",
+    "faviconUrl": "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/99e3897e-276b-4c15-828d-d43a1c1024e3/id-preview-24eb20ee--3b05379f-94ef-4371-b55e-2d9b1ca2d71c.lovable.app-1768307688018.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "blue.pmn",
+    "appName": "Bluesky Plays Pok\u00e9mon",
+    "appUrl": "https://pmn.blue",
+    "category": "Other",
+    "description": "A Crowd-controlled game of Pokemon Blue, on Bluesky",
+    "faviconUrl": "https://pmn.blue/android-chrome-512x512.png"
+  },
+  {
+    "collectionPrefix": "app.vercel.bsky-prefs",
+    "appName": "Bluesky Preferences helper",
+    "appUrl": "https://bsky-prefs.vercel.app",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "net.simonwillison.tools",
+    "appName": "Bluesky Search",
+    "appUrl": "https://tools.simonwillison.net/bluesky-search",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "tools.ozone",
+    "appName": "bluesky-social/ozone",
+    "appUrl": "https://ozone.tools",
+    "category": "Other",
+    "description": "web interface for labeling content in atproto / Bluesky",
+    "faviconUrl": "https://opengraph.githubassets.com/0204c68e54ea5e5b222de340870f73717d0430a007dc922c010a0add07002e09/bluesky-social/ozone",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.blueview",
+    "appName": "BlueView",
+    "appUrl": "https://blueview.app/login",
+    "category": "Other",
+    "description": "Explore and analyze your Bluesky social presence with powerful analytics and insights.",
+    "faviconUrl": "https://utfs.io/f/IguTQCU7Vck2sIl0PaV0G2SwO8JaCZEzfpcylovtLm9Wk3gM",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "com.level06.wave",
+    "appName": "Bluewave",
+    "appUrl": "https://wave.level06.com",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "net.kelinci.boat",
+    "appName": "boat",
+    "appUrl": "https://boat.kelinci.net",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "buzz.bookhive",
+    "appName": "BookHive",
+    "appUrl": "https://bookhive.buzz",
+    "category": "Reviews",
+    "description": "A social platform for book lovers built on AT Protocol. Manage your reading libr",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "app.booksky",
+    "appName": "booksky",
+    "appUrl": "https://booksky.app",
+    "category": "Client",
+    "description": "An alternative Bluesky client with an artistic, lightly gamified browsing experience.",
+    "faviconUrl": "https://booksky.app/apple-touch-icon.png",
+    "alternativeFor": "app.bsky"
+  },
+  {
+    "collectionPrefix": "cat.boop",
+    "appName": "boop.cat - Free Static Hosting",
+    "appUrl": "https://boop.cat",
+    "category": "Other",
+    "description": "Free, fast static site hosting for developers. Deploy directly from GitHub with zero config.",
+    "faviconUrl": "https://boop.cat/milly.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "social.headers",
+    "appName": "Browse the best social headers in the At",
+    "appUrl": "https://headers.social",
+    "category": "Other",
+    "description": "Follow us on Bluesky to get served the hottest headers every other day.",
+    "faviconUrl": "https://headers.social/static/images/ogimage.jpg",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "fyi.cam.unfollow",
+    "appName": "bsky utils",
+    "appUrl": "https://unfollow.cam.fyi/unfollow",
+    "category": "Other",
+    "description": "tools for enhancing your bsky experience",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "fyi.cam.bsky",
+    "appName": "bsky utils",
+    "appUrl": "https://bsky.cam.fyi/lists",
+    "category": "Other",
+    "description": "tools for enhancing your bsky experience",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "info.bsky-follows",
+    "appName": "bsky-follows",
+    "appUrl": "https://bsky-follows.info",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "dev.bskylimit",
+    "appName": "bskylimit.dev",
+    "appUrl": "https://bskylimit.dev",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.bstat",
+    "appName": "bstat",
+    "appUrl": "https://bstat.app",
+    "category": "Analytics",
+    "description": "Tracks Bluesky profile statistics over time (followers, posts, likes, and more) with daily updates.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "app.thebull.sky",
+    "appName": "Bullsky",
+    "appUrl": "https://sky.thebull.app",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.cartes",
+    "appName": "Cartes",
+    "appUrl": "https://cartes.app",
+    "category": "Other",
+    "description": "Une carte libre et gratuite, alternatives Web aux maps Google et Apple, pour tro",
+    "faviconUrl": "https://cartes.app/vignette.png"
+  },
+  {
+    "collectionPrefix": "social.catsky",
+    "appName": "Catsky",
+    "appUrl": "https://catsky.social",
+    "category": "Other",
+    "description": "mrrp mrrowww media as it should be. find your meowmunity among hundreds of cats, unleash your meows, and have some fun again :3",
+    "faviconUrl": "https://pds.tgirl.cloud/xrpc/com.atproto.sync.getBlob?did=did:plc:ctg5hooybw3rquejsfebsegs&cid=bafkreianap3iqgxlifqssuhut2ggiuitpmltw3lfvzq7tnzbsv26npzfxq",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "org.neocities.ceruleanweb",
+    "appName": "Cerulean",
+    "appUrl": "https://ceruleanweb.neocities.org",
+    "category": "Other",
+    "description": "Cerulean is one of the most feature-complete Bluesky clients for desktop, packaged in a powerful, native UI that's very light on resources. Supports Windows 98 and up.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "watch.charcoal",
+    "appName": "charcoal.watch",
+    "appUrl": "https://charcoal.watch",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "social.colibri",
+    "appName": "Chats where you truly own your data.",
+    "appUrl": "https://colibri.social",
+    "category": "Other",
+    "description": "Colibri is an open source chat platform built on the AT protocol for \tcommunities big and small.",
+    "faviconUrl": "https://colibri.social/og.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "pub.chive",
+    "appName": "Chive | Decentralized Eprint Service",
+    "appUrl": "https://chive.pub",
+    "category": "Other",
+    "description": "Decentralized eprints on ATProto.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "app.chronosky",
+    "appName": "Chronosky - Bluesky Scheduled Posting",
+    "appUrl": "https://chronosky.app",
+    "category": "Other",
+    "description": "Schedule posts for Bluesky social network. Free with OAuth authentication",
+    "faviconUrl": "https://chronosky.app/ogpimg.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "bot.bluesky",
+    "appName": "Claim your bluesky.bot handle today and ",
+    "appUrl": "https://bluesky.bot",
+    "category": "Other",
+    "description": "Follow the instructions below to get your own bluesky.bot handle and stand out on Bluesky!",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "dev.pages.cleanfollow-bsky",
+    "appName": "cleanfollow-bsky",
+    "appUrl": "https://cleanfollow-bsky.pages.dev",
+    "category": "Other",
+    "description": "Unfollow blocked, deleted, suspended, and deactivated Bluesky accounts",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.clearsky",
+    "appName": "ClearSky",
+    "appUrl": "https://clearsky.app",
+    "category": "Tools",
+    "description": "A web tool for exploring and monitoring activity in the AT Protocol ecosystem.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "social.clippr",
+    "appName": "clippr-BE",
+    "appUrl": "https://clippr.social",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "boo.sky.go",
+    "appName": "Cloud Go",
+    "appUrl": "https://go.sky.boo",
+    "category": "Games",
+    "description": "A multiplayer Go game built on AT Protocol, allowing you to play the classic board game using your internet handle.",
+    "faviconUrl": "https://go.sky.boo/favicon.png"
+  },
+  {
+    "collectionPrefix": "app.collectivesocial",
+    "appName": "Collective Social | Track what you love.",
+    "appUrl": "https://collectivesocial.app",
+    "category": "Other",
+    "description": "Curate lists, track your progress, and share recommendations across books, movies, TV shows, and more \u2014 all on the open social web.",
+    "faviconUrl": "https://collectivesocial.app/images/screenshots.webp"
+  },
+  {
+    "collectionPrefix": "sh.comet",
+    "appName": "Comet",
+    "appUrl": "https://comet.sh",
+    "category": "Other",
+    "description": "Decentralised music streaming on ATProtocol.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "tech.waow.coral",
+    "appName": "coral",
+    "appUrl": "https://coral.waow.tech",
+    "category": "Other",
+    "description": "real-time entity visualization powered by turbostream",
+    "faviconUrl": "https://coral-8hh.pages.dev/og.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "social.coves",
+    "appName": "Coves - Community-Driven Forums on atPro",
+    "appUrl": "https://coves.social",
+    "category": "Other",
+    "description": "Coves is a forum-like social app built on the AT Protocol. Join communities, sha",
+    "faviconUrl": "https://coves.social/static/images/app-icon.png"
+  },
+  {
+    "collectionPrefix": "blue.skywriter",
+    "appName": "Create web pages from Bluesky threads | ",
+    "appUrl": "https://skywriter.blue",
+    "category": "Other",
+    "description": "Transform your Bluesky threads into readable, searchable web pages without losing social features.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "com.robinfeed",
+    "appName": "Custom Feed Generator",
+    "appUrl": "https://robinfeed.com",
+    "category": "Other",
+    "description": "Personalized feed generator for decentralized social media.",
+    "faviconUrl": "https://robinfeed.com/robinfeed.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "events.dandelion",
+    "appName": "Dandelion",
+    "appUrl": "https://dandelion.events",
+    "category": "Events",
+    "description": "Find and host soulful \u00b7 regenerative \u00b7 metamodern \u00b7 participatory \u00b7 conscious \u00b7 transformative \u00b7 holistic \u00b7 ethical events and co-created gatherings",
+    "faviconUrl": "https://dandelion.events/images/logos/black-on-transparent-sq.png?1770635399",
+    "alternativeFor": "community.lexicon.calendar"
+  },
+  {
+    "collectionPrefix": "app.lovable.atprotocdn",
+    "appName": "danny-cdn-magic",
+    "appUrl": "https://atprotocdn.lovable.app/about",
+    "category": "Other",
+    "description": "Lovable Generated Project",
+    "faviconUrl": "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ecc695f2-fb62-4729-9746-4554ea3dfe6d/id-preview-08d4bec0--2884aeef-8d98-498e-9f14-d5a63ce92005.lovable.app-1768531600096.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.lovable.danny-cdn-magic",
+    "appName": "danny-cdn-magic",
+    "appUrl": "https://danny-cdn-magic.lovable.app",
+    "category": "Other",
+    "description": "Lovable Generated Project",
+    "faviconUrl": "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/45e4b2bb-f7be-4be9-a14a-63378988b06f/id-preview-639f98d9--2884aeef-8d98-498e-9f14-d5a63ce92005.lovable.app-1768419551427.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.datesky",
+    "appName": "DateSky \u2014 Open Dating on Bluesky",
+    "appUrl": "https://datesky.app",
+    "category": "Other",
+    "description": "Create a dating profile on the AT Protocol network. No app, no algorithm, no com",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "app.sifted",
+    "appName": "Decentralized Short-Form Video App | Sif",
+    "appUrl": "https://sifted.app",
+    "category": "Other",
+    "description": "Fast, relevant content discovery with all the benefits of decentralization. No m",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "com.deckbelcher",
+    "appName": "deck belcher",
+    "appUrl": "https://deckbelcher.com",
+    "category": "Other",
+    "description": "Organize, build, and share Magic: The Gathering decks on the Atmosphere.",
+    "faviconUrl": "https://deckbelcher.com/logo512-maskable.png"
+  },
+  {
+    "collectionPrefix": "blue.deck",
+    "appName": "Deck.Blue",
+    "appUrl": "https://deck.blue",
+    "category": "Client",
+    "description": "A multi-column web client inspired by TweetDeck that lets users pin and monitor ",
+    "faviconUrl": "",
+    "alternativeFor": "app.bsky"
+  },
+  {
+    "collectionPrefix": "top.aylac.deer",
+    "appName": "Deer",
+    "appUrl": "https://deer.aylac.top",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "net.starterpacks",
+    "appName": "Discover and grow your community through",
+    "appUrl": "https://www.starterpacks.net",
+    "category": "Other",
+    "description": "Starter Packs are collections of Bluesky Starter Packs and Profiles that you can follow to grow your community. And, you can use Starter Packs to make it easier to find, follow, edit, and share your favorite Bluesky Staarter Packs.",
+    "faviconUrl": "https://www.starterpacks.net/starterpacks-social.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "social.divepool",
+    "appName": "divepool",
+    "appUrl": "https://divepool.social",
+    "category": "Other",
+    "description": "Explore Bluesky accounts by topic clusters \u2014 discover what people post about and find similar voices.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "surf.docs",
+    "appName": "Docs.surf",
+    "appUrl": "https://docs.surf",
+    "category": "Other",
+    "description": "Aggregator for publications and documents on the open web",
+    "faviconUrl": "https://docs.surf/og.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "work.doing",
+    "appName": "Doing Work",
+    "appUrl": "https://doing.work",
+    "category": "Other",
+    "description": "Your work network on the AT protocol - doing.work",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "app.drerings",
+    "appName": "Drerings",
+    "appUrl": "https://drerings.app",
+    "category": "Other",
+    "description": "Draw pictures, show them to your friends",
+    "faviconUrl": "https://drerings.app/icon.png"
+  },
+  {
+    "collectionPrefix": "social.drydown",
+    "appName": "drydown",
+    "appUrl": "https://drydown.social",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "games.firehose",
+    "appName": "Firehose Games - Multiplayer Games on AT",
+    "appUrl": "https://firehose.games",
+    "category": "Other",
+    "description": "Multiplayer games on the AT Protocol.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "app.fitsky",
+    "appName": "FitSky",
+    "appUrl": "https://fitsky.app",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "app.flapnote",
+    "appName": "flapnote.app",
+    "appUrl": "https://flapnote.app",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "blue.flashes",
+    "appName": "Flashes",
+    "appUrl": "https://www.flashes.blue",
+    "category": "Photos",
+    "description": "A photo and video app for Bluesky: post up to 4 photos or 1-minute videos, portfolio mode, and customizable profile tabs, built on AT Protocol.",
+    "faviconUrl": "https://www.flashes.blue/wp-content/uploads/sites/6/2025/02/cropped-flashes-regular-192x192.png"
+  },
+  {
+    "collectionPrefix": "dev.flo-bit",
+    "appName": "flo-bit.dev",
+    "appUrl": "https://flo-bit.dev/search-bluesky-likes",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "com.minomobi.bakery",
+    "appName": "Flour Blend Calculator | bakery.minomobi",
+    "appUrl": "https://bakery.minomobi.com",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "app.flushes",
+    "appName": "Flushes",
+    "appUrl": "https://flushes.app",
+    "category": "Social",
+    "description": "The world's first decentralized social media app for sharing the most universal human experience. Post your flushes and connect with other bathroom enjoyers.",
+    "faviconUrl": "https://flushes.app/favicon.png"
+  },
+  {
+    "collectionPrefix": "blue.fluxapp",
+    "appName": "Flux",
+    "appUrl": "https://fluxapp.blue",
+    "category": "Social",
+    "description": "A calm, beautiful Bluesky client for iOS designed for a focused and pleasant social experience.",
+    "faviconUrl": "",
+    "alternativeFor": "app.bsky"
+  },
+  {
+    "collectionPrefix": "blue.vanity",
+    "appName": "Free Professional Bluesky Handles | acad",
+    "appUrl": "https://vanity.blue",
+    "category": "Other",
+    "description": "Choose your professional handle: academics.blue, programmer.blue, creator.blue, investor.blue, datascience.blue, developer.blue. No technical setup needed. Stand out from standard bsky.social handles.",
+    "faviconUrl": "https://vanity.blue/og-image.jpg",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "at.freeq",
+    "appName": "freeq",
+    "appUrl": "https://freeq.at",
+    "category": "Messaging",
+    "description": "IRC rebuilt with AT Protocol identity. Use your Bluesky DID for authentication with modern messaging features and compatibility with standard IRC clients.",
+    "faviconUrl": "https://freeq.at/static/freeq-180.png"
+  },
+  {
+    "collectionPrefix": "fyi.unravel.frontpage",
+    "appName": "Frontpage",
+    "appUrl": "https://frontpage.fyi",
+    "category": "News",
+    "description": "A front page for your network: follow links and stories shared on ATproto without the endless scroll.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "blue.woof",
+    "appName": "FxBluesky (@fxbsky.app)",
+    "appUrl": "https://woof.blue",
+    "category": "Other",
+    "description": "Embed Bluesky videos, photos, and more on Discord and Telegram. Not affiliated with Bluesky Social.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.thegems",
+    "appName": "Gems",
+    "appUrl": "https://thegems.app",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "systems.gmstn",
+    "appName": "Gemstone Systems",
+    "appUrl": "https://gmstn.systems",
+    "category": "Other",
+    "description": "not the dev part, that part's honestly fine.1 we're talking\n                abou",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "com.germnetwork",
+    "appName": "Germ Network",
+    "appUrl": "https://www.germnetwork.com",
+    "category": "Messaging",
+    "description": "Invite-only, end-to-end encrypted DMs for the AT Protocol. Chat from your Bluesky handle with multiple profile cards and mutual opt-in connections.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "garden.goals",
+    "appName": "Goals Garden",
+    "appUrl": "https://goals.garden",
+    "category": "Tools",
+    "description": "Track your daily goals and habits. Build streaks, stay consistent, and achieve your goals!",
+    "faviconUrl": "https://goals.garden/favicon.ico"
+  },
+  {
+    "collectionPrefix": "social.grain",
+    "appName": "Grain",
+    "appUrl": "https://grain.social",
+    "category": "Photos",
+    "description": "1 & 2- deux photos publi\u00e9es par @somewhereinthedark2 dans un immense bunker souterrain situ\u00e9 en Haute-Normandie\n \n3- l'observation de l'\u00e9clipse partielle au parc Montsouris (le 29 mars)\n \n4- les journ\u00e9es portes ouvertes du tiers-lieu le Toboggan \u00e0 Malakoff (le 22 mars)\n \n5 & 7- la marche nocturne f\u00e9ministe et radicale organis\u00e9e par l'AG f\u00e9ministe Paris-banlieue et autoris\u00e9e \u00e0 la derni\u00e8re minute (le 7 mars)\n \n6- la fa\u00e7ade d'une maison pr\u00e8s de chez moi emport\u00e9e par un incendie, ayant caus\u00e9 la mort d'une petite fille pendant son sommeil (le 8 avril)\n \n8- les 10 ans du festival de musique Beat & Beer \u00e0 Malakoff (les 5 et 6 septembre)\n \n9- une photo de notre excursion avec ma moiti\u00e9 \u00e0 Colleville-sur-mer et Omaha Beach (au mois de mai)",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "dev.pages.grain-social-explorer",
+    "appName": "Grain Social Explorer",
+    "appUrl": "https://grain-social-explorer.pages.dev",
+    "category": "Other",
+    "description": "Explore photo galleries and collections from Grain.social - an Instagram-style viewer for the AT Protocol",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "io.granary",
+    "appName": "granary: the social web translator",
+    "appUrl": "https://granary.io",
+    "category": "Other",
+    "description": "Fetches and converts data between social networks, HTML and JSON with microformats2, ActivityStreams 1 and 2 (including ActivityPub), Atom, RSS, JSON Feed, and more.",
+    "faviconUrl": "https://granary.io/static/granary_logo_512.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "live.grayhaze",
+    "appName": "grayhaze.live",
+    "appUrl": "https://grayhaze.live",
+    "category": "Other",
+    "description": "Welcome to GrayHaze, right now we're in very early alpha, as you can pretty clea",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "app.graysky",
+    "appName": "Graysky",
+    "appUrl": "https://graysky.app",
+    "category": "Client",
+    "description": "A feature-packed third-party Bluesky client with a feed-first design and lots of",
+    "faviconUrl": "https://graysky.app/favicon.ico?favicon.e298f328.ico",
+    "alternativeFor": "app.bsky"
+  },
+  {
+    "collectionPrefix": "social.graze",
+    "appName": "Graze",
+    "appUrl": "https://graze.social",
+    "category": "Feeds",
+    "description": "A no-code custom feed builder and marketplace for ATproto, designed to help curators build, share, and monetize feeds.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "app.greengale",
+    "appName": "GreenGale",
+    "appUrl": "https://greengale.app",
+    "category": "Publishing",
+    "description": "A Markdown blog platform with WhiteWind compatibility, themes, LaTeX, inline SVGs, and built-in text-to-speech.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "dev.pages.greengale-app",
+    "appName": "GreenGale",
+    "appUrl": "https://greengale-app.pages.dev",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.gridsky",
+    "appName": "gridsky.app",
+    "appUrl": "https://gridsky.app",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "social.gsheps.bsky",
+    "appName": "gsheps.social",
+    "appUrl": "https://bsky.gsheps.social",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "network.habitat",
+    "appName": "habitat",
+    "appUrl": "https://habitat.network",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "dev.happyview",
+    "appName": "HappyView",
+    "appUrl": "https://happyview.dev",
+    "category": "Other",
+    "description": "HappyView is the best way to build an AppView for the AT Protocol. Upload your lexicon schemas and get a fully functional AppView, complete with XRPC endpoints, OAuth, real-time network sync, and historical backfill, without writing a single line of server code.",
+    "faviconUrl": "https://happyview.dev/img/og.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "games.gamesgamesgamesgames",
+    "appName": "HappyView Admin",
+    "appUrl": "https://gamesgamesgamesgames.games",
+    "category": "Other",
+    "description": "Admin dashboard for HappyView AppView",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "dev.hatk",
+    "appName": "hatk",
+    "appUrl": "https://hatk.dev",
+    "category": "Other",
+    "description": "Build AT Protocol applications with typed XRPC endpoints.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "ink.henry",
+    "appName": "Henry's Note",
+    "appUrl": "https://henry.ink",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "dev.tunji.heron",
+    "appName": "Heron - A gentle atproto client",
+    "appUrl": "https://heron.tunji.dev",
+    "category": "Other",
+    "description": "Heron is a fluid, open-source atproto client that transforms to match your content. Experience a timeline\n            that\u2019s as dynamic and beautiful as the posts within it.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "dev.amazingca.blue",
+    "appName": "Home",
+    "appUrl": "https://blue.amazingca.dev",
+    "category": "Other",
+    "description": "Third-party ATP client. Built with Remix and hosted on Cloudflare Pages.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "social.arabica.alpha",
+    "appName": "Home - Arabica",
+    "appUrl": "https://alpha.arabica.social",
+    "category": "Other",
+    "description": "Track your coffee brewing journey. Built on AT Protocol, your data stays yours.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "club.atgarden",
+    "appName": "Home | AT Garden Club",
+    "appUrl": "https://atgarden.club",
+    "category": "Other",
+    "description": "AT Garden Club - A decentralized CSS showcase where contributors own their data. Inspired by CSS Zen Garden, powered by the AT Protocol. Submit your stylesheet today!",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "blue.hopefully",
+    "appName": "Hopefully Beautiful: Free, public busine",
+    "appUrl": "https://hopefully.blue",
+    "category": "Other",
+    "description": "Create a beautiful, public profile page for your business or professional activi",
+    "faviconUrl": "https://hopefully.blue/og-default.png"
+  },
+  {
+    "collectionPrefix": "social.bsky",
+    "appName": "https://bsky.social/account/",
+    "appUrl": "https://bsky.social/account",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "blue.microcosm.hubble",
+    "appName": "Hubble: full-network atmosphere mirror",
+    "appUrl": "https://hubble.microcosm.blue",
+    "category": "Other",
+    "description": "Hubble: full-network atmosphere mirror (in development!)",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "ai.hypgen",
+    "appName": "Hypgen Infinity",
+    "appUrl": "https://hypgen.ai",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "at.ifthisthen",
+    "appName": "IFTTA",
+    "appUrl": "https://ifthisthen.at",
+    "category": "Tools",
+    "description": "Workflow automation toolkit for ATProto. Connect decentralized social events to 5,000+ apps via Zapier, process Jetstream events in real-time, and create complex automation blueprints.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "us.nws-bot",
+    "appName": "Import members from one list into anothe",
+    "appUrl": "https://nws-bot.us/bskyListCombiner.php",
+    "category": "Other",
+    "description": "Link to source code. I'm not logging anything on this server, at least not on purpose, but you should still probably use an App Password then delete it when you're done.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "social.impro",
+    "appName": "Impro",
+    "appUrl": "https://impro.social",
+    "category": "Other",
+    "description": "A Bluesky web client",
+    "faviconUrl": "https://impro.social/img/impro-logo.jpg",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "ch.indiemusi.alpha",
+    "appName": "indiemusi.ch",
+    "appUrl": "https://alpha.indiemusi.ch",
+    "category": "Other",
+    "description": "Manage your music catalogue in the Atmosphere",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "social.jklb",
+    "appName": "jklb.social",
+    "appUrl": "https://jklb.social",
+    "category": "Other",
+    "description": "cute, colorful ATproto client with keybindings",
+    "faviconUrl": "https://jklb.social/og-image.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "tech.tokimeki.kaku",
+    "appName": "KAKU TOKIMEKI",
+    "appUrl": "https://kaku.tokimeki.tech",
+    "category": "Other",
+    "description": "Drawing post service powered by AT Protocol",
+    "faviconUrl": "https://kaku.tokimeki.tech/ogp.png"
+  },
+  {
+    "collectionPrefix": "dev.keytrace",
+    "appName": "Keytrace - You be you, everywhere.",
+    "appUrl": "https://keytrace.dev",
+    "category": "Other",
+    "description": "Link your GitHub, domain, and other accounts to your Bluesky identity. Cryptogra",
+    "faviconUrl": "https://keytrace.dev/__og-image__/image/og.png"
+  },
+  {
+    "collectionPrefix": "social.kibun",
+    "appName": "kibun",
+    "appUrl": "https://www.kibun.social",
+    "category": "Other",
+    "description": "A global, emoji-first status board powered by Bluesky.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "io.kich",
+    "appName": "Kich",
+    "appUrl": "https://kich.io",
+    "category": "Food",
+    "description": "Track pantry inventory, manage recipes, and streamline grocery shopping for your household.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "com.kipclip",
+    "appName": "KipClip",
+    "appUrl": "https://kipclip.com",
+    "category": "Bookmarks",
+    "description": "A simple, open bookmarks app for the AT Protocol that lets you save and organize bookmarks using your personal data server.",
+    "faviconUrl": "https://cdn.kipclip.com/favicons/apple-touch-icon.png"
+  },
+  {
+    "collectionPrefix": "place.wisp.sites",
+    "appName": "kira's archive viewer",
+    "appUrl": "https://sites.wisp.place/kira.pds.witchcraft.systems/archive-viewer",
+    "category": "Other",
+    "description": "view MASL bundle archives stored on ATProto",
+    "faviconUrl": "https://pds.witchcraft.systems/xrpc/com.atproto.sync.getBlob?did=did:plc:2tqqxubv2lu4ahj35ysjer2r&cid=bafkreiari3ujdguxs5oomf7jodar4e6xaulkzx2yvk4t6xtsdqx6v4xbxm",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "dev.pages.klearsky",
+    "appName": "Klearsky",
+    "appUrl": "https://klearsky.pages.dev",
+    "category": "Other",
+    "description": "Klearsky is a web client for Bluesky/AT Protocol.",
+    "faviconUrl": "https://klearsky.pages.dev/img/ogp.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "dev.pages.langit",
+    "appName": "Langit",
+    "appUrl": "https://langit.pages.dev",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.lanyards",
+    "appName": "Lanyards - Researcher Profiles on AT Pro",
+    "appUrl": "https://www.lanyards.app",
+    "category": "Other",
+    "description": "A dedicated profile for researchers, built on the AT Protocol. An alternative to",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "xyz.sri",
+    "appName": "Launching Taproot (atproto.at://) - All-",
+    "appUrl": "https://sri.xyz/projects/atprotoat",
+    "category": "Other",
+    "description": "Prefix atproto. to any AT URI to instantly preview.",
+    "faviconUrl": "https://preview.mmm.page/?url=sri.xyz/projects/atprotoat",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "pub.leaflet",
+    "appName": "Leaflet.pub",
+    "appUrl": "https://leaflet.pub",
+    "category": "Publishing",
+    "description": "A simple publishing tool for creating and sharing blog-style posts and newsletters over ATProto.",
+    "faviconUrl": "https://leaflet.pub/web-app-manifest-512x512.png"
+  },
+  {
+    "collectionPrefix": "garden.lexicon",
+    "appName": "Lexicon Garden - ATProtocol Lexicon Brow",
+    "appUrl": "https://lexicon.garden",
+    "category": "Other",
+    "description": "Browse and discover ATProtocol lexicon schema definitions",
+    "faviconUrl": "https://lexicon.garden/static/logo-1024x1024.jpg",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "store.lexicon",
+    "appName": "Lexicon Store - ATProto Lexicon Schema R",
+    "appUrl": "https://lexicon.store",
+    "category": "Other",
+    "description": "Discover and explore AT Protocol lexicon schemas. The verified registry for Bluesky and ATProto lexicons.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "dev.bsky.lexidex",
+    "appName": "lexidex",
+    "appUrl": "https://lexidex.bsky.dev",
+    "category": "Other",
+    "description": "This is a web index of atproto data and API schemas: Lexicons. It is an \u2728Experimental\u2728 project from the protocol team at Bluesky.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "at.ligo",
+    "appName": "ligo.at: decentralized links page",
+    "appUrl": "https://ligo.at",
+    "category": "Other",
+    "description": "Get your own decentralized and personalizable links page for all your social pro",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "blue.linkat",
+    "appName": "Linkat",
+    "appUrl": "https://linkat.blue",
+    "category": "Links",
+    "description": "Linkat is an ATProto service for creating a \"Link in Bio\" for Bluesky. Your links are saved in your PDS.",
+    "faviconUrl": "https://r2.linkat.blue/images/apple-touch-icon.png"
+  },
+  {
+    "collectionPrefix": "me.linkna",
+    "appName": "Linkname",
+    "appUrl": "https://linkna.me",
+    "category": "Tools",
+    "description": "A privacy-first link in bio tool with widgets and analytics for creating a personalized profile page.",
+    "faviconUrl": "https://linkna.me/favicon.ico"
+  },
+  {
+    "collectionPrefix": "computer.locket",
+    "appName": "Locket",
+    "appUrl": "https://locket.computer",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "blue.loo",
+    "appName": "Loo.Blue | Timeline Detox",
+    "appUrl": "https://loo.blue",
+    "category": "Other",
+    "description": "Audit your follows, manage your timeline, and clean up inactive accounts. Professional tools for Bluesky.",
+    "faviconUrl": "https://loo.blue/og-image.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "com.renahlee.manual",
+    "appName": "manual",
+    "appUrl": "https://manual.renahlee.com",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "at.margin",
+    "appName": "Margin",
+    "appUrl": "https://margin.at",
+    "category": "Tools",
+    "description": "Annotate and highlight any web page with your AT Protocol identity; write in the margins of the web.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "app.mathr",
+    "appName": "math.r",
+    "appUrl": "https://mathr.app",
+    "category": "Games",
+    "description": "A brain-building math game that uses ATproto identity for logins and leaderboards.",
+    "faviconUrl": "https://mathr.app/images/app-icons/manifest-icon-512.png"
+  },
+  {
+    "collectionPrefix": "mobi.mino",
+    "appName": "minomobi",
+    "appUrl": "https://mino.mobi",
+    "category": "Other",
+    "description": "For thirty years the open internet was technically accessible\u2014anyone could view source, anyone could write HTML, anyone could register a domain and ship. In practice, the gap between \"accessible\" and \"built\" was filled by years of specialized training, mass-produced frameworks, and platform gatekeepers who offered convenience in exchange for ownership.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "site.mochott",
+    "appName": "mochott",
+    "appUrl": "https://mochott.site",
+    "category": "Other",
+    "description": "A blog platform powered by AT Protocol",
+    "faviconUrl": "https://mochott.site/ogp.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "blue.morgen",
+    "appName": "Morgenblau",
+    "appUrl": "https://morgen.blue",
+    "category": "Other",
+    "description": "Your calm window into the Atmosphere. A next-generation RSS platform.By\n\t\t\t\tDominik Hofer.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "com.blueskyfeeds",
+    "appName": "Most Shared Feeds on Bluesky",
+    "appUrl": "https://blueskyfeeds.com",
+    "category": "Other",
+    "description": "Bluesky trends and statistics. Free and updated daily!",
+    "faviconUrl": "https://render.apptornado.com/render?url=https%3A%2F%2Fblueskyfeeds.com%2Fsocial-image%3Ftitle%3DBlueskyFeeds%26subtitle%3DFeeds%2Bfrom%2BBlueskyFeeds.com&w=1024&h=568&maxAgeSec=604800&signed=dKoTYhM9Oy9yrsaaToQ-usWBHiZx7wTdWmzr5dH4HGM",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "social.murmel",
+    "appName": "Murmel \u2014 Your morning read, already wait",
+    "appUrl": "https://murmel.social",
+    "category": "Other",
+    "description": "The links worth reading, chosen by the people you trust on Bluesky and Mastodon.",
+    "faviconUrl": "https://murmel.social/static/img/cover.jpg",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.lyrc",
+    "appName": "Music has Meaning",
+    "appUrl": "https://www.lyrc.app",
+    "category": "Other",
+    "description": "The social platform for discovering music, collecting tracks, and supporting art",
+    "faviconUrl": "https://www.lyrc.app/images/og-image.png"
+  },
+  {
+    "collectionPrefix": "com.ripperoni.mutes",
+    "appName": "mutes.ripperoni.com",
+    "appUrl": "https://mutes.ripperoni.com",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.navyfragen",
+    "appName": "Navyfragen App",
+    "appUrl": "https://navyfragen.app",
+    "category": "Other",
+    "description": "Navyfragen - Anonymous questions and answers on Bluesky",
+    "faviconUrl": "https://navyfragen.app/navyfragen.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "com.newdin",
+    "appName": "newdin",
+    "appUrl": "https://newdin.com",
+    "category": "Other",
+    "description": "A place on ATProto to collect links, ideas, knowledge",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "sc.nexus",
+    "appName": "Nexus",
+    "appUrl": "https://nexus.sc",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "me.nooki",
+    "appName": "nooki",
+    "appUrl": "https://nooki.me",
+    "category": "Communities",
+    "description": "A minimal discussion platform built on AT Protocol for browsing and participatin",
+    "faviconUrl": "https://nooki.me/assets/nooki.png"
+  },
+  {
+    "collectionPrefix": "br.social.novelo",
+    "appName": "Novelo Social",
+    "appUrl": "https://novelo.social.br",
+    "category": "Other",
+    "description": "Novelo Social",
+    "faviconUrl": "https://novelo.social.br/img/og-image.jpg"
+  },
+  {
+    "collectionPrefix": "dev.npmx",
+    "appName": "npmx",
+    "appUrl": "https://npmx.dev",
+    "category": "Developer Tools",
+    "description": "A better browser for the npm registry with search and package comparison.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "ing.observ",
+    "appName": "Observ.ing - Observe nature. Own your da",
+    "appUrl": "https://observ.ing",
+    "category": "Other",
+    "description": "A decentralized platform for biodiversity observations, built on the AT Protocol.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "art.pinksea",
+    "appName": "oekaki BBS",
+    "appUrl": "https://pinksea.art",
+    "category": "Other",
+    "description": "PinkSea is an Oekaki BBS running as an AT Protocol application. Log in and draw!",
+    "faviconUrl": "https://pinksea.art/assets/img/logo.png"
+  },
+  {
+    "collectionPrefix": "club.ongaku",
+    "appName": "ongaku.club - Discover Independent Music",
+    "appUrl": "https://ongaku.club",
+    "category": "Other",
+    "description": "Discover and stream independent music - Your gateway to underground albums, emer",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "directory.evnt",
+    "appName": "Open Evnt",
+    "appUrl": "https://evnt.directory",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "app.openmkt",
+    "appName": "Open Market",
+    "appUrl": "https://openmkt.app",
+    "category": "Marketplace",
+    "description": "A decentralized marketplace built on AT Protocol for buying, selling, and trading freely on the open web without walled gardens.",
+    "faviconUrl": "https://openmkt.app/icon.png?icon.bb3c2204.png"
+  },
+  {
+    "collectionPrefix": "net.openmeet",
+    "appName": "OpenMeet",
+    "appUrl": "https://openmeet.net",
+    "category": "Events",
+    "description": "A free, open-source alternative to Meetup built on the AT Protocol for creating groups and organizing in-person events.",
+    "faviconUrl": "https://openmeet.net/_astro/apple-touch-icon.DR2xqhHq.png",
+    "alternativeFor": "community.lexicon.calendar"
+  },
+  {
+    "collectionPrefix": "net.openmeet.platform",
+    "appName": "OpenMeet \u2013 Free, Open-Source Alternative",
+    "appUrl": "https://platform.openmeet.net",
+    "category": "Other",
+    "description": "The free, open-source alternative to Meetup. Create groups and events for your community \u2014 no fees, no ads, community-owned forever.",
+    "faviconUrl": "https://platform.openmeet.net/openmeet/og-image.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "social.openvibe",
+    "appName": "Openvibe \u2014 Town Square for Open Social M",
+    "appUrl": "https://openvibe.social",
+    "category": "Other",
+    "description": "Interact With Anyone On The Open Internet. All Decentralised Social Networks, Si",
+    "faviconUrl": "https://openvibe.social/opengraph.png"
+  },
+  {
+    "collectionPrefix": "com.aesthr.at-orbital-laser",
+    "appName": "Orbital Laser for ATProto",
+    "appUrl": "https://at-orbital-laser.aesthr.com",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "com.getorbyt",
+    "appName": "orbyt - video communities",
+    "appUrl": "https://getorbyt.com",
+    "category": "Other",
+    "description": "a new video app for bluesky",
+    "faviconUrl": "https://getorbyt.com/images/orbyt-logotype.png"
+  },
+  {
+    "collectionPrefix": "app.useouranos",
+    "appName": "Ouranos",
+    "appUrl": "https://useouranos.app",
+    "category": "Other",
+    "description": "Your friendly Bluesky client for the web",
+    "faviconUrl": "https://useouranos.app/opengraph-image.png?cdfb08a144c3ff69",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.offprint",
+    "appName": "Own your words. Own your audience. | Off",
+    "appUrl": "https://offprint.app",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "https://offprint.app/static/images/ogimage.jpg"
+  },
+  {
+    "collectionPrefix": "dev.panproto",
+    "appName": "panproto | schematic version control",
+    "appUrl": "https://panproto.dev",
+    "category": "Other",
+    "description": "One engine for schematic version control within and across any schema language. Built on generalized algebraic theories for provably correct migrations.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "social.popfeed.paperbnd",
+    "appName": "paperbnd.popfeed.social",
+    "appUrl": "https://paperbnd.popfeed.social",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "one.papili",
+    "appName": "papili",
+    "appUrl": "https://papili.one",
+    "category": "Other",
+    "description": "ATProto-powered link aggregator",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "social.paramx",
+    "appName": "PARA Docs",
+    "appUrl": "https://paramx.social",
+    "category": "Other",
+    "description": "PARA explains its political thesis through democratic friction, policy flairs, RAQ, voting, agents, anonymity, and the technical layer beneath the product.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "org.passingreads",
+    "appName": "Passing Reads",
+    "appUrl": "https://passingreads.org",
+    "category": "Other",
+    "description": "Give your books a second life. Find your next favourite read, and the story of w",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "blog.pckt",
+    "appName": "pckt.blog",
+    "appUrl": "https://pckt.blog",
+    "category": "Publishing",
+    "description": "A distraction-free space to write and share your story. Just you, and your words.",
+    "faviconUrl": "https://pckt.blog/android-chrome-512x512.png"
+  },
+  {
+    "collectionPrefix": "social.tophhie.migrate",
+    "appName": "PDS Migration App",
+    "appUrl": "https://migrate.tophhie.social",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "eu.wsocial.pds-prod",
+    "appName": "pds-prod.wsocial.eu",
+    "appUrl": "https://pds-prod.wsocial.eu",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "dev.pdsls",
+    "appName": "PDSls",
+    "appUrl": "https://pdsls.dev",
+    "category": "Developer",
+    "description": "A lightweight, client-side web app for exploring the AT Protocol atmosphere. Bro",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "social.periwinkle",
+    "appName": "Periwinkle - Get Started",
+    "appUrl": "https://periwinkle.social",
+    "category": "Other",
+    "description": "Create your AT Protocol identity with Periwinkle",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "at.photosky",
+    "appName": "PhotoSky \u2014 Photography Community",
+    "appUrl": "https://photosky.at",
+    "category": "Other",
+    "description": "A minimalist photo-sharing community built on ATProtocol.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "app.pinksky",
+    "appName": "Pinksky",
+    "appUrl": "https://pinksky.app",
+    "category": "Client",
+    "description": "An alternative Bluesky client focused on a cleaner, modern browsing experience.",
+    "faviconUrl": "",
+    "alternativeFor": "app.bsky"
+  },
+  {
+    "collectionPrefix": "xyz.kittysay.piper",
+    "appName": "Piper - Spotify & Last.fm Tracker",
+    "appUrl": "https://piper.kittysay.xyz",
+    "category": "Other",
+    "description": "Piper is a multi-user application that records what you're listening to on\n    Spotify and Last.fm, saving your listening history.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "social.pipup",
+    "appName": "PiPup",
+    "appUrl": "https://pipup.social",
+    "category": "Other",
+    "description": "A blogging platform with support for rich text, math, and diagrams.",
+    "faviconUrl": "https://pipup.social/og/default.png"
+  },
+  {
+    "collectionPrefix": "fm.plyr",
+    "appName": "Plyr.fm",
+    "appUrl": "https://plyr.fm",
+    "category": "Audio",
+    "description": "Discover and stream music on the atproto network.",
+    "faviconUrl": "https://plyr.fm/icons/icon-512.png"
+  },
+  {
+    "collectionPrefix": "blue.poll",
+    "appName": "poll.blue",
+    "appUrl": "https://poll.blue",
+    "category": "Other",
+    "description": "poll.blue is a polling app for Bluesky run by @netwatch.dev. It was originally created by @epistemic.horse. To make a poll, go to the posting page.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "place.pollen",
+    "appName": "Pollen - A place for things to spread",
+    "appUrl": "https://pollen.place",
+    "category": "Other",
+    "description": "A gentle place for things to spread. Share GIFs, thoughts, and moments on a dece",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "tech.waow.pollz",
+    "appName": "pollz",
+    "appUrl": "https://pollz.waow.tech",
+    "category": "Other",
+    "description": "create and vote on polls",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "blue.deniz.poly",
+    "appName": "Polycules Grapher",
+    "appUrl": "https://poly.deniz.blue",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "social.popfeed",
+    "appName": "Popfeed",
+    "appUrl": "https://popfeed.social",
+    "category": "Reviews",
+    "description": "A media ratings and reviews app built on ATproto, focused on portability of your lists and reviews.",
+    "faviconUrl": "https://popfeed.social/favicon.ico"
+  },
+  {
+    "collectionPrefix": "club.paperbnd",
+    "appName": "Popfeed",
+    "appUrl": "https://www.paperbnd.club",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "dev.pages.posteing",
+    "appName": "posteing",
+    "appUrl": "https://posteing.pages.dev",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.potatonet",
+    "appName": "potatonet.app",
+    "appUrl": "https://potatonet.app",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "social.attps",
+    "appName": "Private Age Assurance",
+    "appUrl": "https://attps.social",
+    "category": "Other",
+    "description": "Private age assurance for Bluesky using zero-knowledge proofs",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "garden.profile",
+    "appName": "profile.garden \u2013 your homepage on the AT",
+    "appUrl": "https://profile.garden",
+    "category": "Other",
+    "description": "An internet website!",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.protoimsg",
+    "appName": "proto instant messenger",
+    "appUrl": "https://protoimsg.app/beta-signup",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "com.protoimsg",
+    "appName": "protoimsg | AIM-inspired group chat on t",
+    "appUrl": "https://www.protoimsg.com",
+    "category": "Other",
+    "description": "Community chat rooms, peer-to-peer video calls, encrypted DMs, and buddy lists built on the AT Protocol. Works with Blacksky, Bluesky, or any atproto account.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "blue.protopro",
+    "appName": "ProtoPro",
+    "appUrl": "https://protopro.blue",
+    "category": "Other",
+    "description": "AT Proto for professionals and businesses.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "run.val.proto-runs",
+    "appName": "ProtoRuns",
+    "appUrl": "https://proto-runs.val.run",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "tech.waow.pub-search",
+    "appName": "pub search",
+    "appUrl": "https://pub-search.waow.tech",
+    "category": "Other",
+    "description": "search atproto publishing platforms",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "blue.feeds.pulsar",
+    "appName": "pulsar.feeds.blue",
+    "appUrl": "https://pulsar.feeds.blue",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "com.bunnynabbit.labels",
+    "appName": "Query labels",
+    "appUrl": "https://labels.bunnynabbit.com",
+    "category": "Other",
+    "description": "Query all labels for an account or labeler on the public Bluesky network.",
+    "faviconUrl": "https://labels.bunnynabbit.com/web/asset/icon/pool-toy-icon-128.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "org.robocracy",
+    "appName": "r o b o c r a c y . o r g",
+    "appUrl": "https://robocracy.org",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "net.rankthat",
+    "appName": "RankThat - Collections",
+    "appUrl": "https://rankthat.net",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "dev.pages.skywrite",
+    "appName": "Read Docs on AT Proto",
+    "appUrl": "https://skywrite.pages.dev",
+    "category": "Other",
+    "description": "A simple, interoperable reader for long-form content on the AT Protocol. Currently, only WhiteWind and Leaflet are integrated.",
+    "faviconUrl": "https://skywrite.pages.dev/social-card.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "at.mosphere.wormhole.at",
+    "appName": "README",
+    "appUrl": "https://at.wormhole.mosphere.at",
+    "category": "Other",
+    "description": "This is a browser extension that provides \u201cwormhole\u201d navigation\nbetween different AT Protocol/Bluesky services inspired by Dame\u2019s\nShortcut. The extension transforms URLs and identifiers from one\nservice to equivalent URLs on other services.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "exchange.recipe",
+    "appName": "recipe.exchange",
+    "appUrl": "https://recipe.exchange",
+    "category": "Food",
+    "description": "A recipe-sharing platform where people can publish and discover cooking recipes.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "app.reddwarf",
+    "appName": "Red Dwarf",
+    "appUrl": "https://reddwarf.app",
+    "category": "Other",
+    "description": "an appview-less Bluesky client using Constellation and PDS Queries",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "dev.jbcrn.rd",
+    "appName": "Red Dwarf",
+    "appUrl": "https://rd.jbcrn.dev",
+    "category": "Other",
+    "description": "an appview-less Bluesky client using Constellation and PDS Queries",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "party.whey.reddwarf",
+    "appName": "Red Dwarf",
+    "appUrl": "https://reddwarf.whey.party",
+    "category": "Other",
+    "description": "an appview-less Bluesky client using Constellation and PDS Queries",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "blue.registry",
+    "appName": "RegistryBlue",
+    "appUrl": "https://registry.blue",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "space.remanso",
+    "appName": "Remanso",
+    "appUrl": "https://remanso.space",
+    "category": "Other",
+    "description": "Remanso for displaying & sharing personal notes",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "pub.leaflet.mark-germ",
+    "appName": "Render a Germ DM button in your AppView ",
+    "appUrl": "https://mark-germ.leaflet.pub/3mem22lhe222t",
+    "category": "Other",
+    "description": "Bring the Germ DM button to your atproto app!",
+    "faviconUrl": "https://leaflet.pub/lish/did%253Aplc%253Albu36k4mysk5g6gcrpw4dbwm/3mcvr236wys26/3mem22lhe222t/opengraph-image?e2bb7203df6d3028",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "blue.rito",
+    "appName": "Rito",
+    "appUrl": "https://rito.blue/en",
+    "category": "Other",
+    "description": "A social bookmarking platform connecting users and developers.",
+    "faviconUrl": "https://rito.blue/rito_ogp.png"
+  },
+  {
+    "collectionPrefix": "dev.pages.rito-bookmark-importer",
+    "appName": "Rito Bookmark Importer",
+    "appUrl": "https://rito-bookmark-importer.pages.dev",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "at.riven",
+    "appName": "Riven",
+    "appUrl": "https://riven.at",
+    "category": "Other",
+    "description": "A modern platform for original content, genuine conversation, and a feed that's ",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "app.rocksky",
+    "appName": "Rocksky",
+    "appUrl": "https://rocksky.app",
+    "category": "Client",
+    "description": "A lightweight and fast Bluesky client for the web, designed for a smooth browsing experience.",
+    "faviconUrl": "",
+    "alternativeFor": "app.bsky"
+  },
+  {
+    "collectionPrefix": "io.github.notactuallytreyanastasio",
+    "appName": "Role Call: Explore work from the folks w",
+    "appUrl": "https://notactuallytreyanastasio.github.io/role_call/?tab=discover",
+    "category": "Other",
+    "description": "Mark shows you've seen. Search stuff you like. Find new stuff from your favorite",
+    "faviconUrl": "https://notactuallytreyanastasio.github.io/role_call/og-image.png"
+  },
+  {
+    "collectionPrefix": "space.roomy",
+    "appName": "Roomy",
+    "appUrl": "https://roomy.space",
+    "category": "Communities",
+    "description": "A decentralized group chat app built on AT Protocol and Automerge, with local-first sync and identity via your PDS.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "pub.roster",
+    "appName": "Roster \u2014 Your relationships are yours",
+    "appUrl": "https://roster.pub",
+    "category": "Other",
+    "description": "Roster is a contact-graph-first social platform where your contacts are encrypte",
+    "faviconUrl": "https://roster.pub/images/og-default.png"
+  },
+  {
+    "collectionPrefix": "com.ruthub",
+    "appName": "RutHub",
+    "appUrl": "https://ruthub.com",
+    "category": "Developer Tools",
+    "description": "A developer tool built on AT Protocol for managing and sharing code repositories and projects.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "food.sampler",
+    "appName": "sampler.food",
+    "appUrl": "https://sampler.food",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "ink.henry.saunter",
+    "appName": "Sauntermap",
+    "appUrl": "https://saunter.henry.ink/profile/henryzoo.com/3mi3h4auvaz2x",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "org.scrapboard",
+    "appName": "Scrapboard",
+    "appUrl": "https://scrapboard.org",
+    "category": "Tools",
+    "description": "A collaborative visual workspace for organizing ideas and content, built for the",
+    "faviconUrl": "https://scrapboard.org/icon.png"
+  },
+  {
+    "collectionPrefix": "so.seams",
+    "appName": "Seams",
+    "appUrl": "https://seams.so",
+    "category": "Tools",
+    "description": "A social annotation platform for the ATmosphere; highlight and discuss any web page with the AT Protocol.",
+    "faviconUrl": "https://seams.so/assets/logo.png"
+  },
+  {
+    "collectionPrefix": "so.semble",
+    "appName": "Semble",
+    "appUrl": "https://semble.so",
+    "category": "Tools",
+    "description": "A social knowledge network for creators built on ATProto: follow peers' research trails, surface new connections, and own your data.",
+    "faviconUrl": "https://semble.so/semble-icon-512x512.png"
+  },
+  {
+    "collectionPrefix": "io.shadowsky",
+    "appName": "ShadowSky - Bluesky Companion",
+    "appUrl": "https://shadowsky.io/search",
+    "category": "Other",
+    "description": "Your companion app for deeper Bluesky insights. Enhanced analytics, multi-column views, and powerful tools for the Bluesky community.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "com.icloud",
+    "appName": "Shortcuts",
+    "appUrl": "https://www.icloud.com/shortcuts/61a09e98865b48118b91334d1ae0ddb5",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.sidetrail",
+    "appName": "sidetrail",
+    "appUrl": "https://sidetrail.app",
+    "category": "Other",
+    "description": "trails worth walking",
+    "faviconUrl": "https://sidetrail.app/opengraph-image-12gd74.png?742e8e2cd7d4bd20"
+  },
+  {
+    "collectionPrefix": "id.sifa",
+    "appName": "Sifa",
+    "appUrl": "https://sifa.id",
+    "category": "Social",
+    "description": "Professional identity on the AT Protocol for owning your career profile and narr",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "dev.pages.ih-auth",
+    "appName": "Sign in - Internet Handle",
+    "appUrl": "https://ih-auth.pages.dev/auth",
+    "category": "Other",
+    "description": "Internet handle authentication middleman",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "social.sill",
+    "appName": "Sill",
+    "appUrl": "https://sill.social",
+    "category": "News",
+    "description": "A link aggregation app that monitors your Bluesky and Mastodon feeds to surface the most shared links in your network.",
+    "faviconUrl": "https://sill.social/android-icon-192x192.png"
+  },
+  {
+    "collectionPrefix": "dev.pages.skeetdeck",
+    "appName": "Skeetdeck",
+    "appUrl": "https://skeetdeck.pages.dev",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "dev.sky-follower-bridge",
+    "appName": "Sky Follower Bridge",
+    "appUrl": "https://www.sky-follower-bridge.dev",
+    "category": "Other",
+    "description": "Instantly find and follow the same users from your \ud835\udd4f followers on Bluesky",
+    "faviconUrl": "https://www.sky-follower-bridge.dev/images/og-image.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "com.skybemoreblue",
+    "appName": "SkyBeMoreBlue",
+    "appUrl": "https://www.skybemoreblue.com/home",
+    "category": "Other",
+    "description": "Make Bluesky more fun and exciting - An AT Protocol application for user introductions",
+    "faviconUrl": "https://www.skybemoreblue.com/opengraph-image.jpg?opengraph-image.ec77ba23.jpg"
+  },
+  {
+    "collectionPrefix": "blue.skybind",
+    "appName": "SkyBind",
+    "appUrl": "https://skybind.blue/create",
+    "category": "Other",
+    "description": "Bluesky\u306e\u6f2b\u753b\u30b9\u30ec\u30c3\u30c9\u7528\u306e\u898b\u958b\u304d\u30d3\u30e5\u30fc\u30a2\u3067\u3059\u3002",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "dev.skyboard",
+    "appName": "Skyboard",
+    "appUrl": "https://skyboard.dev",
+    "category": "Tools",
+    "description": "Kanban boards you actually own, built on the AT Protocol. All boards are public and stored in your PDS \u2014 transparent by default, owned by you.",
+    "faviconUrl": "https://skyboard.dev/apple-touch-icon.png"
+  },
+  {
+    "collectionPrefix": "social.skydeck",
+    "appName": "SkyDeck",
+    "appUrl": "https://skydeck.social",
+    "category": "Other",
+    "description": "SkyDeck is a Bluesky Social web client that lets you follow multiple feeds at once.",
+    "faviconUrl": "https://skydeck.social/social.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.skydrops",
+    "appName": "Skydrops.app",
+    "appUrl": "https://skydrops.app",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "social.skylight",
+    "appName": "Skylight",
+    "appUrl": "https://skylight.social",
+    "category": "Video",
+    "description": "A short-form video app built on ATproto, designed as a decentralized alternative to TikTok.",
+    "faviconUrl": "https://skylight.social/favicon.ico"
+  },
+  {
+    "collectionPrefix": "my.skylights",
+    "appName": "Skylights",
+    "appUrl": "https://skylights.my",
+    "category": "Reviews",
+    "description": "Collects your public ratings and reviews in one place, built on AT Protocol so your data stays portable.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "com.louisarge.skyline",
+    "appName": "Skyline",
+    "appUrl": "https://skyline.louisarge.com",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "blue.skymap",
+    "appName": "SkyMap",
+    "appUrl": "https://skymap.blue",
+    "category": "Tools",
+    "description": "A mapping and discovery tool for the AT Protocol ecosystem.",
+    "faviconUrl": "https://skymap.blue/favicon.ico"
+  },
+  {
+    "collectionPrefix": "me.skyna",
+    "appName": "Skyname",
+    "appUrl": "https://skyna.me/login",
+    "category": "Other",
+    "description": "Free, unique usernames for Bluesky\u2014register in seconds.",
+    "faviconUrl": "https://skyna.me/banner.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "site.skypicker",
+    "appName": "SkyPicker \u00b7 Host giveaways on Bluesky",
+    "appUrl": "https://skypicker.site",
+    "category": "Other",
+    "description": "Host giveaways easily on Bluesky with SkyPicker",
+    "faviconUrl": "https://skypicker.site/og-skypicker.site.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "org.skypoints",
+    "appName": "skypoints.org",
+    "appUrl": "https://skypoints.org",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "com.skyrdle",
+    "appName": "Skyrdle",
+    "appUrl": "https://skyrdle.com",
+    "category": "Games",
+    "description": "A Wordle-style daily word game built for the ATproto ecosystem.",
+    "faviconUrl": "data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAEKADAAQAAAABAAAAEAAAAAA0VXHyAAACb0lEQVQ4EY2TTU8TURSGn5kpbemXtJRavmJQYsREYpQF+8aoK/+CS3+Af8T/4UoXbDASgokLV2CM4aMBbSlQ2tIOnZnO3Jnx3lKKEha+k8m9M+ee95zznnO19Nu1kP+E8EPCMMTQNXT5Kuj/6YvjBSzdzfD62R2mCkn84CJu5G8Crx9BskpyTT5qdQMI5H55oUBpaZKqA9miS6Pt4EnjkEAxlhbTzM8YtGyPlhBslV1e5F2e32tzf6qJaW+yXo/yxV4gkYpx1rSuStA0jacLETJGj73NGiMRm+xtwZvHNZzTJitrVay977wc/cpp5ZSOzED5/KNBtdujZrnU2z0qxzbmuYdrNdjYEbz7HGU205GpQ88RBNc1UJpWJIFm97BdgfnLRM+mEFaLB8mQiUWNT1sx5iZcqcgVhhqonz93e7I2gT6bIqqHdM0I77cnKBUPmRE6nW6Uldo0bmj0BVY0QwJf9vdJfop8Ls5ZAeodlx3bxBorYE1DR5Y2Oh1il4VMVbZmgKEGajhyxTTV2hnV8jFHByck01FePdTY3W/ycf2Q5kmH0lzYz47B+A0JlCjbdQc7k2bz2z4iGsc2XRnZZrfWZbtiUW04NEyPQGZ7iX4Jvhyg4rh0kP13pS2RH0P4Go7l0T53mUzB8nwMI/BpyNJC4pf+6IotNxZj6VERQ+rbObWIjmfpSTLh+3z44aMlE+Qmb9HSR9n4reOHck4HrYioWhKZOGWZXtcWGBEdywroqpbKU6sHBqv7hprtPtQSMQYfaq9u1fGRSVNGRrIpJ9f15W27kGdE+iqoW6hs19HXIJAaOMIb2m46eNM/5fAHCd8lRR5k1Y4AAAAASUVORK5CYII="
+  },
+  {
+    "collectionPrefix": "app.skyreader",
+    "appName": "SkyReader",
+    "appUrl": "https://skyreader.app",
+    "category": "News",
+    "description": "A modern RSS reader built on the AT Protocol, allowing you to follow your favorite blogs and news sites with your Bluesky identity.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "dev.nekono.skyshare",
+    "appName": "Skyshare",
+    "appUrl": "https://skyshare.nekono.dev/app",
+    "category": "Other",
+    "description": "Skyshare is a web application helps bluesky users post to both bluesky or x.com.",
+    "faviconUrl": "https://skyshare.nekono.dev/materials/ogp_main.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "me.skyspace",
+    "appName": "SkySpace",
+    "appUrl": "https://skyspace.me",
+    "category": "Social",
+    "description": "A work-in-progress social media flashback to 2005, when the internet was good and part of it belonged to you. An easy way to find people and make new friends on Bluesky with customizable profile pages.",
+    "faviconUrl": "https://skyspace.me/apple-touch-icon.png"
+  },
+  {
+    "collectionPrefix": "app.skysquare",
+    "appName": "Skysquare \u2013 A social layer for the open",
+    "appUrl": "https://skysquare.app",
+    "category": "Other",
+    "description": "Skysquare overlays Bluesky discourse directly onto the source material across the open web\u2014turning static pages into living, contextual documents.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "lu.p8.skysweeper",
+    "appName": "SkySweeper",
+    "appUrl": "https://skysweeper.p8.lu",
+    "category": "Other",
+    "description": "Automatically delete your old skeets from Bluesky.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "blue.skytalk",
+    "appName": "SkyTalk.Blue",
+    "appUrl": "https://skytalk.blue",
+    "category": "Other",
+    "description": "Free conversations on ATProto",
+    "faviconUrl": "https://skytalk.blue/opengraph-image?807a8595020bc173"
+  },
+  {
+    "collectionPrefix": "org.skytrails",
+    "appName": "skytrails \u00b7 20,000 trails through Bluesk",
+    "appUrl": "https://www.skytrails.org",
+    "category": "Other",
+    "description": "Regaining freedom of movement on social media. Browse Bluesky via interconnected trails.",
+    "faviconUrl": "https://www.skytrails.org/og.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "social.skyverse",
+    "appName": "skyverse.social",
+    "appUrl": "https://skyverse.social",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.skywatched",
+    "appName": "skywatched",
+    "appUrl": "https://skywatched.app",
+    "category": "Other",
+    "description": "review movies and shows with your friends from bluesky.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "dev.skywell",
+    "appName": "Skywell",
+    "appUrl": "https://skywell.dev",
+    "category": "Other",
+    "description": "a file sharing service built for atproto.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "events.smokesignal",
+    "appName": "Smoke Signal",
+    "appUrl": "https://smokesignal.events",
+    "category": "Events",
+    "description": "An event creation and management app for organizing in-person or online gatherin",
+    "faviconUrl": "https://smokesignal.events/static/icon.webp",
+    "alternativeFor": "community.lexicon.calendar"
+  },
+  {
+    "collectionPrefix": "st.snowpo",
+    "appName": "Snowpost",
+    "appUrl": "https://snowpo.st",
+    "category": "Other",
+    "description": "You can log in with your Bluesky account and publish beautiful static pages to s",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "app.solidar",
+    "appName": "Solidar",
+    "appUrl": "https://solidar.app",
+    "category": "Other",
+    "description": "Bluesky enhanced with Matrix for E2EE DMs and censorship resilience. Be yourself in your community on Bluesky, while building solidarity across communities for collective action.",
+    "faviconUrl": "https://solidar.app/static/social-card-default-gradient.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "social.solidarity",
+    "appName": "Solidarity Social",
+    "appUrl": "https://solidarity.social",
+    "category": "Other",
+    "description": "Join Solidarity Social to build trust and organize solidarity in your community. Connect, collaborate, and create positive change together.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "stream.firehose.200-dollar-plasma-screen-tv",
+    "appName": "Sometimes, I will just stand here and wa",
+    "appUrl": "https://200-dollar-plasma-screen-tv.firehose.stream",
+    "category": "Other",
+    "description": "Michael Scott's $200 Plasma TV streaming the ATProto Jetstream firehose",
+    "faviconUrl": "https://200-dollar-plasma-screen-tv.firehose.stream/plasma-tv.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.sonasky",
+    "appName": "SonaSky | Browse Species",
+    "appUrl": "https://sonasky.app",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "blue.sonde",
+    "appName": "Sonde",
+    "appUrl": "https://sonde.blue",
+    "category": "Other",
+    "description": "Explore the AT Protocol network - browse records, decode data, follow the graph.",
+    "faviconUrl": "https://sonde.blue/api/og/",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "sh.protokill",
+    "appName": "Soon",
+    "appUrl": "https://protokill.sh",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "blue.sorteio",
+    "appName": "sorteio.blue \u00b7 Sorteios no Bluesky",
+    "appUrl": "https://sorteio.blue",
+    "category": "Other",
+    "description": "Fa\u00e7a sorteios de forma simples no Bluesky com o sorteio.blue",
+    "faviconUrl": "https://sorteio.blue/og-sorteio.blue.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "cloud.soundsky",
+    "appName": "SoundSky",
+    "appUrl": "https://soundsky.cloud",
+    "category": "Audio",
+    "description": "A music and audio sharing platform built on AT Protocol for uploading, discoveri",
+    "faviconUrl": "https://soundsky.cloud/favicon.ico"
+  },
+  {
+    "collectionPrefix": "so.sprk",
+    "appName": "Spark - Take back your timeline",
+    "appUrl": "https://sprk.so",
+    "category": "Other",
+    "description": "Social media is addictive and manipulative. It's time for social that puts the u",
+    "faviconUrl": "https://sprk.so/meta/og-image.png"
+  },
+  {
+    "collectionPrefix": "social.spkeasy",
+    "appName": "Speakeasy",
+    "appUrl": "https://spkeasy.social",
+    "category": "Other",
+    "description": "Social media as it should be. Find your community among millions of users, unleash your creativity, and have some fun again.",
+    "faviconUrl": "https://spkeasy.social/static/social-card-default-gradient.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "garden.spores",
+    "appName": "spores.garden",
+    "appUrl": "https://spores.garden",
+    "category": "Other",
+    "description": "Curate your ideas, collect flowers, and discover other gardens.",
+    "faviconUrl": "https://spores.garden/og/spores-garden.png"
+  },
+  {
+    "collectionPrefix": "chat.squawk",
+    "appName": "Squawk",
+    "appUrl": "https://squawk.chat",
+    "category": "Messaging",
+    "description": "Instant real-time group chats on ATProto. Create or join channels, discuss URLs,",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "net.octet-stream.standard-search",
+    "appName": "Standard Search",
+    "appUrl": "https://standard-search.octet-stream.net",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "link.stargraph",
+    "appName": "Stargraph",
+    "appUrl": "https://stargraph.link",
+    "category": "Other",
+    "description": "Stargraph automatically maps Atmosphere profiles together. Find your friends and share your presence in one link.",
+    "faviconUrl": "https://stargraph.link/favicon.webp",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "dev.pages.starrysky-console",
+    "appName": "starrysky-console.pages.dev",
+    "appUrl": "https://starrysky-console.pages.dev",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "io.zzstoatzz.status",
+    "appName": "status",
+    "appUrl": "https://status.zzstoatzz.io",
+    "category": "Other",
+    "description": "share your status",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "boo.sky.stickies",
+    "appName": "stickies.sky.boo",
+    "appUrl": "https://stickies.sky.boo",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "com.stonking",
+    "appName": "Stonking",
+    "appUrl": "https://stonking.com",
+    "category": "Other",
+    "description": "Stonking people. Stonking conversations. Stonking social media and news.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "place.stream",
+    "appName": "Stream.place",
+    "appUrl": "https://stream.place",
+    "category": "Video",
+    "description": "Live streaming and video-first experiences that connect to ATproto identity.",
+    "faviconUrl": "https://stream.place/favicon.ico"
+  },
+  {
+    "collectionPrefix": "social.surf",
+    "appName": "Surf",
+    "appUrl": "https://surf.social",
+    "category": "Client",
+    "description": "An open social web browser that unites content from Bluesky, Threads, Mastodon, and more, with custom feeds and publishing to Bluesky.",
+    "faviconUrl": "",
+    "alternativeFor": "app.bsky"
+  },
+  {
+    "collectionPrefix": "social.surf.about",
+    "appName": "Surf \u2013 Join the Surf Beta Waitlist",
+    "appUrl": "https://about.surf.social",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "xyz.atpoke.demo",
+    "appName": "SvelteKit Atproto Demo",
+    "appUrl": "https://demo.atpoke.xyz/login",
+    "category": "Other",
+    "description": "A demo application with pokes.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "mobi.mino.sweat",
+    "appName": "Sweat \u2014 minomobi",
+    "appUrl": "https://sweat.mino.mobi",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "tech.tokimeki.takibi",
+    "appName": "Takibi from TOKIMEKI",
+    "appUrl": "https://takibi.tokimeki.tech",
+    "category": "Other",
+    "description": "AT Protocol Chill...",
+    "faviconUrl": "https://takibi.tokimeki.tech/ogp.png"
+  },
+  {
+    "collectionPrefix": "sh.tangled",
+    "appName": "Tangled",
+    "appUrl": "https://tangled.org",
+    "category": "Developer Tools",
+    "description": "A decentralized, social code hosting platform for git repositories, built to kee",
+    "faviconUrl": "https://tangled.org/static/logos/dolly.png"
+  },
+  {
+    "collectionPrefix": "at.atprotocol",
+    "appName": "Taproot",
+    "appUrl": "https://atprotocol.at",
+    "category": "Other",
+    "description": "AT Protocol Explorer",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "at.atproto",
+    "appName": "Taproot (atproto.at://) - AT Protocol Ex",
+    "appUrl": "https://atproto.at",
+    "category": "Other",
+    "description": "Preview AT Protocol links by prefixing atproto. to any AT Protocol URI",
+    "faviconUrl": "https://atproto.at/atprotoat_ogimage.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "fm.teal",
+    "appName": "teal.fm - Your music journey, beautifull",
+    "appUrl": "https://teal.fm",
+    "category": "Other",
+    "description": "Track your music listening across all platforms with teal.fm - The most beautifu",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "world.ptah",
+    "appName": "The Ptah Protocol",
+    "appUrl": "https://ptah.world",
+    "category": "Other",
+    "description": "Open world infrastructure for the AT Protocol. Eight record types for world-building, competitive events, and narrative provenance.",
+    "faviconUrl": "https://ptah.world/og_image.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "stream.thought",
+    "appName": "Thought Stream",
+    "appUrl": "https://thought.stream",
+    "category": "Other",
+    "description": "Thought stream is an experimental real-time, global, multi-agent communication system with optional human participation. Powered by AT Protocol. You can run your own agent here, or chat using the rust CLI here.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "io.github.lemonmeant",
+    "appName": "Thread Cutter",
+    "appUrl": "https://lemonmeant.github.io/splitter",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "games.firehose.tictactoe",
+    "appName": "Tic-Tac-Toe (Firehose Games)",
+    "appUrl": "https://tictactoe.firehose.games",
+    "category": "Games",
+    "description": "A multiplayer Tic-Tac-Toe game that uses ATproto login so you can play as your internet handle.",
+    "faviconUrl": "https://tictactoe.firehose.games/favicon.ico"
+  },
+  {
+    "collectionPrefix": "li.plonk",
+    "appName": "timeline \u00b7 plonk.li",
+    "appUrl": "https://plonk.li",
+    "category": "Other",
+    "description": "by @13sunnydays.bsky.social\u00a0\u00b7\n6mo ago\n\u00b7\nplaintext\n\u00b7\n10 loc\n\u00b7\u00a00 comments",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "social.atmo.secrets",
+    "appName": "timelocked secrets",
+    "appUrl": "https://secrets.atmo.social",
+    "category": "Other",
+    "description": "Encrypt messages that can only be decrypted after a specific time. Powered by drand timelock encryption and stored on your atproto PDS.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "codes.cyanne.to-doodleoo",
+    "appName": "To Doodleoo",
+    "appUrl": "https://to-doodleoo.cyanne.codes",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "blue.tokimeki",
+    "appName": "TOKIMEKI - Bluesky client project",
+    "appUrl": "https://tokimeki.blue",
+    "category": "Other",
+    "description": "TOKIMEKI is a Bluesky browser client with multi-column and multi-account support.",
+    "faviconUrl": "https://tokimeki.blue/ogp.jpg",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "tech.tokimeki.poll",
+    "appName": "TOKIMEKI Poll",
+    "appUrl": "https://poll.tokimeki.tech",
+    "category": "Other",
+    "description": "AT Protocol Poll Service for TOKIMEKI.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "blue.toolify",
+    "appName": "Toolify.blue",
+    "appUrl": "https://toolify.blue",
+    "category": "Tools",
+    "description": "A utility for the Bluesky ecosystem that allows looking up profiles by handle or DID.",
+    "faviconUrl": "https://toolify.blue/favicon.ico?favicon.7675f780.ico"
+  },
+  {
+    "collectionPrefix": "social.track",
+    "appName": "Track \u2014 AI-Powered Bluesky Monitoring",
+    "appUrl": "https://track.social",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "diy.tracklist",
+    "appName": "tracklist:// \u2014 the world is listening",
+    "appUrl": "https://tracklist.diy",
+    "category": "Other",
+    "description": "music without limits",
+    "faviconUrl": "https://tracklist.diy/tracklist_logo_square.png"
+  },
+  {
+    "collectionPrefix": "systems.wizardry.buttercup",
+    "appName": "Tranquil PDS",
+    "appUrl": "https://buttercup.wizardry.systems",
+    "category": "Other",
+    "description": "Tranquil PDS is a Personal Data Server, the thing that stores your\n          posts, profile, and keys. Bluesky runs one for you, but you can run\n          your own.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "farm.tranquil",
+    "appName": "Tranquil PDS",
+    "appUrl": "https://tranquil.farm",
+    "category": "Other",
+    "description": "Tranquil PDS is a Personal Data Server, the thing that stores your\n          posts, profile, and keys. Bluesky runs one for you, but you can run\n          your own.",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "com.suibari.trilinesat",
+    "appName": "TriLinesAt",
+    "appUrl": "https://trilinesat.suibari.com",
+    "category": "Other",
+    "description": "Five minutes before bed, three lines of journaling. A social diary app on Bluesky.",
+    "faviconUrl": "https://trilinesat.suibari.com/ogp.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "pet.ptr.trill",
+    "appName": "trill - bsky voice memos",
+    "appUrl": "https://trill.ptr.pet",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "dev.pages.leafletimporter",
+    "appName": "Tumblr to Leaflet",
+    "appUrl": "https://leafletimporter.pages.dev",
+    "category": "Other",
+    "description": "Migrate your Tumblr blog to Leaflet.pub. Your words deserve a home you actually own, built on AT Protocol.",
+    "faviconUrl": "https://leafletimporter.pages.dev/images/og-preview.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "tech.waow.typeahead",
+    "appName": "typeahead",
+    "appUrl": "https://typeahead.waow.tech",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "net.ucho-ten",
+    "appName": "Ucho-ten Bluesky Client",
+    "appUrl": "https://ucho-ten.net",
+    "category": "Other",
+    "description": "Ucho-ten\u306f\u300c\u4ed6\u8005\u304b\u3089\u89e3\u653e\u3055\u308c\u3001\u81ea\u5df1\u306e\u72ec\u7acb\u300d\u3092\u76ee\u6307\u3059Bluesky\u30af\u30e9\u30a4\u30a2\u30f3\u30c8\u3067\u3059\u3002\u3044\u3064\u3067\u3082\u65b0\u9bae\u306a\u6c17\u6301\u3061\u3067SNS\u3092\u4f7f\u3046\u3053\u3068\u304c\u3067\u304d\u307e\u3059\u3002",
+    "faviconUrl": "https://ucho-ten.net/images/ogp/ucho-ten-ogp.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "at.unthread",
+    "appName": "Unthread",
+    "appUrl": "https://unthread.at/login",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "com.viewsift",
+    "appName": "viewsift.com",
+    "appUrl": "https://viewsift.com",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "live.voxport",
+    "appName": "VoxPort \u2014 Protocol-Native Podcast Publis",
+    "appUrl": "https://voxport.live",
+    "category": "Other",
+    "description": "AT Protocol powered podcast hosting. Own your audience, publish everywhere, and stay in control.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "com.vayumandala",
+    "appName": "v\u0101yuma\u1e47\u1e0dala",
+    "appUrl": "https://vayumandala.com",
+    "category": "Other",
+    "description": "v\u0101yuma\u1e47\u1e0dala",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "dev.atprotocol",
+    "appName": "W for ATProto",
+    "appUrl": "https://atprotocol.dev/w-for-atproto",
+    "category": "Other",
+    "description": "W is a new platform recently announced, aspiring to be a European alternative to X.  It may actually be powered by ATProto, based on leaked screenshots.  This is a win for ATProto",
+    "faviconUrl": "https://atprotocol.dev/content/images/2026/01/w_for_atproto--1-.jpg",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.wfall",
+    "appName": "Waterfall",
+    "appUrl": "https://wfall.app",
+    "category": "Other",
+    "description": "The video platform giving power back to creators and their fans. Built on the AT",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "app.wavemsg",
+    "appName": "Wave",
+    "appUrl": "https://wavemsg.app",
+    "category": "Messaging",
+    "description": "A privacy-first messaging app with end-to-end encryption and decentralized messaging infrastructure.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "sh.weaver",
+    "appName": "Weaver",
+    "appUrl": "https://weaver.sh",
+    "category": "Other",
+    "description": "Share your words, your way.",
+    "faviconUrl": "https://weaver.sh/og/site.png"
+  },
+  {
+    "collectionPrefix": "sh.weaver.alpha",
+    "appName": "Weaver",
+    "appUrl": "https://alpha.weaver.sh",
+    "category": "Other",
+    "description": "Share your words, your way.",
+    "faviconUrl": "https://alpha.weaver.sh/og/site.png",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.atsky",
+    "appName": "What's new at Discover sky | Atsky",
+    "appUrl": "https://atsky.app",
+    "category": "Other",
+    "description": "Explore what's new around your sky today",
+    "faviconUrl": "https://atsky.app/preview.jpg"
+  },
+  {
+    "collectionPrefix": "com.whtwnd",
+    "appName": "WhiteWind",
+    "appUrl": "https://whtwnd.com",
+    "category": "Publishing",
+    "description": "A decentralized blogging platform built on AT Protocol that allows you to write and publish long-form content.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "app.winesky",
+    "appName": "Winesky",
+    "appUrl": "https://winesky.app",
+    "category": "Social",
+    "description": "A social wine discovery and logging app built on the AT Protocol.",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "place.wisp",
+    "appName": "Wisp.place",
+    "appUrl": "https://wisp.place",
+    "category": "Hosting",
+    "description": "A decentralized static site hosting platform built on the AT Protocol, allowing you to deploy sites directly to your PDS.",
+    "faviconUrl": "https://wisp.place/android-chrome-512x512.png"
+  },
+  {
+    "collectionPrefix": "app.witchsky",
+    "appName": "Witchsky",
+    "appUrl": "https://witchsky.app",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "link.woosh",
+    "appName": "Woosh",
+    "appUrl": "https://woosh.link",
+    "category": "Links",
+    "description": "One link for everything. Effortlessly share everything you create, curate, and s",
+    "faviconUrl": "https://woosh.link/favicon-light.png"
+  },
+  {
+    "collectionPrefix": "org.xcvr",
+    "appName": "xcvr.org",
+    "appUrl": "https://xcvr.org",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": "",
+    "alternativeFor": ""
+  },
+  {
+    "collectionPrefix": "app.xptracker",
+    "appName": "xptracker.app",
+    "appUrl": "https://www.xptracker.app",
+    "category": "Other",
+    "description": "Create a custom, professional resume in seconds with xptracker's dynamic resume ",
+    "faviconUrl": "https://cdn.xptracker.app/images/og-icon.jpg"
+  },
+  {
+    "collectionPrefix": "at.youandme",
+    "appName": "You & Me",
+    "appUrl": "https://youandme.at",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "app.yoten",
+    "appName": "y\u014dten - home",
+    "appUrl": "https://yoten.app",
+    "category": "Other",
+    "description": "",
+    "faviconUrl": ""
+  },
+  {
+    "collectionPrefix": "com.suibari.atsumeat",
+    "appName": "\u3042\u3064\u3081\u3042\u3063\u3068 (AtsumeAt)",
+    "appUrl": "https://atsumeat.suibari.com",
+    "category": "Other",
+    "description": "Bluesky \u30c7\u30b8\u30bf\u30eb\u30b7\u30fc\u30eb\u4ea4\u63db\u30a2\u30d7\u30ea",
+    "faviconUrl": "https://atsumeat.suibari.com/ogp.png"
+  }
+]
