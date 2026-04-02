@@ -49,7 +49,7 @@ struct OnboardingView: View {
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
                         .padding(.horizontal)
-                        .onChange(of: handleInput) { _, query in
+                        .onChange(of: handleInput) { query in
                             searchTask?.cancel()
                             let trimmed = query.trimmingCharacters(in: .whitespaces)
                             if trimmed.count < 2 || trimmed.starts(with: "did:") {

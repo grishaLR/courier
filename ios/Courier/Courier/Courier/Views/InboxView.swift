@@ -41,15 +41,15 @@ struct InboxView: View {
                 }
             }
             .navigationTitle("Inbox")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+            .toolbar(content: {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         Task { await authManager.signOut() }
                     } label: {
                         Image(systemName: "rectangle.portrait.and.arrow.right")
                     }
                 }
-            }
+            })
             .task {
                 await loadNotifications()
                 if let did = authManager.did {
