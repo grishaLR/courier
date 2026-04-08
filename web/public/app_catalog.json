@@ -286,7 +286,7 @@
     "appUrl": "https://atmo.rsvp",
     "category": "Events",
     "description": "A decentralized events calendar for the AT Protocol. Create, discover, and join ",
-    "faviconUrl": ""
+    "faviconUrl": "https://atmo.rsvp/favicon.svg"
   },
   {
     "collectionPrefix": "tools.atmo",
@@ -502,9 +502,9 @@
     "collectionPrefix": "community.blacksky",
     "appName": "Blacksky",
     "appUrl": "https://blacksky.community",
-    "category": "Communities",
+    "category": "Client",
     "description": "Decentralized social media built for community power, culture, and collective freedom.",
-    "faviconUrl": "https://blacksky.community/static/favicon-32x32.png",
+    "faviconUrl": "https://blacksky.community/static/apple-touch-icon.png",
     "alternativeFor": "app.bsky"
   },
   {
@@ -619,7 +619,8 @@
     "appUrl": "https://skyfeed.app",
     "category": "Client",
     "description": "A powerful alternative Bluesky client with advanced custom feed building and curation tools.",
-    "faviconUrl": "https://skyfeed.app/android-chrome-512x512.png"
+    "faviconUrl": "https://skyfeed.app/android-chrome-512x512.png",
+    "alternativeFor": "app.bsky"
   },
   {
     "collectionPrefix": "app.bluemotion",
@@ -1248,7 +1249,7 @@
     "collectionPrefix": "blue.fluxapp",
     "appName": "Flux",
     "appUrl": "https://fluxapp.blue",
-    "category": "Social",
+    "category": "Client",
     "description": "A calm, beautiful Bluesky client for iOS designed for a focused and pleasant social experience.",
     "faviconUrl": "",
     "alternativeFor": "app.bsky"
@@ -1326,7 +1327,7 @@
     "appUrl": "https://grain.social",
     "category": "Photos",
     "description": "1 & 2- deux photos publi\u00e9es par @somewhereinthedark2 dans un immense bunker souterrain situ\u00e9 en Haute-Normandie\n \n3- l'observation de l'\u00e9clipse partielle au parc Montsouris (le 29 mars)\n \n4- les journ\u00e9es portes ouvertes du tiers-lieu le Toboggan \u00e0 Malakoff (le 22 mars)\n \n5 & 7- la marche nocturne f\u00e9ministe et radicale organis\u00e9e par l'AG f\u00e9ministe Paris-banlieue et autoris\u00e9e \u00e0 la derni\u00e8re minute (le 7 mars)\n \n6- la fa\u00e7ade d'une maison pr\u00e8s de chez moi emport\u00e9e par un incendie, ayant caus\u00e9 la mort d'une petite fille pendant son sommeil (le 8 avril)\n \n8- les 10 ans du festival de musique Beat & Beer \u00e0 Malakoff (les 5 et 6 septembre)\n \n9- une photo de notre excursion avec ma moiti\u00e9 \u00e0 Colleville-sur-mer et Omaha Beach (au mois de mai)",
-    "faviconUrl": ""
+    "faviconUrl": "https://grain.social/favicon.png"
   },
   {
     "collectionPrefix": "dev.pages.grain-social-explorer",
@@ -1470,11 +1471,11 @@
   },
   {
     "collectionPrefix": "social.arabica.alpha",
-    "appName": "Home - Arabica",
-    "appUrl": "https://alpha.arabica.social",
+    "appName": "Arabica",
+    "appUrl": "https://arabica.social/",
     "category": "Other",
     "description": "Track your coffee brewing journey. Built on AT Protocol, your data stays yours.",
-    "faviconUrl": ""
+    "faviconUrl": "https://arabica.social/favicon.ico"
   },
   {
     "collectionPrefix": "club.atgarden",
