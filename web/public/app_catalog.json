@@ -1255,6 +1255,15 @@
     "alternativeFor": "app.bsky"
   },
   {
+    "collectionPrefix": "com.skeetsapp",
+    "appName": "Skeets",
+    "appUrl": "https://www.skeetsapp.com/",
+    "category": "Client",
+    "description": "A 3rd party iOS / iPadOS client for Bluesky with a truly native look & feel, optimized for accessibility.",
+    "faviconUrl": "https://courier.social/icons/skeets.png",
+    "alternativeFor": "app.bsky"
+  },
+  {
     "collectionPrefix": "blue.vanity",
     "appName": "Free Professional Bluesky Handles | acad",
     "appUrl": "https://vanity.blue",
@@ -1472,7 +1481,7 @@
   {
     "collectionPrefix": "social.arabica.alpha",
     "appName": "Arabica",
-    "appUrl": "https://arabica.social/",
+    "appUrl": "https://alpha.arabica.social/",
     "category": "Other",
     "description": "Track your coffee brewing journey. Built on AT Protocol, your data stays yours.",
     "faviconUrl": "https://arabica.social/favicon.ico"

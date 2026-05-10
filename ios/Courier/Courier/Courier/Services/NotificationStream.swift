@@ -22,9 +22,19 @@ final class NotificationStream: ObservableObject {
 
             while !Task.isCancelled {
                 do {
+                    // Get session token for WS auth
+                    guard let token = AuthManager.shared.sessionToken else {
+                        try? await Task.sleep(for: .seconds(5))
+                        continue
+                    }
+
                     let session = URLSession.shared
                     let ws = session.webSocketTask(with: url)
                     ws.resume()
+
+                    // First-message auth
+                    let authJSON = "{\"token\":\"\(token)\"}"
+                    try await ws.send(.string(authJSON))
 
                     while !Task.isCancelled {
                         let message = try await ws.receive()

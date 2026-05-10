@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Terms of Service - Courier Social">
+  <main style="max-width: 720px; margin: 0 auto; padding: 2rem 1rem;">
+    <a href="/" style="color: #666; font-size: 0.875rem;">&larr; Back to Courier</a>
+
+    <h1 style="margin-top: 1.5rem; font-size: 2rem;">Terms of Service</h1>
+    <p style="color: #666; margin-bottom: 2rem;">Last updated: April 2, 2026</p>
+
+    <section style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem;">What Courier Is</h2>
+      <p>Courier is a free push notification service for the AT Protocol ecosystem. It monitors the public ATProto firehose and delivers notifications to registered devices when interactions occur on your content across supported apps.</p>
+    </section>
+
+    <section style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Your Account</h2>
+      <p>To use Courier, you must authenticate using AT Protocol OAuth, which proves you own the DID you are registering. You may only register DIDs that belong to you.</p>
+      <p style="margin-top: 0.5rem;"><strong>Do not impersonate others.</strong> Registering a DID you do not own to monitor someone else's notifications is strictly prohibited. Accounts found doing this will be permanently blocked.</p>
+    </section>
+
+    <section style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Acceptable Use</h2>
+      <p>You agree not to:</p>
+      <ul style="margin: 0.5rem 0 0.5rem 1.5rem;">
+        <li>Impersonate another person or register DIDs you do not own</li>
+        <li>Use Courier to stalk, harass, or monitor another person's activity</li>
+        <li>Abuse the service by programmatically creating excessive registrations</li>
+        <li>Attempt to circumvent rate limits or security measures</li>
+        <li>Use Courier for any illegal purpose</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Public Data</h2>
+      <p>Courier processes data from the public AT Protocol firehose. All interactions we notify you about are already publicly available on the network. Courier does not create, modify, or amplify any content — it only delivers notifications about existing public interactions.</p>
+    </section>
+
+    <section style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Service Availability</h2>
+      <p>Courier is provided as-is. We make reasonable efforts to keep the service running but do not guarantee uptime, notification delivery, or real-time performance. Notifications depend on upstream services (the ATProto firehose, Apple/Google push services) that are outside our control.</p>
+    </section>
+
+    <section style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Moderation</h2>
+      <p>Courier checks senders against AT Protocol moderation labels. Notifications from accounts labeled as spam, impersonation, or scam by the network's labeling services may be automatically suppressed. We reserve the right to block any DID or device from the service at our discretion.</p>
+    </section>
+
+    <section style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Termination</h2>
+      <p>You may stop using Courier at any time by unregistering your device in the app. We may suspend or terminate accounts that violate these terms without notice.</p>
+    </section>
+
+    <section style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Limitation of Liability</h2>
+      <p>Courier is a free service provided without warranty. We are not liable for missed notifications, delayed delivery, or any damages resulting from use of the service.</p>
+    </section>
+
+    <section style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Changes</h2>
+      <p>We may update these terms as the service evolves. Continued use of Courier after changes constitutes acceptance of the updated terms.</p>
+    </section>
+
+    <section style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Contact</h2>
+      <p>For questions about these terms, reach out via the <a href="https://github.com/grishaLR/courier" style="color: #0066cc; text-decoration: underline;">Courier GitHub repository</a>.</p>
+    </section>
+  </main>
+</Base>

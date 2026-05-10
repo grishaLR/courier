@@ -57,6 +57,7 @@ func (h *OAuthHandlers) ClientMetadata(w http.ResponseWriter, r *http.Request) {
 func (h *OAuthHandlers) Start(w http.ResponseWriter, r *http.Request) {
 	var req struct {
 		Handle string `json:"handle"`
+		Mobile bool   `json:"mobile,omitempty"`
 	}
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil || req.Handle == "" {
 		httpError(w, http.StatusBadRequest, "handle is required")
@@ -104,6 +105,7 @@ func (h *OAuthHandlers) Start(w http.ResponseWriter, r *http.Request) {
 		DPoP:         oauth.DPoPKeyToState(dpopKey),
 		DID:          did,
 		AuthServer:   *authServer,
+		Mobile:       req.Mobile,
 	}
 	if err := h.sessions.SaveOAuthState(r.Context(), state, oauthState); err != nil {
 		httpError(w, http.StatusInternalServerError, "failed to save state")
@@ -151,14 +153,23 @@ func (h *OAuthHandlers) Callback(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Create session and pass token via URL fragment (not sent to server, not logged)
-	handle := ""
-	sessionToken, err := h.sessions.CreateSession(r.Context(), token.Sub, handle)
+	// Create session
+	sessionToken, err := h.sessions.CreateSession(r.Context(), token.Sub, oauthState.DID)
 	if err != nil {
 		httpError(w, http.StatusInternalServerError, "failed to create session")
 		return
 	}
 
+	// Check if this is a mobile OAuth flow (state stored with mobile flag)
+	if oauthState.Mobile {
+		// Redirect to the iOS app via custom URL scheme
+		redirectURL := fmt.Sprintf("social.courier:/auth/callback?session=%s&did=%s",
+			url.QueryEscape(sessionToken), url.QueryEscape(token.Sub))
+		http.Redirect(w, r, redirectURL, http.StatusFound)
+		return
+	}
+
+	// Web flow — redirect to web app
 	redirectURL := fmt.Sprintf("https://courier.social/api#demo&session=%s", url.QueryEscape(sessionToken))
 	http.Redirect(w, r, redirectURL, http.StatusFound)
 }

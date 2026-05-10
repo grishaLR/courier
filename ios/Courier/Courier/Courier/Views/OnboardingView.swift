@@ -22,24 +22,24 @@ struct OnboardingView: View {
 
     var body: some View {
         NavigationStack {
+            ScrollView {
             VStack(spacing: 24) {
-                Spacer()
+                Color.clear.frame(height: 40)
 
                 // Logo
                 VStack(spacing: 12) {
-                    Image(systemName: "bell.badge.fill")
-                        .font(.system(size: 64))
-                        .foregroundStyle(.blue)
+                    Image("Logo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200)
 
                     Text("Courier")
                         .font(.largeTitle.bold())
 
-                    Text("Push notifications for Bluesky")
+                    Text("Push notifications for Open Social")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
-
-                Spacer()
 
                 // Handle input with typeahead
                 VStack(spacing: 0) {
@@ -49,7 +49,7 @@ struct OnboardingView: View {
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
                         .padding(.horizontal)
-                        .onChange(of: handleInput) { query in
+                        .onChange(of: handleInput) { _, query in
                             searchTask?.cancel()
                             let trimmed = query.trimmingCharacters(in: .whitespaces)
                             if trimmed.count < 2 || trimmed.starts(with: "did:") {
@@ -121,7 +121,7 @@ struct OnboardingView: View {
                             ProgressView()
                                 .frame(maxWidth: .infinity)
                         } else {
-                            Text("Get Started")
+                            Text("Login")
                                 .frame(maxWidth: .infinity)
                         }
                     }
@@ -131,9 +131,9 @@ struct OnboardingView: View {
                     .padding(.horizontal)
                     .padding(.top, 16)
                 }
-
-                Spacer()
             }
+            }
+            .background(Color("BackgroundColor").ignoresSafeArea())
         }
     }
 

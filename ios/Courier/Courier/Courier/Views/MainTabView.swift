@@ -13,5 +13,6 @@ struct MainTabView: View {
                     Label("Preferences", systemImage: "slider.horizontal.3")
                 }
         }
+        .tint(Color.accentColor)
     }
 }

@@ -1,5 +1,4 @@
 import Foundation
-import CryptoKit
 
 @MainActor
 final class AuthManager: ObservableObject {
@@ -9,39 +8,50 @@ final class AuthManager: ObservableObject {
     @Published var did: String?
     @Published var handle: String?
 
+    private(set) var sessionToken: String?
     private let defaults = UserDefaults.standard
     private let oauthService = OAuthService.shared
 
     private init() {
         did = defaults.string(forKey: "courier.did")
         handle = defaults.string(forKey: "courier.handle")
-        isAuthenticated = did != nil
+        sessionToken = defaults.string(forKey: "courier.sessionToken")
+        isAuthenticated = did != nil && sessionToken != nil
+
+        // Sync token to APIClient
+        if let token = sessionToken {
+            Task { await APIClient.shared.setSessionToken(token) }
+        }
     }
 
     func authenticate(handleOrDID: String) async throws {
         let inputHandle = handleOrDID.starts(with: "did:") ? nil : handleOrDID
 
-        // OAuth: proves DID ownership via ATProto OAuth flow
-        let authenticatedDID = try await oauthService.authenticate(handleOrDID: handleOrDID)
+        // Server-side OAuth: returns session token + authenticated DID
+        let result = try await oauthService.authenticate(handleOrDID: handleOrDID)
 
-        // Resolve handle if we started with a DID
-        let resolvedHandle = inputHandle ?? authenticatedDID
+        let resolvedHandle = inputHandle ?? result.did
 
-        // Register with backend
-        if let token = PushManager.shared.deviceToken {
-            _ = try await APIClient.shared.register(
-                handle: resolvedHandle,
-                did: authenticatedDID,
-                deviceToken: token
-            )
-        }
-
-        self.did = authenticatedDID
+        // Store session
+        self.sessionToken = result.sessionToken
+        self.did = result.did
         self.handle = resolvedHandle
         self.isAuthenticated = true
 
-        defaults.set(authenticatedDID, forKey: "courier.did")
+        defaults.set(result.did, forKey: "courier.did")
         defaults.set(resolvedHandle, forKey: "courier.handle")
+        defaults.set(result.sessionToken, forKey: "courier.sessionToken")
+
+        await APIClient.shared.setSessionToken(result.sessionToken)
+
+        // Register device token with backend (now authenticated)
+        if let token = PushManager.shared.deviceToken {
+            _ = try await APIClient.shared.register(
+                handle: resolvedHandle,
+                did: result.did,
+                deviceToken: token
+            )
+        }
     }
 
     func signOut() async {
@@ -50,8 +60,11 @@ final class AuthManager: ObservableObject {
         }
         self.did = nil
         self.handle = nil
+        self.sessionToken = nil
         self.isAuthenticated = false
         defaults.removeObject(forKey: "courier.did")
         defaults.removeObject(forKey: "courier.handle")
+        defaults.removeObject(forKey: "courier.sessionToken")
+        await APIClient.shared.setSessionToken(nil)
     }
 }

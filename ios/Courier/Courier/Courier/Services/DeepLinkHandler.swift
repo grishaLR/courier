@@ -41,6 +41,33 @@ enum DeepLinkHandler {
         ("events.smokesignal", { id, rkey in
             "https://smokesignal.events/\(id)/\(rkey)"
         }),
+        // Leaflet (blog)
+        ("pub.leaflet", { _, _ in
+            "https://leaflet.pub/notifications"
+        }),
+        // Grain (photos)
+        ("social.grain", { id, rkey in
+            "https://grain.social/profile/\(id)/\(rkey)"
+        }),
+        // Flashes (photos)
+        ("blue.flashes", { id, _ in
+            "https://www.flashes.blue/\(id)"
+        }),
+        ("app.flashes", { id, _ in
+            "https://www.flashes.blue/\(id)"
+        }),
+        // Plyr (music)
+        ("fm.plyr", { id, _ in
+            "https://plyr.fm/\(id)"
+        }),
+        // Teal (music)
+        ("fm.teal", { id, _ in
+            "https://teal.fm/\(id)"
+        }),
+        // Standard.site (blog)
+        ("site.standard", { id, rkey in
+            "https://standard.site/\(id)/\(rkey)"
+        }),
     ]
 
     static func open(atURI: String) {

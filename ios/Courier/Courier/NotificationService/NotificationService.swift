@@ -1,35 +1,98 @@
-//
-//  NotificationService.swift
-//  NotificationService
-//
-//  Created by gregory levine-rozenvayn on 4/2/26.
-//
-
 import UserNotifications
+import UIKit
 
 class NotificationService: UNNotificationServiceExtension {
-
     var contentHandler: ((UNNotificationContent) -> Void)?
     var bestAttemptContent: UNMutableNotificationContent?
 
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
-        
-        if let bestAttemptContent = bestAttemptContent {
-            // Modify the notification content here...
-            bestAttemptContent.title = "\(bestAttemptContent.title) [modified]"
-            
-            contentHandler(bestAttemptContent)
+
+        guard let content = bestAttemptContent else {
+            contentHandler(request.content)
+            return
         }
-    }
-    
-    override func serviceExtensionTimeWillExpire() {
-        // Called just before the extension will be terminated by the system.
-        // Use this as an opportunity to deliver your "best attempt" at modified content, otherwise the original push payload will be used.
-        if let contentHandler = contentHandler, let bestAttemptContent =  bestAttemptContent {
-            contentHandler(bestAttemptContent)
+
+        // Prefer app favicon (shows nicely on long-press), fall back to avatar
+        let imageURL = faviconURL(from: content.userInfo) ?? avatarURL(from: content.userInfo)
+
+        if let imageURL {
+            downloadImage(url: imageURL) { attachment in
+                if let attachment {
+                    content.attachments = [attachment]
+                }
+                contentHandler(content)
+            }
+        } else {
+            contentHandler(content)
         }
     }
 
+    override func serviceExtensionTimeWillExpire() {
+        if let contentHandler, let content = bestAttemptContent {
+            contentHandler(content)
+        }
+    }
+
+    private func avatarURL(from userInfo: [AnyHashable: Any]) -> URL? {
+        guard let urlString = userInfo["fromAvatar"] as? String, !urlString.isEmpty else { return nil }
+        return URL(string: urlString)
+    }
+
+    private func faviconURL(from userInfo: [AnyHashable: Any]) -> URL? {
+        guard let urlString = userInfo["appFavicon"] as? String, !urlString.isEmpty else { return nil }
+        return URL(string: urlString)
+    }
+
+    private func downloadImage(url: URL, completion: @escaping (UNNotificationAttachment?) -> Void) {
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 10
+        config.timeoutIntervalForResource = 15
+        let session = URLSession(configuration: config)
+        session.downloadTask(with: url) { localURL, response, error in
+            guard let localURL, error == nil else {
+                completion(nil)
+                return
+            }
+
+            let tmpDir = FileManager.default.temporaryDirectory
+
+            do {
+                // Load image data and convert to JPEG (iOS notifications don't support WebP)
+                let data = try Data(contentsOf: localURL)
+                let jpegURL = tmpDir.appendingPathComponent(UUID().uuidString + ".jpg")
+
+                if let image = UIImage(data: data),
+                   let jpegData = image.jpegData(compressionQuality: 0.8) {
+                    try jpegData.write(to: jpegURL)
+                    let attachment = try UNNotificationAttachment(
+                        identifier: "media",
+                        url: jpegURL,
+                        options: nil
+                    )
+                    completion(attachment)
+                } else {
+                    completion(nil)
+                }
+            } catch {
+                completion(nil)
+            }
+        }.resume()
+    }
+
+    private func fileExtension(for url: URL, response: URLResponse?) -> String {
+        // Check content type
+        if let httpResponse = response as? HTTPURLResponse,
+           let contentType = httpResponse.value(forHTTPHeaderField: "Content-Type") {
+            if contentType.contains("png") { return "png" }
+            if contentType.contains("svg") { return "png" } // SVG not supported, won't render
+            if contentType.contains("gif") { return "gif" }
+            if contentType.contains("webp") { return "webp" }
+        }
+        // Fall back to URL extension
+        let pathExt = url.pathExtension.lowercased()
+        if ["png", "gif", "webp"].contains(pathExt) { return pathExt }
+        return "jpg"
+    }
 }

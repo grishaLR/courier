@@ -1,0 +1,82 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Privacy Policy - Courier Social">
+  <main style="max-width: 720px; margin: 0 auto; padding: 2rem 1rem;">
+    <a href="/" style="color: #666; font-size: 0.875rem;">&larr; Back to Courier</a>
+
+    <h1 style="margin-top: 1.5rem; font-size: 2rem;">Privacy Policy</h1>
+    <p style="color: #666; margin-bottom: 2rem;">Last updated: April 2, 2026</p>
+
+    <section style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem;">What Courier Does</h2>
+      <p>Courier is a push notification service for the AT Protocol ecosystem. We listen to the public AT Protocol firehose and deliver notifications to your device when someone interacts with your content across ATProto apps.</p>
+    </section>
+
+    <section style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Data We Collect</h2>
+      <p>When you sign in and register for notifications, we store:</p>
+      <ul style="margin: 0.5rem 0 0.5rem 1.5rem;">
+        <li><strong>Your DID and handle</strong> — your public AT Protocol identity, used to identify which notifications are yours.</li>
+        <li><strong>Device push token</strong> — provided by Apple (APNs) or Google (FCM), used solely to deliver push notifications to your device.</li>
+        <li><strong>Notification preferences</strong> — which notification types and apps you want to receive alerts from.</li>
+        <li><strong>Recent notifications</strong> — the last 50 notifications delivered to you, stored temporarily for display in the app inbox.</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Data We Do Not Collect</h2>
+      <ul style="margin: 0.5rem 0 0.5rem 1.5rem;">
+        <li>Passwords or authentication credentials</li>
+        <li>Post content or media</li>
+        <li>Location data</li>
+        <li>Email addresses or phone numbers</li>
+        <li>Analytics or tracking data</li>
+        <li>Contacts or address book</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Public Data</h2>
+      <p>All notification data processed by Courier originates from the public AT Protocol firehose. This means the interactions we notify you about (likes, replies, follows, etc.) are already publicly visible on the AT Protocol network. Courier aggregates and delivers this public data — we do not access any private or direct messages.</p>
+    </section>
+
+    <section style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Authentication</h2>
+      <p>Courier uses AT Protocol OAuth to verify your identity. When you sign in, you prove ownership of your DID through the standard ATProto OAuth flow. We do not store your OAuth tokens beyond the session — sessions expire after 7 days.</p>
+    </section>
+
+    <section style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Data Retention</h2>
+      <p>Your registration data (DID, device token, preferences) is stored as long as you have an active account. Notification history is capped at 50 entries and can be cleared at any time from the app. When you unregister or delete your account, your data is removed from our servers.</p>
+    </section>
+
+    <section style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Third-Party Services</h2>
+      <ul style="margin: 0.5rem 0 0.5rem 1.5rem;">
+        <li><strong>Apple Push Notification Service (APNs)</strong> — delivers push notifications to iOS devices.</li>
+        <li><strong>Firebase Cloud Messaging (FCM)</strong> — delivers push notifications to Android devices.</li>
+        <li><strong>Fly.io</strong> — hosts our server infrastructure.</li>
+        <li><strong>Bluesky Public API</strong> — used to resolve handles and fetch public profile information.</li>
+      </ul>
+      <p style="margin-top: 0.5rem;">We do not sell, share, or provide your data to any other third parties.</p>
+    </section>
+
+    <section style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Your Rights</h2>
+      <p>You can at any time:</p>
+      <ul style="margin: 0.5rem 0 0.5rem 1.5rem;">
+        <li>View and modify your notification preferences</li>
+        <li>Clear your notification history</li>
+        <li>Unregister your device to stop receiving notifications</li>
+        <li>Delete your account entirely by signing out, which removes your data from our servers</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Contact</h2>
+      <p>For privacy-related questions or concerns, reach out via the <a href="https://github.com/grishaLR/courier" style="color: #0066cc; text-decoration: underline;">Courier GitHub repository</a>.</p>
+    </section>
+  </main>
+</Base>

@@ -1,6 +1,6 @@
 import Foundation
 
-struct Preferences: Codable {
+struct Preferences: Codable, Equatable {
     var likes: Bool
     var replies: Bool
     var reposts: Bool
@@ -16,6 +16,6 @@ struct Preferences: Codable {
         follows: true,
         mentions: true,
         quotes: true,
-        generic: false
+        generic: true
     )
 }

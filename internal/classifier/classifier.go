@@ -11,14 +11,25 @@ import (
 type NotificationType string
 
 const (
-	Like    NotificationType = "like"
-	Reply   NotificationType = "reply"
-	Repost  NotificationType = "repost"
-	Follow  NotificationType = "follow"
-	Mention NotificationType = "mention"
-	Quote   NotificationType = "quote"
-	Generic NotificationType = "generic"
-	Unknown NotificationType = "unknown"
+	Like         NotificationType = "like"
+	Favorite     NotificationType = "favorite"
+	Reply        NotificationType = "reply"
+	Repost       NotificationType = "repost"
+	Follow       NotificationType = "follow"
+	Mention      NotificationType = "mention"
+	Quote        NotificationType = "quote"
+	Star         NotificationType = "star"
+	Issue        NotificationType = "issue"
+	PullRequest  NotificationType = "pullRequest"
+	RSVP         NotificationType = "rsvp"
+	Subscription NotificationType = "subscription"
+	Reaction     NotificationType = "reaction"
+	Play         NotificationType = "play"
+	Recommend    NotificationType = "recommend"
+	Vote         NotificationType = "vote"
+	BlogPost     NotificationType = "blogPost"
+	Generic      NotificationType = "generic"
+	Unknown      NotificationType = "unknown"
 )
 
 type Notification struct {
@@ -79,28 +90,10 @@ func Classify(event *jetstream.Event, watchedDID string) *Notification {
 			base.Type = Follow
 			return base
 		}
-	// Tangled
-	case "sh.tangled.feed.reaction":
-		if refersTo(c.Record, watchedDID) {
-			base.Type = Like
-			base.SubjectURI = extractFirstATURI(c.Record, watchedDID)
-			return base
-		}
-	case "sh.tangled.repo.comment":
-		if refersTo(c.Record, watchedDID) {
-			base.Type = Reply
-			base.SubjectURI = extractFirstATURI(c.Record, watchedDID)
-			return base
-		}
-	case "sh.tangled.graph.follow":
-		if subjectIs(c.Record, watchedDID) {
-			base.Type = Follow
-			return base
-		}
 	default:
 		// Unknown collection: scan for any at:// URI referencing the watched DID
 		if refersTo(c.Record, watchedDID) {
-			base.Type = Generic
+			base.Type = inferTypeFromCollection(c.Collection)
 			base.SubjectURI = extractFirstATURI(c.Record, watchedDID)
 			return base
 		}
@@ -159,6 +152,58 @@ func classifyPost(record json.RawMessage, watchedDID string, base *Notification)
 	}
 
 	return nil
+}
+
+// inferTypeFromCollection guesses the notification type from the collection name.
+func inferTypeFromCollection(collection string) NotificationType {
+	parts := strings.ToLower(collection)
+
+	// App-specific matches first (more specific wins)
+	switch {
+	case strings.Contains(parts, "feed.star") || strings.HasSuffix(parts, ".star"):
+		return Star
+	case strings.Contains(parts, "feed.reaction") || strings.HasSuffix(parts, ".reaction"):
+		return Reaction
+	case strings.Contains(parts, "repo.issue.comment") || strings.Contains(parts, "repo.pull.comment"):
+		return Reply
+	case strings.Contains(parts, "repo.issue"):
+		return Issue
+	case strings.Contains(parts, "repo.pull"):
+		return PullRequest
+	case strings.Contains(parts, "calendar.rsvp"):
+		return RSVP
+	case strings.Contains(parts, "graph.subscription"):
+		return Subscription
+	case strings.Contains(parts, "grain.favorite"):
+		return Favorite
+	case strings.Contains(parts, "grain.comment"):
+		return Reply
+	case strings.Contains(parts, "feed.play") || strings.HasSuffix(parts, ".play"):
+		return Play
+	case strings.Contains(parts, "recommend"):
+		return Recommend
+	case strings.Contains(parts, "poll.vote") || strings.HasSuffix(parts, ".vote"):
+		return Vote
+	case strings.Contains(parts, "leaflet.graph.subscription"):
+		return Subscription
+	// Generic pattern matches
+	case strings.Contains(parts, "favorite"):
+		return Favorite
+	case strings.Contains(parts, "like"):
+		return Like
+	case strings.Contains(parts, "follow"):
+		return Follow
+	case strings.Contains(parts, "reply"), strings.Contains(parts, "comment"):
+		return Reply
+	case strings.Contains(parts, "repost"), strings.Contains(parts, "retweet"), strings.Contains(parts, "boost"):
+		return Repost
+	case strings.Contains(parts, "mention"):
+		return Mention
+	case strings.Contains(parts, "quote"):
+		return Quote
+	default:
+		return Generic
+	}
 }
 
 // refersTo scans raw JSON for any at:// URI containing the given DID.

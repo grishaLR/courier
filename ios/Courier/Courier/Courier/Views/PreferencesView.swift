@@ -24,8 +24,29 @@ struct UserAppsResponse: Codable {
     let discoverApps: [AppGroup]
 }
 
+enum AppTheme: String, CaseIterable {
+    case system, light, dark
+
+    var label: String {
+        switch self {
+        case .system: return "System"
+        case .light: return "Light"
+        case .dark: return "Dark"
+        }
+    }
+
+    var colorScheme: ColorScheme? {
+        switch self {
+        case .system: return nil
+        case .light: return .light
+        case .dark: return .dark
+        }
+    }
+}
+
 struct PreferencesView: View {
     @EnvironmentObject var authManager: AuthManager
+    @AppStorage("appTheme") private var appTheme: AppTheme = .system
 
     @State private var yourApps: [AppGroup] = []
     @State private var discoverApps: [AppGroup] = []
@@ -33,11 +54,16 @@ struct PreferencesView: View {
     @State private var typePrefs = Preferences.default
     @State private var expandedCategories: Set<String> = []
     @State private var userAppPrefixes: Set<String> = []
+    @State private var appearanceExpanded = false
+    @State private var notifTypesExpanded = false
     @State private var yourAppsExpanded = true
     @State private var discoverExpanded = false
     @State private var preferredApps: [String: String] = [:] // prefix → appURL
     @State private var pickerPrefix: String?
     private let sharedLexicons: Set<String> = ["app.bsky", "community.lexicon.calendar"]
+    @State private var blogSubs: [APIClient.BlogSub] = []
+    @State private var blogSubsExpanded = false
+    @State private var isRefreshingBlogs = false
     @State private var isLoading = true
     @State private var isSaving = false
     @State private var saved = false
@@ -49,93 +75,200 @@ struct PreferencesView: View {
                     ProgressView()
                 } else {
                     List {
-                        // Account + notification types in one compact section
                         Section {
-                            DisclosureGroup("Notification Types") {
-                                Toggle("Likes", isOn: $typePrefs.likes)
-                                Toggle("Replies", isOn: $typePrefs.replies)
-                                Toggle("Reposts", isOn: $typePrefs.reposts)
-                                Toggle("Follows", isOn: $typePrefs.follows)
-                                Toggle("Mentions", isOn: $typePrefs.mentions)
-                                Toggle("Quotes", isOn: $typePrefs.quotes)
-                                Toggle("Other", isOn: $typePrefs.generic)
+                            if appearanceExpanded {
+                                Picker("Theme", selection: $appTheme) {
+                                    ForEach(AppTheme.allCases, id: \.self) { theme in
+                                        Text(theme.label).tag(theme)
+                                    }
+                                }
+                                .pickerStyle(.segmented)
+                                .listRowBackground(Color("BackgroundColor"))
                             }
                         } header: {
-                            if let handle = authManager.handle {
-                                Text(handle).font(.caption)
-                            }
+                            sectionHeader(
+                                title: "Appearance",
+                                count: 0,
+                                isExpanded: $appearanceExpanded
+                            )
+                            .listRowBackground(Color("BackgroundColor"))
                         }
 
-                        // Apps you're on
+                        Section {
+                            if notifTypesExpanded {
+                                Toggle("Likes", isOn: $typePrefs.likes)
+                                    .listRowBackground(Color("BackgroundColor"))
+                                Toggle("Replies", isOn: $typePrefs.replies)
+                                    .listRowBackground(Color("BackgroundColor"))
+                                Toggle("Reposts", isOn: $typePrefs.reposts)
+                                    .listRowBackground(Color("BackgroundColor"))
+                                Toggle("Follows", isOn: $typePrefs.follows)
+                                    .listRowBackground(Color("BackgroundColor"))
+                                Toggle("Mentions", isOn: $typePrefs.mentions)
+                                    .listRowBackground(Color("BackgroundColor"))
+                                Toggle("Quotes", isOn: $typePrefs.quotes)
+                                    .listRowBackground(Color("BackgroundColor"))
+                                Toggle("Other", isOn: $typePrefs.generic)
+                                    .listRowBackground(Color("BackgroundColor"))
+                            }
+                        } header: {
+                            sectionHeader(
+                                title: "Notification Types",
+                                count: 0,
+                                isExpanded: $notifTypesExpanded
+                            )
+                            .listRowBackground(Color("BackgroundColor"))
+                        }
+
+                        Section {
+                            if blogSubsExpanded {
+                                if blogSubs.isEmpty {
+                                    HStack {
+                                        Text("No blog subscriptions found")
+                                            .font(.caption)
+                                            .foregroundStyle(.secondary)
+                                        Spacer()
+                                    }
+                                    .listRowBackground(Color("BackgroundColor"))
+                                }
+
+                                ForEach(blogSubs.indices, id: \.self) { index in
+                                        HStack(spacing: 10) {
+                                            // Blog icon
+                                            blogIcon(blogSubs[index])
+                                                .frame(width: 28, height: 28)
+                                                .clipShape(RoundedRectangle(cornerRadius: 6))
+
+                                            VStack(alignment: .leading, spacing: 2) {
+                                                Button {
+                                                    if let webUrl = blogSubs[index].webUrl,
+                                                       let url = URL(string: webUrl) {
+                                                        UIApplication.shared.open(url)
+                                                    }
+                                                } label: {
+                                                    Text(blogSubs[index].blogName.isEmpty ? "Untitled Blog" : blogSubs[index].blogName)
+                                                        .font(.subheadline)
+                                                        .foregroundStyle(.primary)
+                                                }
+                                                Text(blogSubs[index].platform)
+                                                    .font(.caption2)
+                                                    .foregroundStyle(.secondary)
+                                            }
+
+                                            Spacer()
+
+                                            Button {
+                                                blogSubs[index].enabled.toggle()
+                                                let sub = blogSubs[index]
+                                                Task {
+                                                    try? await APIClient.shared.setBlogPref(
+                                                        publicationUri: sub.publicationUri,
+                                                        enabled: sub.enabled
+                                                    )
+                                                }
+                                            } label: {
+                                                Circle()
+                                                    .fill(blogSubs[index].enabled ? Color.green : Color(.systemGray4))
+                                                    .frame(width: 24, height: 24)
+                                                    .overlay {
+                                                        Image(systemName: blogSubs[index].enabled ? "checkmark" : "")
+                                                            .font(.system(size: 12, weight: .bold))
+                                                            .foregroundStyle(.white)
+                                                    }
+                                            }
+                                            .buttonStyle(.plain)
+                                        }
+                                        .listRowBackground(Color("BackgroundColor"))
+                                    }
+
+                                    Button {
+                                        Task { await refreshBlogs() }
+                                    } label: {
+                                        HStack {
+                                            if isRefreshingBlogs {
+                                                ProgressView()
+                                                    .controlSize(.small)
+                                            } else {
+                                                Image(systemName: "arrow.clockwise")
+                                            }
+                                            Text(blogSubs.isEmpty ? "Discover Subscriptions" : "Refresh")
+                                        }
+                                        .font(.caption)
+                                        .foregroundStyle(Color.accentColor)
+                                    }
+                                    .disabled(isRefreshingBlogs)
+                                    .listRowBackground(Color("BackgroundColor"))
+                                }
+                            } header: {
+                                sectionHeader(
+                                    title: "Blog Subscriptions",
+                                    count: blogSubs.count,
+                                    isExpanded: $blogSubsExpanded
+                                )
+                                .listRowBackground(Color("BackgroundColor"))
+                            }
+
                         if !yourApps.isEmpty {
                             Section {
                                 if yourAppsExpanded {
                                     ForEach(yourApps) { group in
                                         appCategoryRow(group: group, showRemove: true)
+                                            .listRowBackground(Color("BackgroundColor"))
                                     }
                                 }
                             } header: {
-                                Button {
-                                    withAnimation { yourAppsExpanded.toggle() }
-                                } label: {
-                                    HStack {
-                                        Text("Apps You're On")
-                                        Spacer()
-                                        Image(systemName: yourAppsExpanded ? "chevron.down" : "chevron.right")
-                                            .font(.caption)
-                                    }
-                                    .foregroundStyle(.primary)
-                                }
+                                sectionHeader(
+                                    title: "Apps You're On",
+                                    count: yourApps.flatMap(\.apps).count,
+                                    isExpanded: $yourAppsExpanded
+                                )
+                                .listRowBackground(Color("BackgroundColor"))
                             }
                         }
 
-                        // Discover
                         if !discoverApps.isEmpty {
                             Section {
                                 if discoverExpanded {
                                     ForEach(discoverApps) { group in
                                         appCategoryRow(group: group, showAdd: true)
+                                            .listRowBackground(Color("BackgroundColor"))
                                     }
                                 }
                             } header: {
-                                Button {
-                                    withAnimation { discoverExpanded.toggle() }
-                                } label: {
-                                    HStack {
-                                        Text("Apps You Could Be On")
-                                        Spacer()
-                                        Image(systemName: discoverExpanded ? "chevron.down" : "chevron.right")
-                                            .font(.caption)
-                                    }
-                                    .foregroundStyle(.primary)
-                                }
+                                sectionHeader(
+                                    title: "Apps You Could Be On",
+                                    count: discoverApps.flatMap(\.apps).count,
+                                    isExpanded: $discoverExpanded
+                                )
+                                .listRowBackground(Color("BackgroundColor"))
                             }
                         }
 
-                        // Save button
-                        Section {
-                            Button {
-                                Task { await save() }
-                            } label: {
-                                HStack {
-                                    Text("Save All")
-                                        .fontWeight(.medium)
-                                    Spacer()
-                                    if isSaving {
-                                        ProgressView()
-                                    } else if saved {
-                                        Image(systemName: "checkmark.circle.fill")
-                                            .foregroundStyle(.green)
-                                    }
-                                }
-                            }
-                            .disabled(isSaving)
-                        }
                     }
                 }
             }
             .listStyle(.plain)
-            .navigationTitle("Preferences")
+            .scrollContentBackground(.hidden)
+            .background(Color("BackgroundColor"))
+            .environment(\.defaultMinListHeaderHeight, 0)
+            .navigationTitle("Courier")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        Task { await authManager.signOut() }
+                    } label: {
+                        Image(systemName: "rectangle.portrait.and.arrow.right")
+                            .font(.caption)
+                    }
+                }
+            }
+            .onChange(of: typePrefs) { _, _ in
+                Task { await save() }
+            }
+            .onChange(of: appPrefs) { _, _ in
+                Task { await save() }
+            }
             .sheet(isPresented: Binding(
                 get: { pickerPrefix != nil },
                 set: { if !$0 { pickerPrefix = nil } }
@@ -158,6 +291,81 @@ struct PreferencesView: View {
             .task {
                 await loadData()
             }
+        }
+    }
+
+    @ViewBuilder
+    private func blogIcon(_ sub: APIClient.BlogSub) -> some View {
+        if let iconUrl = sub.iconUrl, !iconUrl.isEmpty,
+           let url = URL(string: iconUrl) {
+            AsyncImage(url: url) { image in
+                image.resizable().scaledToFill()
+            } placeholder: {
+                platformIcon(sub.platform)
+            }
+        } else {
+            platformIcon(sub.platform)
+        }
+    }
+
+    @ViewBuilder
+    private func platformIcon(_ platform: String) -> some View {
+        let (icon, color): (String, Color) = switch platform {
+        case "leaflet": ("leaf.fill", .green)
+        case "standard": ("doc.text.fill", .blue)
+        case "whitewind": ("wind", .cyan)
+        case "pckt": ("bookmark.fill", .orange)
+        default: ("doc.text.fill", .gray)
+        }
+        RoundedRectangle(cornerRadius: 6)
+            .fill(color.opacity(0.15))
+            .overlay {
+                Image(systemName: icon)
+                    .font(.system(size: 14))
+                    .foregroundStyle(color)
+            }
+    }
+
+    private func refreshBlogs() async {
+        isRefreshingBlogs = true
+        do {
+            blogSubs = try await APIClient.shared.refreshBlogSubs()
+        } catch {}
+        isRefreshingBlogs = false
+    }
+
+    @ViewBuilder
+    private func sectionLabel(_ title: String) -> some View {
+        Text(title)
+            .font(.subheadline.bold())
+            .foregroundStyle(Color.accentColor)
+            .listRowBackground(Color("BackgroundColor"))
+    }
+
+    private func sectionHeader(title: String, count: Int, isExpanded: Binding<Bool>) -> some View {
+        Button {
+            withAnimation { isExpanded.wrappedValue.toggle() }
+        } label: {
+            HStack {
+                Text(title)
+                    .font(.subheadline.bold())
+                    .foregroundStyle(Color.accentColor)
+                if count > 0 {
+                    Text("\(count)")
+                        .font(.caption2)
+                        .foregroundStyle(Color("SecondaryText"))
+                        .padding(.horizontal, 5)
+                        .padding(.vertical, 1)
+                        .background(Color("SecondaryText").opacity(0.15))
+                        .clipShape(Capsule())
+                }
+                Spacer()
+                Image(systemName: isExpanded.wrappedValue ? "chevron.down" : "chevron.right")
+                    .font(.caption)
+                    .foregroundStyle(Color("SecondaryText"))
+            }
+            .padding(.vertical, 4)
+            .contentShape(Rectangle())
         }
     }
 
@@ -313,6 +521,12 @@ struct PreferencesView: View {
 
             // Expand your apps categories by default
             expandedCategories = Set(yourApps.map(\.category))
+
+            // Load blog subscriptions
+            blogSubs = (try? await APIClient.shared.getBlogSubs()) ?? []
+            if !blogSubs.isEmpty {
+                blogSubsExpanded = true
+            }
         } catch {
         }
         isLoading = false

@@ -3,15 +3,13 @@ import Foundation
 actor APIClient {
     static let shared = APIClient()
 
-    private let baseURL: URL
+    let baseURLValue: URL
     private let session: URLSession
 
+    private var baseURL: URL { baseURLValue }
+
     private init() {
-        #if DEBUG
-        self.baseURL = URL(string: "http://localhost:8080")!
-        #else
-        self.baseURL = URL(string: "https://api.courier.social")!
-        #endif
+        self.baseURLValue = URL(string: "https://api.courier.social")!
         self.session = URLSession.shared
     }
 
@@ -70,6 +68,13 @@ actor APIClient {
         try checkResponse(response)
     }
 
+    func updateDeviceToken(token: String) async throws {
+        var req = try makeRequest("/device-token", method: "PUT")
+        req.httpBody = try JSONSerialization.data(withJSONObject: ["deviceToken": token])
+        let (_, response) = try await session.data(for: req)
+        try checkResponse(response)
+    }
+
     func unregister(did: String) async throws {
         var req = try makeRequest("/unregister", method: "DELETE")
         req.addValue(did, forHTTPHeaderField: "X-DID")
@@ -81,6 +86,19 @@ actor APIClient {
 
     func getNotifications(did: String) async throws -> [CourierNotification] {
         return try await get("/notifications/\(did)")
+    }
+
+    func clearNotifications() async throws {
+        let req = try makeRequest("/notifications", method: "DELETE")
+        let (_, response) = try await session.data(for: req)
+        try checkResponse(response)
+    }
+
+    func deleteNotification(uri: String) async throws {
+        var req = try makeRequest("/notifications/delete", method: "POST")
+        req.httpBody = try JSONSerialization.data(withJSONObject: ["uri": uri])
+        let (_, response) = try await session.data(for: req)
+        try checkResponse(response)
     }
 
     // MARK: - App Registry
@@ -116,6 +134,42 @@ actor APIClient {
         try checkResponse(response)
     }
 
+    // MARK: - Blog Subscriptions
+
+    struct BlogSub: Codable, Identifiable {
+        let publicationUri: String
+        let authorDid: String
+        let blogName: String
+        let platform: String
+        let webUrl: String?
+        let iconUrl: String?
+        var enabled: Bool
+
+        var id: String { publicationUri }
+    }
+
+    func getBlogSubs() async throws -> [BlogSub] {
+        return try await get("/subscriptions/blogs")
+    }
+
+    func setBlogPref(publicationUri: String, enabled: Bool) async throws {
+        var req = try makeRequest("/subscriptions/blogs", method: "PUT")
+        req.httpBody = try JSONSerialization.data(withJSONObject: [
+            "publicationUri": publicationUri,
+            "enabled": enabled
+        ])
+        let (_, response) = try await session.data(for: req)
+        try checkResponse(response)
+    }
+
+    func refreshBlogSubs() async throws -> [BlogSub] {
+        var req = try makeRequest("/subscriptions/blogs/refresh", method: "POST")
+        req.httpBody = Data("{}".utf8)
+        let (data, response) = try await session.data(for: req)
+        try checkResponse(response)
+        return try JSONDecoder().decode([BlogSub].self, from: data)
+    }
+
     // MARK: - Networking
 
     func get<T: Decodable>(_ path: String) async throws -> T {
@@ -133,6 +187,12 @@ actor APIClient {
         return try JSONDecoder().decode(T.self, from: data)
     }
 
+    private var _sessionToken: String?
+
+    func setSessionToken(_ token: String?) {
+        _sessionToken = token
+    }
+
     func makeRequest(_ path: String, method: String) throws -> URLRequest {
         guard let url = URL(string: path, relativeTo: baseURL) else {
             throw APIError.invalidURL
@@ -140,6 +200,9 @@ actor APIClient {
         var req = URLRequest(url: url)
         req.httpMethod = method
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        if let token = _sessionToken {
+            req.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
         return req
     }
 

@@ -56,6 +56,7 @@ type OAuthState struct {
 	DPoP         DPoPState `json:"dpop"`
 	DID          string `json:"did"`
 	AuthServer   AuthServerMetadata `json:"authServer"`
+	Mobile       bool   `json:"mobile,omitempty"`
 }
 
 type DPoPState struct {
@@ -115,13 +116,38 @@ func ResolvePDS(did string) (string, error) {
 	return "", fmt.Errorf("no PDS found for %s", did)
 }
 
-// FetchAuthServerMetadata fetches the OAuth authorization server metadata from a PDS.
+// FetchAuthServerMetadata resolves a PDS to its authorization server and fetches
+// the AS metadata. The PDS advertises its AS via /.well-known/oauth-protected-resource;
+// for bsky.social users that points to https://bsky.social, while for self-hosted
+// PDSes it typically points back at the PDS itself.
 func FetchAuthServerMetadata(pdsURL string) (*AuthServerMetadata, error) {
-	resp, err := http.Get(pdsURL + "/.well-known/oauth-authorization-server")
+	prResp, err := http.Get(pdsURL + "/.well-known/oauth-protected-resource")
+	if err != nil {
+		return nil, err
+	}
+	defer prResp.Body.Close()
+	if prResp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("oauth-protected-resource returned %d", prResp.StatusCode)
+	}
+	var pr struct {
+		AuthorizationServers []string `json:"authorization_servers"`
+	}
+	if err := json.NewDecoder(prResp.Body).Decode(&pr); err != nil {
+		return nil, err
+	}
+	if len(pr.AuthorizationServers) == 0 {
+		return nil, fmt.Errorf("no authorization_servers advertised by PDS %s", pdsURL)
+	}
+	asURL := strings.TrimRight(pr.AuthorizationServers[0], "/")
+
+	resp, err := http.Get(asURL + "/.well-known/oauth-authorization-server")
 	if err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("oauth-authorization-server returned %d", resp.StatusCode)
+	}
 	var meta AuthServerMetadata
 	if err := json.NewDecoder(resp.Body).Decode(&meta); err != nil {
 		return nil, err

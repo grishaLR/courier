@@ -1937,7 +1937,7 @@
             "uri": "at://did:plc:6i6n57nrkq6xavqbdo6bvkqr/network.cosmik.card/3mfid6likph2r",
             "cardContent": {
                 "url": "https://alpha.arabica.social/",
-                "title": "Home - Arabica",
+                "title": "Arabica",
                 "description": "Track your coffee brewing journey. Built on AT Protocol, your data stays yours.",
                 "siteName": "Arabica",
                 "type": "link"
@@ -7983,7 +7983,7 @@
             "uri": "at://did:plc:stznz7qsokto2345qtdzogjb/network.cosmik.card/3mfi4aazh2v2o",
             "cardContent": {
                 "url": "https://alpha.arabica.social/",
-                "title": "Home - Arabica",
+                "title": "Arabica",
                 "description": "Track your coffee brewing journey. Built on AT Protocol, your data stays yours.",
                 "siteName": "Arabica",
                 "type": "link"
