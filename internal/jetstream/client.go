@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"math"
+	"net/url"
 	"sync"
 	"time"
 
@@ -62,8 +63,21 @@ func NewClient(url string, dids []string, onEvent func(*Event), opts ...Option) 
 func (c *Client) buildURL() string {
 	u := c.url + "?"
 
-	// No wantedDids — we consume the full firehose (filtered by collections)
-	// and do server-side DID matching against the watched set.
+	c.mu.RLock()
+	dids := make([]string, 0, len(c.dids))
+	for did := range c.dids {
+		dids = append(dids, did)
+	}
+	c.mu.RUnlock()
+
+	// Pass wantedDIDs when the set fits within Jetstream's 10k limit.
+	// This shifts DID filtering server-side, eliminating the O(N) scan per event.
+	if len(dids) > 0 && len(dids) <= 10000 {
+		for _, did := range dids {
+			u += "wantedDIDs=" + url.QueryEscape(did) + "&"
+		}
+	}
+
 	for _, col := range c.collections {
 		u += "wantedCollections=" + col + "&"
 	}
@@ -156,4 +170,11 @@ func (c *Client) RemoveDID(did string) {
 	c.mu.Lock()
 	delete(c.dids, did)
 	c.mu.Unlock()
+}
+
+// Reconnect closes the active connection so Run() reconnects with the current DID set.
+func (c *Client) Reconnect() {
+	if c.conn != nil {
+		c.conn.Close()
+	}
 }

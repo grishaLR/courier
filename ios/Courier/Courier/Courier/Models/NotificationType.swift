@@ -19,6 +19,12 @@ enum NotificationType: String, Codable, CaseIterable {
     case vote
     case blogPost
     case generic
+    case unknown
+
+    init(from decoder: Decoder) throws {
+        let raw = try decoder.singleValueContainer().decode(String.self)
+        self = NotificationType(rawValue: raw) ?? .unknown
+    }
 
     var displayName: String {
         switch self {
@@ -40,6 +46,7 @@ enum NotificationType: String, Codable, CaseIterable {
         case .vote: return "Votes"
         case .blogPost: return "New Posts"
         case .generic: return "Other"
+        case .unknown: return "Other"
         }
     }
 
@@ -63,6 +70,7 @@ enum NotificationType: String, Codable, CaseIterable {
         case .vote: return "chart.bar.fill"
         case .blogPost: return "doc.text.fill"
         case .generic: return "bell.fill"
+        case .unknown: return "bell.fill"
         }
     }
 }

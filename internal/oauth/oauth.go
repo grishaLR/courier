@@ -52,11 +52,13 @@ type DIDService struct {
 
 // OAuthState stored in Redis during the auth flow
 type OAuthState struct {
-	CodeVerifier string `json:"codeVerifier"`
-	DPoP         DPoPState `json:"dpop"`
-	DID          string `json:"did"`
-	AuthServer   AuthServerMetadata `json:"authServer"`
-	Mobile       bool   `json:"mobile,omitempty"`
+	CodeVerifier  string             `json:"codeVerifier"`
+	DPoP          DPoPState          `json:"dpop"`
+	DID           string             `json:"did"`
+	AuthServer    AuthServerMetadata `json:"authServer"`
+	Mobile        bool               `json:"mobile,omitempty"`
+	RedirectURI   string             `json:"redirectUri,omitempty"`
+	ClientMetaURL string             `json:"clientMetaUrl,omitempty"`
 }
 
 type DPoPState struct {
@@ -156,9 +158,11 @@ func FetchAuthServerMetadata(pdsURL string) (*AuthServerMetadata, error) {
 }
 
 // GeneratePKCE creates a code verifier and S256 challenge.
-func GeneratePKCE() (verifier, challenge string) {
+func GeneratePKCE() (verifier, challenge string, err error) {
 	b := make([]byte, 32)
-	rand.Read(b)
+	if _, err = rand.Read(b); err != nil {
+		return
+	}
 	verifier = base64URLEncode(b)
 	h := sha256.Sum256([]byte(verifier))
 	challenge = base64URLEncode(h[:])
@@ -368,7 +372,7 @@ func ExchangeCodeForToken(authServer *AuthServerMetadata, code, codeVerifier, cl
 	defer resp.Body.Close()
 
 	// Handle DPoP nonce retry
-	if resp.StatusCode == 400 && resp.Header.Get("DPoP-Nonce") != "" {
+	if (resp.StatusCode == 400 || resp.StatusCode == 401) && resp.Header.Get("DPoP-Nonce") != "" {
 		nonce := resp.Header.Get("DPoP-Nonce")
 		dpopJWT2, err := CreateDPoPJWT(dpopKey, "POST", authServer.TokenEndpoint, nonce)
 		if err != nil {

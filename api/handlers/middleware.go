@@ -43,16 +43,6 @@ func RequireAuth(sessions *oauth.SessionStore, reg *registry.Registry) func(http
 				}
 			}
 
-			// Try query param token (for WebSocket connections)
-			if token := r.URL.Query().Get("token"); token != "" {
-				session, err := sessions.GetSession(r.Context(), token)
-				if err == nil && session.DID != "" {
-					ctx := context.WithValue(r.Context(), authedDIDKey, session.DID)
-					next.ServeHTTP(w, r.WithContext(ctx))
-					return
-				}
-			}
-
 			// Try X-DID header (iOS app, after challenge-verify)
 			if did := r.Header.Get("X-DID"); did != "" && reg != nil {
 				if user, err := reg.GetUser(r.Context(), did); err == nil && user != nil {

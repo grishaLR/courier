@@ -9,7 +9,11 @@ actor APIClient {
     private var baseURL: URL { baseURLValue }
 
     private init() {
+        #if DEBUG
+        self.baseURLValue = URL(string: "http://localhost:8080")!
+        #else
         self.baseURLValue = URL(string: "https://api.courier.social")!
+        #endif
         self.session = URLSession.shared
     }
 

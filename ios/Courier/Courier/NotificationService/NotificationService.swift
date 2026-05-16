@@ -45,12 +45,15 @@ class NotificationService: UNNotificationServiceExtension {
         return URL(string: urlString)
     }
 
-    private func downloadImage(url: URL, completion: @escaping (UNNotificationAttachment?) -> Void) {
+    private static let urlSession: URLSession = {
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 10
         config.timeoutIntervalForResource = 15
-        let session = URLSession(configuration: config)
-        session.downloadTask(with: url) { localURL, response, error in
+        return URLSession(configuration: config)
+    }()
+
+    private func downloadImage(url: URL, completion: @escaping (UNNotificationAttachment?) -> Void) {
+        Self.urlSession.downloadTask(with: url) { localURL, response, error in
             guard let localURL, error == nil else {
                 completion(nil)
                 return
@@ -81,18 +84,4 @@ class NotificationService: UNNotificationServiceExtension {
         }.resume()
     }
 
-    private func fileExtension(for url: URL, response: URLResponse?) -> String {
-        // Check content type
-        if let httpResponse = response as? HTTPURLResponse,
-           let contentType = httpResponse.value(forHTTPHeaderField: "Content-Type") {
-            if contentType.contains("png") { return "png" }
-            if contentType.contains("svg") { return "png" } // SVG not supported, won't render
-            if contentType.contains("gif") { return "gif" }
-            if contentType.contains("webp") { return "webp" }
-        }
-        // Fall back to URL extension
-        let pathExt = url.pathExtension.lowercased()
-        if ["png", "gif", "webp"].contains(pathExt) { return pathExt }
-        return "jpg"
-    }
 }

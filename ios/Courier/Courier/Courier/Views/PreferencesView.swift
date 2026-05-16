@@ -67,6 +67,7 @@ struct PreferencesView: View {
     @State private var isLoading = true
     @State private var isSaving = false
     @State private var saved = false
+    @State private var saveTask: Task<Void, Never>?
 
     var body: some View {
         NavigationStack {
@@ -251,7 +252,7 @@ struct PreferencesView: View {
             .scrollContentBackground(.hidden)
             .background(Color("BackgroundColor"))
             .environment(\.defaultMinListHeaderHeight, 0)
-            .navigationTitle("Courier")
+            .navigationTitle("Preferences")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -259,15 +260,16 @@ struct PreferencesView: View {
                         Task { await authManager.signOut() }
                     } label: {
                         Image(systemName: "rectangle.portrait.and.arrow.right")
-                            .font(.caption)
                     }
                 }
             }
             .onChange(of: typePrefs) { _, _ in
-                Task { await save() }
+                saveTask?.cancel()
+                saveTask = Task { await save() }
             }
             .onChange(of: appPrefs) { _, _ in
-                Task { await save() }
+                saveTask?.cancel()
+                saveTask = Task { await save() }
             }
             .sheet(isPresented: Binding(
                 get: { pickerPrefix != nil },

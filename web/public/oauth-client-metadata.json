@@ -2,7 +2,11 @@
   "client_id": "https://courier.social/oauth-client-metadata.json",
   "client_name": "Courier",
   "client_uri": "https://courier.social",
-  "redirect_uris": ["social.courier:/auth/callback", "https://api.courier.social/auth/callback"],
+  "redirect_uris": [
+    "social.courier:/auth/callback",
+    "social.courier.app:/oauth-redirect",
+    "https://api.courier.social/auth/callback"
+  ],
   "scope": "atproto",
   "grant_types": ["authorization_code", "refresh_token"],
   "response_types": ["code"],

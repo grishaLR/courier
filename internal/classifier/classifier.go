@@ -134,11 +134,27 @@ func classifyPost(record json.RawMessage, watchedDID string, base *Notification)
 		return base
 	}
 
-	// Quote post
-	if post.Embed != nil && post.Embed.Record != nil && strings.Contains(post.Embed.Record.URI, watchedDID) {
-		base.Type = Quote
-		base.SubjectURI = post.Embed.Record.URI
-		return base
+	// Quote post (plain embed.record or embed.recordWithMedia wrapper)
+	if post.Embed != nil && post.Embed.Record != nil {
+		uri := post.Embed.Record.URI
+		if uri == "" {
+			// app.bsky.embed.recordWithMedia: quoted record is nested under embed.record.record
+			type recordWithMedia struct {
+				Record struct {
+					URI string `json:"uri"`
+				} `json:"record"`
+			}
+			var rwm recordWithMedia
+			if b, err := json.Marshal(post.Embed.Record); err == nil {
+				_ = json.Unmarshal(b, &rwm)
+				uri = rwm.Record.URI
+			}
+		}
+		if strings.Contains(uri, watchedDID) {
+			base.Type = Quote
+			base.SubjectURI = uri
+			return base
+		}
 	}
 
 	// Mention

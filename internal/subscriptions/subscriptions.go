@@ -97,6 +97,17 @@ func (m *Manager) GetSubscribers(authorDID string) []string {
 	return result
 }
 
+// GetAuthorDIDs returns all blog author DIDs currently tracked in the reverse index.
+func (m *Manager) GetAuthorDIDs() []string {
+	m.mu.RLock()
+	defer m.mu.RUnlock()
+	result := make([]string, 0, len(m.watchers))
+	for did := range m.watchers {
+		result = append(result, did)
+	}
+	return result
+}
+
 // IsSubscribed checks if a user is subscribed to a blog author (in-memory).
 func (m *Manager) IsSubscribed(subscriberDID, authorDID string) bool {
 	m.mu.RLock()

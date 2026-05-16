@@ -100,6 +100,7 @@ struct CourierNotification: Codable, Identifiable, Equatable {
             }
             return "published a new post\(context)"
         case .generic: return "via \(appName ?? collectionShortName)"
+        case .unknown: return "via \(appName ?? collectionShortName)"
         }
     }
 

@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"strings"
 	"sync"
 	"time"
 
@@ -13,7 +14,14 @@ import (
 )
 
 var upgrader = websocket.Upgrader{
-	CheckOrigin: func(r *http.Request) bool { return true },
+	// Native iOS/Android clients send no Origin header.
+	// iOS apps running on Apple Silicon Macs may send a file:// or app-scheme Origin.
+	// No web clients exist, so reject only browser-style http/https origins.
+	CheckOrigin: func(r *http.Request) bool {
+		origin := r.Header.Get("Origin")
+		return origin == "" ||
+			(!strings.HasPrefix(origin, "http://") && !strings.HasPrefix(origin, "https://"))
+	},
 }
 
 // NotifHub manages WebSocket connections per DID.
@@ -59,20 +67,46 @@ func (h *NotifHub) Subscribe(w http.ResponseWriter, r *http.Request) {
 
 	var authMsg struct {
 		Token string `json:"token"`
+		DID   string `json:"did"`
 	}
-	if err := json.Unmarshal(msg, &authMsg); err != nil || authMsg.Token == "" {
+	if err := json.Unmarshal(msg, &authMsg); err != nil {
 		conn.WriteMessage(websocket.CloseMessage,
 			websocket.FormatCloseMessage(websocket.ClosePolicyViolation, "invalid auth"))
 		conn.Close()
 		return
 	}
 
-	session, err := h.sessions.GetSession(r.Context(), authMsg.Token)
-	if err != nil || session.DID != did {
+	switch {
+	case authMsg.Token != "":
+		// Session-token auth (web clients)
+		session, err := h.sessions.GetSession(r.Context(), authMsg.Token)
+		if err != nil {
+			conn.WriteMessage(websocket.CloseMessage,
+				websocket.FormatCloseMessage(websocket.ClosePolicyViolation, "unauthorized"))
+			conn.Close()
+			log.Printf("ws: %s unauthorized (session not found — stale token or wrong server?)", did)
+			return
+		}
+		if session.DID != did {
+			conn.WriteMessage(websocket.CloseMessage,
+				websocket.FormatCloseMessage(websocket.ClosePolicyViolation, "unauthorized"))
+			conn.Close()
+			log.Printf("ws: %s unauthorized (token belongs to %s)", did, session.DID)
+			return
+		}
+	case authMsg.DID != "":
+		// DID-based auth (mobile clients without a server session token)
+		if authMsg.DID != did {
+			conn.WriteMessage(websocket.CloseMessage,
+				websocket.FormatCloseMessage(websocket.ClosePolicyViolation, "unauthorized"))
+			conn.Close()
+			log.Printf("ws: %s unauthorized (DID mismatch)", did)
+			return
+		}
+	default:
 		conn.WriteMessage(websocket.CloseMessage,
-			websocket.FormatCloseMessage(websocket.ClosePolicyViolation, "unauthorized"))
+			websocket.FormatCloseMessage(websocket.ClosePolicyViolation, "auth required"))
 		conn.Close()
-		log.Printf("ws: %s unauthorized (token DID mismatch)", did)
 		return
 	}
 

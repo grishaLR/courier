@@ -99,7 +99,7 @@ struct InboxView: View {
                 }
             }
             .background(Color("BackgroundColor"))
-            .navigationTitle("Courier")
+            .navigationTitle("Inbox")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -108,7 +108,6 @@ struct InboxView: View {
                             showClearConfirm = true
                         } label: {
                             Image(systemName: "trash")
-                                .font(.caption)
                         }
                     }
                 }
@@ -117,7 +116,6 @@ struct InboxView: View {
                         Task { await authManager.signOut() }
                     } label: {
                         Image(systemName: "rectangle.portrait.and.arrow.right")
-                            .font(.caption)
                     }
                 }
             }
@@ -288,6 +286,7 @@ struct NotificationRow: View {
         case .vote: return .indigo
         case .blogPost: return .blue
         case .generic: return .gray
+        case .unknown: return .gray
         }
     }
 }

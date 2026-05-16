@@ -66,8 +66,12 @@ struct CourierApp: App {
 class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         UNUserNotificationCenter.current().delegate = self
-        // Always re-register for remote notifications to get a fresh token
-        application.registerForRemoteNotifications()
+        Task { @MainActor in
+            let settings = await UNUserNotificationCenter.current().notificationSettings()
+            if settings.authorizationStatus == .authorized {
+                application.registerForRemoteNotifications()
+            }
+        }
         return true
     }
 

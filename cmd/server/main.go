@@ -207,7 +207,10 @@ func main() {
 			go func(token string) {
 				result := dispatcher.Send(pushNotif)
 				if result.BadToken {
-					badTokens <- token
+					select {
+					case badTokens <- token:
+					default:
+					}
 				}
 			}(user.DeviceToken)
 		}
@@ -282,9 +285,40 @@ func main() {
 					log.Printf("⚠️ blog push error: %v", result.Err)
 				}
 				if result.BadToken {
-					badTokens <- token
+					select {
+					case badTokens <- token:
+					default:
+					}
 				}
 			}(user.DeviceToken)
+		}
+	}
+
+	// Bounded worker pool — event handlers enqueue; workers do the slow Redis/HTTP work.
+	// Keeps the Jetstream/Spacedust read goroutines free to drain the TCP buffer.
+	type notifJob struct {
+		notif   *classifier.Notification
+		pubInfo *subscriptions.PublicationInfo // non-nil for blog posts
+	}
+	const workerCount = 16
+	const queueDepth = 512
+	notifQueue := make(chan notifJob, queueDepth)
+	for i := 0; i < workerCount; i++ {
+		go func() {
+			for job := range notifQueue {
+				if job.pubInfo != nil {
+					processBlogNotification(job.notif, job.pubInfo)
+				} else {
+					processNotification(job.notif)
+				}
+			}
+		}()
+	}
+	enqueue := func(notif *classifier.Notification, pubInfo *subscriptions.PublicationInfo) {
+		select {
+		case notifQueue <- notifJob{notif: notif, pubInfo: pubInfo}:
+		default:
+			log.Printf("⚠️ notif queue full, dropping %s for %s", notif.URI, notif.ForDID)
 		}
 	}
 
@@ -328,8 +362,8 @@ func main() {
 				Record:     event.Commit.Record,
 			}
 
-			// Process with publication metadata override
-			processBlogNotification(notif, pubInfo)
+			// Enqueue for async processing — keeps the event read goroutine free
+			enqueue(notif, pubInfo)
 		}
 	}
 
@@ -360,26 +394,33 @@ func main() {
 
 	// Jetstream event handler (legacy/fallback)
 	onJetstreamEvent := func(event *jetstream.Event) {
-		// When running hybrid (Spacedust + Jetstream), skip app.bsky events
-		// since Spacedust handles those more efficiently
+		// In hybrid mode Jetstream only needs to handle non-bsky events.
+		// wantedDIDs filters server-side so only events FROM watched users/authors arrive.
 		if useSpacedust && event.Commit != nil && strings.HasPrefix(event.Commit.Collection, "app.bsky.") {
 			return
 		}
 
-		// Check for blog post from a subscribed author
 		if event.Commit != nil {
+			// Blog post from a subscribed author
 			if platform, ok := subscriptions.IsDocumentCollection(event.Commit.Collection); ok {
 				processBlogPost(event, platform)
 			}
-			// Track subscription changes for watched users
+			// Subscription creates/deletes from watched users
 			processSubscriptionEvent(event)
 		}
 
+		// In hybrid mode, wantedDIDs already filtered to watched users and blog authors.
+		// Events from those DIDs are "own writes" for notification purposes — skip the scan.
+		if useSpacedust {
+			return
+		}
+
+		// Pure-Jetstream mode: scan all watched users to find who this event targets.
 		didMu.RLock()
 		defer didMu.RUnlock()
 
 		if didSet[event.Did] {
-			return
+			return // skip own writes
 		}
 
 		for did := range didSet {
@@ -387,7 +428,7 @@ func main() {
 			if notif == nil {
 				continue
 			}
-			processNotification(notif)
+			enqueue(notif, nil)
 		}
 	}
 
@@ -412,7 +453,7 @@ func main() {
 				notif.ForDID = parts[0]
 			}
 		}
-		processNotification(notif)
+		enqueue(notif, nil)
 	}
 
 	// Event source: Spacedust (default) or Jetstream (fallback)
@@ -436,6 +477,10 @@ func main() {
 			jsOpts = append(jsOpts, jetstream.WithCursor(cursor))
 		}
 		jsClient = jetstream.NewClient(jetstreamURL, watchedDIDs, onJetstreamEvent, jsOpts...)
+		// Also watch subscribed blog authors so their posts arrive via wantedDIDs filter
+		for _, authorDID := range subMgr.GetAuthorDIDs() {
+			jsClient.AddDID(authorDID)
+		}
 		log.Println("event source: jetstream (non-bluesky collections)")
 	} else {
 		var clientOpts []jetstream.Option
@@ -459,11 +504,21 @@ func main() {
 		}
 		if jsClient != nil {
 			jsClient.AddDID(did)
+			jsClient.Reconnect() // Reconnect so wantedDIDs filter includes new DID
 		}
-		// Discover blog subscriptions in background
+		// Discover blog subscriptions in background; reconnect Jetstream again
+		// once author DIDs are known so they're included in wantedDIDs.
 		go func() {
 			if err := subMgr.DiscoverAndStore(context.Background(), did); err != nil {
 				log.Printf("subscriptions: discovery error for %s: %v", did, err)
+				return
+			}
+			// Seed newly discovered author DIDs into Jetstream
+			if jsClient != nil {
+				for _, authorDID := range subMgr.GetAuthorDIDs() {
+					jsClient.AddDID(authorDID)
+				}
+				jsClient.Reconnect()
 			}
 		}()
 	}
@@ -508,6 +563,7 @@ func main() {
 		// OAuth flow
 		r.Get("/oauth-client-metadata.json", oh.ClientMetadata)
 		r.Post("/auth/oauth/start", oh.Start)
+		r.Post("/auth/oauth/exchange", oh.Exchange)
 		r.Get("/auth/callback", oh.Callback)
 		r.Get("/auth/session", oh.GetSession)
 		r.Post("/auth/logout", oh.Logout)
@@ -525,14 +581,15 @@ func main() {
 
 		// Notifications (read-only, scoped by DID in path)
 		r.Get("/notifications/{did}", h.GetNotifications)
+
+		// Registration is public — DID ownership is asserted but not cryptographically
+		// verified at this layer; the DeviceToken only delivers to the registered app.
+		r.Post("/register", h.Register)
 	})
 
 	// ── Protected API (requires authenticated session) ───
 	r.Group(func(r chi.Router) {
 		r.Use(handlers.RequireAuth(oauthSessions, reg))
-
-		// Device registration & preferences
-		r.Post("/register", h.Register)
 		r.Put("/preferences", h.UpdatePreferences)
 		r.Put("/device-token", h.UpdateDeviceToken)
 		r.Delete("/unregister", h.Unregister)
@@ -595,7 +652,9 @@ func main() {
 		dispatcher.Close()
 	}
 	close(badTokens)
-	srv.Shutdown(context.Background())
+	shutdownCtx, cancel2 := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel2()
+	srv.Shutdown(shutdownCtx)
 	reg.SaveCursor(context.Background(), 0)
 }
 

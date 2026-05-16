@@ -9,6 +9,8 @@ final class OAuthService: ObservableObject {
 
     @Published var isAuthenticating = false
 
+    private var activeSession: ASWebAuthenticationSession?
+
     private init() {}
 
     struct AuthResult {
@@ -16,30 +18,57 @@ final class OAuthService: ObservableObject {
         let sessionToken: String
     }
 
-    /// Authenticate via Courier's server-side OAuth flow.
-    /// 1. POST /auth/oauth/start with handle + mobile flag
-    /// 2. Server does PAR/PKCE/DPoP, returns authorization URL
-    /// 3. Open browser for user to authorize
-    /// 4. Server callback redirects to social.courier:/auth/callback?session=<token>&did=<did>
-    /// 5. App receives session token
+    /// Authenticate via Courier's mobile OAuth flow.
+    /// 1. POST /auth/oauth/start — server does PAR/PKCE/DPoP, returns authorization URL
+    /// 2. Open browser; PDS redirects to social.courier:/auth/callback?code=...&state=...
+    /// 3. App intercepts callback, POSTs code+state to /auth/oauth/exchange
+    /// 4. Server completes token exchange and returns session token
     func authenticate(handleOrDID: String) async throws -> AuthResult {
         isAuthenticating = true
         defer { isAuthenticating = false }
 
-        // Step 1: Ask server to start OAuth flow
         let startResponse = try await startOAuthFlow(handleOrDID: handleOrDID)
-
-        // Step 2: Open browser for authorization
         let callbackURL = try await openAuthorizationBrowser(url: startResponse.authorizationURL)
 
-        // Step 3: Extract session token and DID from callback
-        guard let components = URLComponents(url: callbackURL, resolvingAgainstBaseURL: false),
-              let sessionToken = components.queryItems?.first(where: { $0.name == "session" })?.value,
-              let did = components.queryItems?.first(where: { $0.name == "did" })?.value else {
+        guard let components = URLComponents(url: callbackURL, resolvingAgainstBaseURL: false) else {
             throw OAuthError.noSessionInCallback
         }
+        let items = components.queryItems ?? []
 
-        return AuthResult(did: did, sessionToken: sessionToken)
+        // New flow: PDS redirects code+state directly to the app
+        if let code = items.first(where: { $0.name == "code" })?.value,
+           let state = items.first(where: { $0.name == "state" })?.value {
+            return try await exchangeCode(code: code, state: state)
+        }
+
+        // Legacy fallback: server-side callback already exchanged the token
+        // TODO: remove this 7 days after release it will be moot. today 05/15/2026
+        if let sessionToken = items.first(where: { $0.name == "session" })?.value,
+           let did = items.first(where: { $0.name == "did" })?.value {
+            return AuthResult(did: did, sessionToken: sessionToken)
+        }
+
+        throw OAuthError.noSessionInCallback
+    }
+
+    private func exchangeCode(code: String, state: String) async throws -> AuthResult {
+        let url = APIClient.shared.baseURLValue.appendingPathComponent("auth/oauth/exchange")
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try JSONSerialization.data(withJSONObject: ["code": code, "state": state])
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let http = response as? HTTPURLResponse, (200...299).contains(http.statusCode) else {
+            throw OAuthError.serverError((response as? HTTPURLResponse)?.statusCode ?? 0)
+        }
+
+        struct ExchangeResponse: Decodable {
+            let sessionToken: String
+            let did: String
+        }
+        let result = try JSONDecoder().decode(ExchangeResponse.self, from: data)
+        return AuthResult(did: result.did, sessionToken: result.sessionToken)
     }
 
     // MARK: - Private
@@ -78,7 +107,8 @@ final class OAuthService: ObservableObject {
             let session = ASWebAuthenticationSession(
                 url: authURL,
                 callbackURLScheme: "social.courier"
-            ) { callbackURL, error in
+            ) { [weak self] callbackURL, error in
+                self?.activeSession = nil
                 if let error {
                     continuation.resume(throwing: error)
                 } else if let callbackURL {
@@ -89,6 +119,7 @@ final class OAuthService: ObservableObject {
             }
             session.prefersEphemeralWebBrowserSession = false
             session.presentationContextProvider = ASWebAuthPresentationContext.shared
+            activeSession = session
             session.start()
         }
     }

@@ -20,21 +20,25 @@ final class NotificationStream: ObservableObject {
 
             guard let url = URL(string: "\(scheme)://\(host)/ws/notifications/\(did)") else { return }
 
+            var delay: TimeInterval = 1
+
             while !Task.isCancelled {
                 do {
-                    // Get session token for WS auth
                     guard let token = AuthManager.shared.sessionToken else {
                         try? await Task.sleep(for: .seconds(5))
                         continue
                     }
 
-                    let session = URLSession.shared
-                    let ws = session.webSocketTask(with: url)
+                    let ws = URLSession.shared.webSocketTask(with: url)
                     ws.resume()
+                    defer { ws.cancel(with: .goingAway, reason: nil) }
 
-                    // First-message auth
-                    let authJSON = "{\"token\":\"\(token)\"}"
+                    let authData = try JSONSerialization.data(withJSONObject: ["token": token])
+                    let authJSON = String(data: authData, encoding: .utf8) ?? ""
                     try await ws.send(.string(authJSON))
+
+                    // Connected successfully — reset backoff
+                    delay = 1
 
                     while !Task.isCancelled {
                         let message = try await ws.receive()
@@ -52,10 +56,14 @@ final class NotificationStream: ObservableObject {
                             break
                         }
                     }
+                } catch let error as URLError where error.code == .userAuthenticationRequired {
+                    // 401-equivalent: stop reconnecting and signal sign-out
+                    NotificationCenter.default.post(name: .notificationStreamAuthFailed, object: nil)
+                    return
                 } catch {
-                    // Reconnect after 2s on disconnect
                     if !Task.isCancelled {
-                        try? await Task.sleep(for: .seconds(2))
+                        try? await Task.sleep(for: .seconds(delay))
+                        delay = min(delay * 2, 60)
                     }
                 }
             }
@@ -66,4 +74,8 @@ final class NotificationStream: ObservableObject {
         task?.cancel()
         task = nil
     }
+}
+
+extension Notification.Name {
+    static let notificationStreamAuthFailed = Notification.Name("notificationStreamAuthFailed")
 }

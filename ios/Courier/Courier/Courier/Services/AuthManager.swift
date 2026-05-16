@@ -11,11 +11,12 @@ final class AuthManager: ObservableObject {
     private(set) var sessionToken: String?
     private let defaults = UserDefaults.standard
     private let oauthService = OAuthService.shared
+    private let tokenKeychainKey = "courier.sessionToken"
 
     private init() {
         did = defaults.string(forKey: "courier.did")
         handle = defaults.string(forKey: "courier.handle")
-        sessionToken = defaults.string(forKey: "courier.sessionToken")
+        sessionToken = KeychainHelper.load(forKey: "courier.sessionToken")
         isAuthenticated = did != nil && sessionToken != nil
 
         // Sync token to APIClient
@@ -40,7 +41,7 @@ final class AuthManager: ObservableObject {
 
         defaults.set(result.did, forKey: "courier.did")
         defaults.set(resolvedHandle, forKey: "courier.handle")
-        defaults.set(result.sessionToken, forKey: "courier.sessionToken")
+        KeychainHelper.save(result.sessionToken, forKey: tokenKeychainKey)
 
         await APIClient.shared.setSessionToken(result.sessionToken)
 
@@ -64,7 +65,8 @@ final class AuthManager: ObservableObject {
         self.isAuthenticated = false
         defaults.removeObject(forKey: "courier.did")
         defaults.removeObject(forKey: "courier.handle")
-        defaults.removeObject(forKey: "courier.sessionToken")
+        KeychainHelper.delete(forKey: tokenKeychainKey)
+        await NotificationCache.shared.clear()
         await APIClient.shared.setSessionToken(nil)
     }
 }
