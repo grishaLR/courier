@@ -1,22 +1,15 @@
 package social.courier.app.service
 
-import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import social.courier.app.R
 
 class FCMService : FirebaseMessagingService() {
-
-    override fun onCreate() {
-        super.onCreate()
-        createNotificationChannels()
-    }
 
     override fun onMessageReceived(message: RemoteMessage) {
         val title = message.notification?.title ?: message.data["title"] ?: "Courier"
@@ -84,22 +77,4 @@ class FCMService : FirebaseMessagingService() {
         }
     }
 
-    private fun createNotificationChannels() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return
-
-        val manager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        val channels = listOf(
-            "likes" to "Likes",
-            "replies" to "Replies",
-            "follows" to "Follows",
-            "reposts" to "Reposts",
-            "mentions" to "Mentions",
-            "quotes" to "Quotes",
-            "other" to "Other",
-        )
-        for ((id, name) in channels) {
-            val channel = NotificationChannel(id, name, NotificationManager.IMPORTANCE_HIGH)
-            manager.createNotificationChannel(channel)
-        }
-    }
 }

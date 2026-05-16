@@ -168,18 +168,18 @@ func (d *Dispatcher) sendFCM(notif *Notification) *Result {
 		return &Result{Token: notif.Token, Err: fmt.Errorf("FCM not configured")}
 	}
 
+	data := make(map[string]string, len(notif.Data)+2)
+	for k, v := range notif.Data {
+		data[k] = v
+	}
+	data["title"] = notif.Title
+	data["body"] = notif.Body
+
 	msg := &messaging.Message{
 		Token: notif.Token,
-		Notification: &messaging.Notification{
-			Title: notif.Title,
-			Body:  notif.Body,
-		},
-		Data: notif.Data,
+		Data:  data,
 		Android: &messaging.AndroidConfig{
-			Notification: &messaging.AndroidNotification{
-				ChannelID: notif.Category,
-				Sound:     "default",
-			},
+			Priority: "high",
 		},
 	}
 

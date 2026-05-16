@@ -147,7 +147,7 @@ func (c *Client) Run(ctx context.Context) error {
 		err := c.connect(ctx)
 		if err != nil {
 			attempt++
-			backoff := time.Duration(math.Min(float64(time.Second)*math.Pow(2, float64(attempt)), 30)) * time.Second
+			backoff := time.Duration(math.Min(float64(time.Second)*math.Pow(2, float64(attempt)), 5)) * time.Second
 			log.Printf("spacedust: disconnected (%v), reconnecting in %s", err, backoff)
 			select {
 			case <-ctx.Done():
@@ -162,7 +162,7 @@ func (c *Client) Run(ctx context.Context) error {
 
 func (c *Client) connect(ctx context.Context) error {
 	wsURL := c.buildURL()
-	log.Printf("spacedust: connecting")
+	log.Printf("spacedust: connecting to %s", wsURL)
 
 	conn, _, err := websocket.DefaultDialer.DialContext(ctx, wsURL, nil)
 	if err != nil {

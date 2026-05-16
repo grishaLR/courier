@@ -4,6 +4,7 @@ import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import social.courier.app.BuildConfig
 import java.util.concurrent.TimeUnit
 
 object ApiClient {
@@ -18,22 +19,12 @@ object ApiClient {
     private val gson = GsonBuilder().create()
 
     val api: CourierApi by lazy {
-        val baseUrl = if (isDebug()) BASE_URL_DEBUG else BASE_URL_PROD
+        val baseUrl = if (BuildConfig.DEBUG) BASE_URL_DEBUG else BASE_URL_PROD
         Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(CourierApi::class.java)
-    }
-
-    private fun isDebug(): Boolean {
-        return try {
-            Class.forName("social.courier.app.BuildConfig")
-                .getField("DEBUG")
-                .getBoolean(null)
-        } catch (e: Exception) {
-            true
-        }
     }
 }

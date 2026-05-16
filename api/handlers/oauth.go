@@ -56,8 +56,9 @@ func (h *OAuthHandlers) ClientMetadata(w http.ResponseWriter, r *http.Request) {
 // POST /auth/oauth/start — starts the OAuth flow
 func (h *OAuthHandlers) Start(w http.ResponseWriter, r *http.Request) {
 	var req struct {
-		Handle string `json:"handle"`
-		Mobile bool   `json:"mobile,omitempty"`
+		Handle   string `json:"handle"`
+		Mobile   bool   `json:"mobile,omitempty"`
+		Platform string `json:"platform,omitempty"` // "ios" | "android"
 	}
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil || req.Handle == "" {
 		httpError(w, http.StatusBadRequest, "handle is required")
@@ -95,16 +96,8 @@ func (h *OAuthHandlers) Start(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// For mobile clients use the production client_id (publicly fetchable by the PDS)
-	// and a custom URL scheme redirect (intercepted by the iOS/Android app directly,
-	// no server-side callback hop needed). This avoids the 127.0.0.1 loopback problem
-	// where the PDS can't fetch local client metadata and falls back to production metadata.
 	clientMetaURL := h.clientMetadataURL
 	redirectURI := h.redirectURI
-	if req.Mobile {
-		clientMetaURL = "https://courier.social/oauth-client-metadata.json"
-		redirectURI = "social.courier:/auth/callback"
-	}
 
 	// PAR request
 	requestURI, state, err := oauth.PushAuthorizationRequest(authServer, clientMetaURL, redirectURI, challenge, req.Handle, dpopKey)

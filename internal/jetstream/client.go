@@ -101,7 +101,7 @@ func (c *Client) Run(ctx context.Context) error {
 		err := c.connect(ctx)
 		if err != nil {
 			attempt++
-			backoff := time.Duration(math.Min(float64(time.Second)*math.Pow(2, float64(attempt)), 30)) * time.Second
+			backoff := time.Duration(math.Min(float64(time.Second)*math.Pow(2, float64(attempt)), 5)) * time.Second
 			log.Printf("jetstream: disconnected (%v), reconnecting in %s", err, backoff)
 			select {
 			case <-ctx.Done():

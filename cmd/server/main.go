@@ -152,23 +152,28 @@ func main() {
 		// Dedup — only one machine should process each notification
 		dedupKey := fmt.Sprintf("dedup:%s:%s", did, notif.URI)
 		if !rdb.SetNX(context.Background(), dedupKey, "1", 60*time.Second).Val() {
+			log.Printf("🔍 dedup: skipping %s for %s", notif.URI, did)
 			return // another machine already processed this
 		}
 
 		// Moderation check — drop notifications from labeled bad actors
 		if !mod.Check(context.Background(), notif.FromDID) {
+			log.Printf("🔍 mod: blocked %s from %s", notif.Type, notif.FromDID)
 			return
 		}
 
 		user, err := reg.GetUser(context.Background(), did)
 		if err != nil {
+			log.Printf("🔍 no user for %s: %v", did, err)
 			return
 		}
 		if !wantsNotification(user.Preferences, notif.Type) {
+			log.Printf("🔍 pref: user %s doesn't want %s", did, notif.Type)
 			return
 		}
 		// Check per-app preferences
 		if !reg.IsAppEnabled(context.Background(), did, notif.Collection) {
+			log.Printf("🔍 app: user %s has %s disabled", did, notif.Collection)
 			return
 		}
 
@@ -204,8 +209,14 @@ func main() {
 					"subjectText": enriched.SubjectText,
 				},
 			}
+			log.Printf("📲 push: sending %s to %s (%s token %s…)", notif.Type, did, user.Platform, user.DeviceToken[:8])
 			go func(token string) {
 				result := dispatcher.Send(pushNotif)
+				if result.Err != nil {
+					log.Printf("⚠️ push: send failed for %s: %v", token[:8], result.Err)
+				} else {
+					log.Printf("✅ push: sent to %s…", token[:8])
+				}
 				if result.BadToken {
 					select {
 					case badTokens <- token:
@@ -438,11 +449,13 @@ func main() {
 		if notif == nil {
 			return
 		}
+		log.Printf("🔍 spacedust event: %s from %s → subject=%s", notif.Collection, notif.FromDID, notif.ForDID)
 		// Skip own writes
 		didMu.RLock()
 		isOwnWrite := didSet[notif.FromDID]
 		didMu.RUnlock()
 		if isOwnWrite {
+			log.Printf("🔍 spacedust: skipping own write from %s", notif.FromDID)
 			return
 		}
 		// ForDID from Spacedust is the subject (could be AT URI or DID)
@@ -664,6 +677,7 @@ func initPushDispatcher() *push.Dispatcher {
 	apnsKeyID := os.Getenv("APNS_KEY_ID")
 	apnsTeamID := os.Getenv("APNS_TEAM_ID")
 	fcmCredPath := os.Getenv("FCM_CREDENTIALS_PATH")
+	fcmCredJSON := os.Getenv("FCM_CREDENTIALS_JSON")
 
 	var apnsCfg *push.APNsConfig
 	if (apnsKeyPath != "" || apnsKeyData != "") && apnsKeyID != "" && apnsTeamID != "" {
@@ -679,18 +693,22 @@ func initPushDispatcher() *push.Dispatcher {
 	}
 
 	var fcmClient *messaging.Client
+	var fcmApp *firebase.App
+	var fcmErr error
 	if fcmCredPath != "" {
-		app, err := firebase.NewApp(context.Background(), nil, option.WithCredentialsFile(fcmCredPath))
-		if err != nil {
-			log.Printf("fcm: init error: %v (continuing without FCM)", err)
+		fcmApp, fcmErr = firebase.NewApp(context.Background(), nil, option.WithCredentialsFile(fcmCredPath))
+	} else if fcmCredJSON != "" {
+		fcmApp, fcmErr = firebase.NewApp(context.Background(), nil, option.WithCredentialsJSON([]byte(fcmCredJSON)))
+	}
+	if fcmApp != nil && fcmErr == nil {
+		fcmClient, fcmErr = fcmApp.Messaging(context.Background())
+		if fcmErr != nil {
+			log.Printf("fcm: messaging error: %v (continuing without FCM)", fcmErr)
 		} else {
-			fcmClient, err = app.Messaging(context.Background())
-			if err != nil {
-				log.Printf("fcm: messaging error: %v (continuing without FCM)", err)
-			} else {
-				log.Println("fcm: configured")
-			}
+			log.Println("fcm: configured")
 		}
+	} else if fcmCredPath != "" || fcmCredJSON != "" {
+		log.Printf("fcm: init error: %v (continuing without FCM)", fcmErr)
 	}
 
 	if apnsCfg == nil && fcmClient == nil {

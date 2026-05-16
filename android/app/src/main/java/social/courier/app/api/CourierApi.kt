@@ -17,8 +17,28 @@ data class RegisterRequest(
 data class RegisterResponse(val did: String, val status: String)
 data class StatusResponse(val status: String)
 data class SuggestAppRequest(val collection: String, val appName: String, val appURL: String)
+data class BlogSub(
+    val publicationUri: String,
+    val authorDid: String,
+    val blogName: String,
+    val platform: String,
+    val webUrl: String?,
+    val iconUrl: String?,
+    val enabled: Boolean,
+)
+data class BlogPrefRequest(val publicationUri: String, val enabled: Boolean)
+data class OAuthStartRequest(val handle: String, val mobile: Boolean = true, val platform: String = "android")
+data class OAuthStartResponse(val authorizationURL: String, val state: String)
+data class OAuthExchangeResponse(val sessionToken: String, val did: String)
 
 interface CourierApi {
+    // OAuth
+    @POST("auth/oauth/start")
+    suspend fun oauthStart(@Body body: OAuthStartRequest): OAuthStartResponse
+
+    @POST("auth/oauth/exchange")
+    suspend fun oauthExchange(@Body body: Map<String, String>): OAuthExchangeResponse
+
     // Auth
     @POST("auth/challenge")
     suspend fun requestChallenge(@Body body: Map<String, String>): ChallengeResponse
@@ -28,7 +48,10 @@ interface CourierApi {
 
     // Registration
     @POST("register")
-    suspend fun register(@Body request: RegisterRequest): RegisterResponse
+    suspend fun register(
+        @Header("Authorization") bearer: String,
+        @Body request: RegisterRequest
+    ): RegisterResponse
 
     @PUT("preferences")
     suspend fun updatePreferences(
@@ -42,6 +65,9 @@ interface CourierApi {
     // Notifications
     @GET("notifications/{did}")
     suspend fun getNotifications(@Path("did") did: String): List<CourierNotification>
+
+    @DELETE("notifications")
+    suspend fun clearNotifications(@Header("X-DID") did: String): StatusResponse
 
     // App catalog
     @GET("catalog/user")
@@ -59,4 +85,17 @@ interface CourierApi {
     // App registry
     @POST("apps/suggest")
     suspend fun suggestApp(@Body request: SuggestAppRequest): StatusResponse
+
+    // Blog subscriptions
+    @GET("subscriptions/blogs")
+    suspend fun getBlogSubs(@Header("Authorization") bearer: String): List<BlogSub>
+
+    @PUT("subscriptions/blogs")
+    suspend fun setBlogPref(
+        @Header("Authorization") bearer: String,
+        @Body body: BlogPrefRequest
+    ): StatusResponse
+
+    @POST("subscriptions/blogs/refresh")
+    suspend fun refreshBlogSubs(@Header("Authorization") bearer: String): List<BlogSub>
 }
