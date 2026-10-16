@@ -67,6 +67,8 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.activity:activity-compose:1.9.3")
+    // Pin above the transitive 1.1.0 (via Play Services); ActivityResult APIs need >= 1.3.0
+    implementation("androidx.fragment:fragment-ktx:1.8.5")
 
     // Serialization (used by ActorSearch typeahead)
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
