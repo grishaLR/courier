@@ -55,7 +55,7 @@ interface CourierApi {
 
     @PUT("preferences")
     suspend fun updatePreferences(
-        @Header("X-DID") did: String,
+        @Header("Authorization") bearer: String,
         @Body preferences: Preferences
     ): StatusResponse
 
@@ -66,25 +66,28 @@ interface CourierApi {
     ): StatusResponse
 
     @DELETE("unregister")
-    suspend fun unregister(@Header("X-DID") did: String): StatusResponse
+    suspend fun unregister(@Header("Authorization") bearer: String): StatusResponse
 
     // Notifications
     @GET("notifications/{did}")
-    suspend fun getNotifications(@Path("did") did: String): List<CourierNotification>
+    suspend fun getNotifications(
+        @Header("Authorization") bearer: String,
+        @Path("did") did: String
+    ): List<CourierNotification>
 
     @DELETE("notifications")
-    suspend fun clearNotifications(@Header("X-DID") did: String): StatusResponse
+    suspend fun clearNotifications(@Header("Authorization") bearer: String): StatusResponse
 
     // App catalog
     @GET("catalog/user")
     suspend fun getUserApps(@Query("actor") actor: String): UserAppsResponse
 
     @GET("catalog/user/prefs")
-    suspend fun getAppPrefs(@Query("did") did: String): Map<String, Boolean>
+    suspend fun getAppPrefs(@Header("Authorization") bearer: String): Map<String, Boolean>
 
     @PUT("catalog/user/prefs")
     suspend fun setAppPrefs(
-        @Header("X-DID") did: String,
+        @Header("Authorization") bearer: String,
         @Body prefs: Map<String, Boolean>
     ): StatusResponse
 

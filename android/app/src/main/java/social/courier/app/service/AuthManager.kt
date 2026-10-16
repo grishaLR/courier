@@ -58,8 +58,8 @@ class AuthManager(context: Context) {
     }
 
     suspend fun signOut() {
-        did?.let {
-            try { ApiClient.api.unregister(it) } catch (_: Exception) {}
+        sessionToken?.let {
+            try { ApiClient.api.unregister("Bearer $it") } catch (_: Exception) {}
         }
         prefs.edit().clear().apply()
     }

@@ -67,7 +67,6 @@ func (h *NotifHub) Subscribe(w http.ResponseWriter, r *http.Request) {
 
 	var authMsg struct {
 		Token string `json:"token"`
-		DID   string `json:"did"`
 	}
 	if err := json.Unmarshal(msg, &authMsg); err != nil {
 		conn.WriteMessage(websocket.CloseMessage,
@@ -78,7 +77,7 @@ func (h *NotifHub) Subscribe(w http.ResponseWriter, r *http.Request) {
 
 	switch {
 	case authMsg.Token != "":
-		// Session-token auth (web clients)
+		// Session-token auth
 		session, err := h.sessions.GetSession(r.Context(), authMsg.Token)
 		if err != nil {
 			conn.WriteMessage(websocket.CloseMessage,
@@ -92,15 +91,6 @@ func (h *NotifHub) Subscribe(w http.ResponseWriter, r *http.Request) {
 				websocket.FormatCloseMessage(websocket.ClosePolicyViolation, "unauthorized"))
 			conn.Close()
 			log.Printf("ws: %s unauthorized (token belongs to %s)", did, session.DID)
-			return
-		}
-	case authMsg.DID != "":
-		// DID-based auth (mobile clients without a server session token)
-		if authMsg.DID != did {
-			conn.WriteMessage(websocket.CloseMessage,
-				websocket.FormatCloseMessage(websocket.ClosePolicyViolation, "unauthorized"))
-			conn.Close()
-			log.Printf("ws: %s unauthorized (DID mismatch)", did)
 			return
 		}
 	default:

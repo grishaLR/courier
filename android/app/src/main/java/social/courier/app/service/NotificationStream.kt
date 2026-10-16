@@ -18,6 +18,7 @@ class NotificationStream {
 
     fun connect(did: String, sessionToken: String?, backoffMs: Long = 1_000L) {
         webSocket?.close(1000, null)
+        if (sessionToken == null) return
 
         val baseUrl = if (BuildConfig.DEBUG) "ws://10.0.2.2:8080" else "wss://api.courier.social"
         val request = Request.Builder()
@@ -27,12 +28,7 @@ class NotificationStream {
         webSocket = CourierHttpClient.client.newWebSocket(request, object : WebSocketListener() {
             override fun onOpen(webSocket: WebSocket, response: Response) {
                 // Server requires auth as first message within 10s
-                val auth = if (sessionToken != null) {
-                    """{"token":"$sessionToken"}"""
-                } else {
-                    """{"did":"$did"}"""
-                }
-                webSocket.send(auth)
+                webSocket.send("""{"token":"$sessionToken"}""")
             }
 
             override fun onMessage(webSocket: WebSocket, text: String) {

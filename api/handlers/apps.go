@@ -43,7 +43,7 @@ func (h *AppHandlers) SuggestApp(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	did := r.Header.Get("X-DID")
+	did := AuthedDID(r)
 
 	if err := h.reg.AddAppSuggestion(r.Context(), req.Collection, req.AppName, req.AppURL, did); err != nil {
 		httpError(w, http.StatusInternalServerError, "failed to save suggestion")

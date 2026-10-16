@@ -95,7 +95,7 @@ class MainActivity : ComponentActivity() {
 
         LaunchedEffect(Unit) {
             authManager.did?.let { did ->
-                try { notifications = ApiClient.api.getNotifications(did) } catch (_: Exception) {}
+                try { notifications = ApiClient.api.getNotifications("Bearer ${authManager.sessionToken}", did) } catch (_: Exception) {}
                 isLoading = false
             }
         }
@@ -114,9 +114,9 @@ class MainActivity : ComponentActivity() {
                         if (currentTab == AppTab.Inbox) {
                             IconButton(onClick = {
                                 scope.launch {
-                                    authManager.did?.let { did ->
+                                    authManager.sessionToken?.let { token ->
                                         try {
-                                            ApiClient.api.clearNotifications(did)
+                                            ApiClient.api.clearNotifications("Bearer $token")
                                             notifications = emptyList()
                                         } catch (_: Exception) {}
                                     }
@@ -393,7 +393,7 @@ class MainActivity : ComponentActivity() {
             runCatching { ApiClient.api.getUserApps(did) }.onSuccess { response ->
                 yourApps = response.yourApps
                 discoverApps = response.discoverApps ?: emptyList()
-                val prefs = runCatching { ApiClient.api.getAppPrefs(did) }
+                val prefs = runCatching { ApiClient.api.getAppPrefs(bearer) }
                     .getOrDefault(emptyMap()).toMutableMap()
                 for (group in discoverApps) {
                     for (app in group.apps) {
@@ -556,7 +556,7 @@ class MainActivity : ComponentActivity() {
                             scope.launch {
                                 isSaving = true
                                 try {
-                                    authManager.did?.let { ApiClient.api.setAppPrefs(it, appPrefs) }
+                                    authManager.sessionToken?.let { ApiClient.api.setAppPrefs("Bearer $it", appPrefs) }
                                     Toast.makeText(this@MainActivity, "Saved", Toast.LENGTH_SHORT).show()
                                 } catch (e: Exception) {
                                     Toast.makeText(this@MainActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()

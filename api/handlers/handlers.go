@@ -47,27 +47,23 @@ func (h *Handlers) Register(w http.ResponseWriter, r *http.Request) {
 		httpError(w, http.StatusBadRequest, "deviceToken and platform are required")
 		return
 	}
-	log.Printf("register: did=%s token=%s… platform=%s", req.DID, req.DeviceToken[:8], req.Platform)
+	log.Printf("register: did=%s token=%s… platform=%s", AuthedDID(r), req.DeviceToken[:8], req.Platform)
 	if req.Platform != "ios" && req.Platform != "android" {
 		httpError(w, http.StatusBadRequest, "platform must be 'ios' or 'android'")
 		return
 	}
 
-	// Resolve DID if only handle provided
-	did := req.DID
-	handle := req.Handle
-	if did == "" && handle == "" {
-		httpError(w, http.StatusBadRequest, "handle or did is required")
+	// Register only the caller's own DID — never one asserted in the body
+	did := AuthedDID(r)
+	if did == "" {
+		httpError(w, http.StatusUnauthorized, "authentication required")
 		return
 	}
-	if did == "" {
-		resolved, err := h.resolveDID(handle)
-		if err != nil {
-			httpError(w, http.StatusBadRequest, fmt.Sprintf("could not resolve handle: %v", err))
-			return
-		}
-		did = resolved
+	if req.DID != "" && req.DID != did {
+		httpError(w, http.StatusForbidden, "did does not match session")
+		return
 	}
+	handle := req.Handle
 	if handle == "" {
 		handle = did // we'll hydrate the handle later
 	}
@@ -104,9 +100,9 @@ func (h *Handlers) UpdatePreferences(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	did := r.Header.Get("X-DID")
+	did := AuthedDID(r)
 	if did == "" {
-		httpError(w, http.StatusBadRequest, "X-DID header required")
+		httpError(w, http.StatusUnauthorized, "authentication required")
 		return
 	}
 
@@ -140,9 +136,9 @@ func (h *Handlers) UpdateDeviceToken(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handlers) Unregister(w http.ResponseWriter, r *http.Request) {
-	did := r.Header.Get("X-DID")
+	did := AuthedDID(r)
 	if did == "" {
-		httpError(w, http.StatusBadRequest, "X-DID header required")
+		httpError(w, http.StatusUnauthorized, "authentication required")
 		return
 	}
 
@@ -162,6 +158,10 @@ func (h *Handlers) GetNotifications(w http.ResponseWriter, r *http.Request) {
 	did := chi.URLParam(r, "did")
 	if did == "" {
 		httpError(w, http.StatusBadRequest, "did is required")
+		return
+	}
+	if did != AuthedDID(r) {
+		httpError(w, http.StatusForbidden, "forbidden")
 		return
 	}
 

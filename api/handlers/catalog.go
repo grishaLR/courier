@@ -219,11 +219,11 @@ func groupByCategory(apps []registry.CatalogApp) []AppGroup {
 	return groups
 }
 
-// GET /catalog/user/preferred?did=... — get preferred app choices
+// GET /catalog/user/preferred — get the caller's preferred app choices
 func (h *CatalogHandlers) GetPreferredApps(w http.ResponseWriter, r *http.Request) {
-	did := r.URL.Query().Get("did")
+	did := AuthedDID(r)
 	if did == "" {
-		httpError(w, http.StatusBadRequest, "did required")
+		httpError(w, http.StatusUnauthorized, "authentication required")
 		return
 	}
 	prefs, err := h.reg.GetPreferredApps(r.Context(), did)
@@ -239,9 +239,9 @@ func (h *CatalogHandlers) GetPreferredApps(w http.ResponseWriter, r *http.Reques
 
 // PUT /catalog/user/preferred — set preferred app choices
 func (h *CatalogHandlers) SetPreferredApps(w http.ResponseWriter, r *http.Request) {
-	did := r.Header.Get("X-DID")
+	did := AuthedDID(r)
 	if did == "" {
-		httpError(w, http.StatusBadRequest, "X-DID header required")
+		httpError(w, http.StatusUnauthorized, "authentication required")
 		return
 	}
 	var prefs map[string]string
@@ -276,9 +276,9 @@ func (h *CatalogHandlers) GetAlternatives(w http.ResponseWriter, r *http.Request
 
 // POST /catalog/user/pin — add app to "apps I'm on"
 func (h *CatalogHandlers) PinApp(w http.ResponseWriter, r *http.Request) {
-	did := r.Header.Get("X-DID")
+	did := AuthedDID(r)
 	if did == "" {
-		httpError(w, http.StatusBadRequest, "X-DID header required")
+		httpError(w, http.StatusUnauthorized, "authentication required")
 		return
 	}
 	var body struct {
@@ -306,9 +306,9 @@ func (h *CatalogHandlers) PinApp(w http.ResponseWriter, r *http.Request) {
 
 // DELETE /catalog/user/pin — remove app from "apps I'm on"
 func (h *CatalogHandlers) UnpinApp(w http.ResponseWriter, r *http.Request) {
-	did := r.Header.Get("X-DID")
+	did := AuthedDID(r)
 	if did == "" {
-		httpError(w, http.StatusBadRequest, "X-DID header required")
+		httpError(w, http.StatusUnauthorized, "authentication required")
 		return
 	}
 	var body struct {
@@ -326,11 +326,11 @@ func (h *CatalogHandlers) UnpinApp(w http.ResponseWriter, r *http.Request) {
 	jsonResp(w, http.StatusOK, map[string]string{"status": "unpinned"})
 }
 
-// GET /catalog/user/prefs?did=... — get per-app preferences
+// GET /catalog/user/prefs — get the caller's per-app preferences
 func (h *CatalogHandlers) GetAppPrefs(w http.ResponseWriter, r *http.Request) {
-	did := r.URL.Query().Get("did")
+	did := AuthedDID(r)
 	if did == "" {
-		httpError(w, http.StatusBadRequest, "did required")
+		httpError(w, http.StatusUnauthorized, "authentication required")
 		return
 	}
 	prefs, err := h.reg.GetAppPreferences(r.Context(), did)
@@ -346,9 +346,9 @@ func (h *CatalogHandlers) GetAppPrefs(w http.ResponseWriter, r *http.Request) {
 
 // PUT /catalog/user/prefs — set per-app preferences
 func (h *CatalogHandlers) SetAppPrefs(w http.ResponseWriter, r *http.Request) {
-	did := r.Header.Get("X-DID")
+	did := AuthedDID(r)
 	if did == "" {
-		httpError(w, http.StatusBadRequest, "X-DID header required")
+		httpError(w, http.StatusUnauthorized, "authentication required")
 		return
 	}
 	var prefs map[string]bool

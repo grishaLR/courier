@@ -593,21 +593,16 @@ func main() {
 		appH := handlers.NewAppHandlers(reg)
 		r.Get("/apps", appH.ListApps)
 		r.Get("/apps/lookup", appH.LookupApp)
-
-		// Notifications (read-only, scoped by DID in path)
-		r.Get("/notifications/{did}", h.GetNotifications)
-
-		// Registration is public — DID ownership is asserted but not cryptographically
-		// verified at this layer; the DeviceToken only delivers to the registered app.
-		r.Post("/register", h.Register)
 	})
 
 	// ── Protected API (requires authenticated session) ───
 	r.Group(func(r chi.Router) {
-		r.Use(handlers.RequireAuth(oauthSessions, reg))
+		r.Use(handlers.RequireAuth(oauthSessions))
+		r.Post("/register", h.Register)
 		r.Put("/preferences", h.UpdatePreferences)
 		r.Put("/device-token", h.UpdateDeviceToken)
 		r.Delete("/unregister", h.Unregister)
+		r.Get("/notifications/{did}", h.GetNotifications)
 		r.Delete("/notifications", h.ClearNotifications)
 		r.Post("/notifications/delete", h.DeleteNotification)
 

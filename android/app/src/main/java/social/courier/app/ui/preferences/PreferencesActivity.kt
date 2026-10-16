@@ -77,7 +77,7 @@ class PreferencesActivity : ComponentActivity() {
             runCatching { ApiClient.api.getUserApps(did) }.onSuccess { response ->
                 yourApps = response.yourApps
                 discoverApps = response.discoverApps ?: emptyList()
-                val prefs = runCatching { ApiClient.api.getAppPrefs(did) }
+                val prefs = runCatching { ApiClient.api.getAppPrefs(bearer) }
                     .getOrDefault(emptyMap()).toMutableMap()
                 for (group in discoverApps) {
                     for (app in group.apps) {
@@ -254,7 +254,7 @@ class PreferencesActivity : ComponentActivity() {
                                 scope.launch {
                                     isSaving = true
                                     try {
-                                        authManager.did?.let { ApiClient.api.setAppPrefs(it, appPrefs) }
+                                        authManager.sessionToken?.let { ApiClient.api.setAppPrefs("Bearer $it", appPrefs) }
                                         Toast.makeText(this@PreferencesActivity, "Saved", Toast.LENGTH_SHORT).show()
                                     } catch (e: Exception) {
                                         Toast.makeText(this@PreferencesActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
