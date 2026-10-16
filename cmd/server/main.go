@@ -420,13 +420,8 @@ func main() {
 			processSubscriptionEvent(event)
 		}
 
-		// In hybrid mode, wantedDIDs already filtered to watched users and blog authors.
-		// Events from those DIDs are "own writes" for notification purposes — skip the scan.
-		if useSpacedust {
-			return
-		}
-
-		// Pure-Jetstream mode: scan all watched users to find who this event targets.
+		// Scan all watched users to find who this event targets.
+		// In hybrid mode this only runs for non-bsky collections (bsky filtered above).
 		didMu.RLock()
 		defer didMu.RUnlock()
 
@@ -450,14 +445,6 @@ func main() {
 			return
 		}
 		log.Printf("🔍 spacedust event: %s from %s → subject=%s", notif.Collection, notif.FromDID, notif.ForDID)
-		// Skip own writes
-		didMu.RLock()
-		isOwnWrite := didSet[notif.FromDID]
-		didMu.RUnlock()
-		if isOwnWrite {
-			log.Printf("🔍 spacedust: skipping own write from %s", notif.FromDID)
-			return
-		}
 		// ForDID from Spacedust is the subject (could be AT URI or DID)
 		// Extract DID if it's an AT URI
 		if strings.HasPrefix(notif.ForDID, "at://") {
@@ -465,6 +452,11 @@ func main() {
 			if len(parts) > 0 {
 				notif.ForDID = parts[0]
 			}
+		}
+		// Skip only if the actor is acting on their own content
+		if notif.FromDID == notif.ForDID {
+			log.Printf("🔍 spacedust: skipping own write from %s", notif.FromDID)
+			return
 		}
 		enqueue(notif, nil)
 	}
@@ -474,27 +466,36 @@ func main() {
 	var jsClient *jetstream.Client
 
 	if useSpacedust {
-		// Spacedust for Bluesky interactions (efficient, filtered)
+		// Spacedust for all app interactions — sources derived from catalog
 		var sdOpts []spacedust.Option
 		if os.Getenv("SPACEDUST_INSTANT") == "true" {
 			sdOpts = append(sdOpts, spacedust.WithInstant(true))
 			log.Println("spacedust: instant mode enabled")
 		}
+		if catalogSources := registry.SpacedustSources(); len(catalogSources) > 0 {
+			srcs := make([]spacedust.Source, len(catalogSources))
+			for i, s := range catalogSources {
+				srcs[i] = spacedust.Source(s)
+			}
+			sdOpts = append(sdOpts, spacedust.WithSources(srcs))
+			log.Printf("spacedust: %d sources from catalog", len(srcs))
+		}
 		sdClient = spacedust.NewClient(spacedustURL, watchedDIDs, onSpacedustEvent, sdOpts...)
 		log.Println("event source: spacedust (bluesky interactions)")
 
-		// Jetstream for non-Bluesky collections (tangled, atmo, etc.)
+		// Jetstream handles blog posts and subscription management only.
+		// Spacedust is the primary notification source for all app interactions.
+		// No wantedDIDs — any author's blog post should arrive, not just Courier users'.
 		var jsOpts []jetstream.Option
 		jsOpts = append(jsOpts, jetstream.WithOnCursor(onCursor))
 		if cursor > 0 {
 			jsOpts = append(jsOpts, jetstream.WithCursor(cursor))
 		}
-		jsClient = jetstream.NewClient(jetstreamURL, watchedDIDs, onJetstreamEvent, jsOpts...)
-		// Also watch subscribed blog authors so their posts arrive via wantedDIDs filter
-		for _, authorDID := range subMgr.GetAuthorDIDs() {
-			jsClient.AddDID(authorDID)
-		}
-		log.Println("event source: jetstream (non-bluesky collections)")
+		jsCols := subscriptions.JetstreamCollections(registry.NonBskyNotificationCollections())
+		jsOpts = append(jsOpts, jetstream.WithCollections(jsCols))
+		log.Printf("jetstream: subscribing to %d blog/subscription collections (no DID filter)", len(jsCols))
+		jsClient = jetstream.NewClient(jetstreamURL, nil, onJetstreamEvent, jsOpts...)
+		log.Println("event source: jetstream (blog + subscriptions)")
 	} else {
 		var clientOpts []jetstream.Option
 		clientOpts = append(clientOpts, jetstream.WithOnCursor(onCursor))
@@ -515,19 +516,20 @@ func main() {
 			sdClient.AddDID(did)
 			sdClient.Reconnect() // Spacedust needs reconnect to update DIDs
 		}
-		if jsClient != nil {
+		// In hybrid mode Jetstream uses wantedCollections (no DID filter) so no
+		// reconnect needed when new users register. Pure-Jetstream mode still needs it.
+		if jsClient != nil && !useSpacedust {
 			jsClient.AddDID(did)
-			jsClient.Reconnect() // Reconnect so wantedDIDs filter includes new DID
+			jsClient.Reconnect()
 		}
-		// Discover blog subscriptions in background; reconnect Jetstream again
-		// once author DIDs are known so they're included in wantedDIDs.
+		// Discover blog subscriptions in background.
 		go func() {
 			if err := subMgr.DiscoverAndStore(context.Background(), did); err != nil {
 				log.Printf("subscriptions: discovery error for %s: %v", did, err)
 				return
 			}
-			// Seed newly discovered author DIDs into Jetstream
-			if jsClient != nil {
+			// Pure-Jetstream mode: seed blog author DIDs so their posts arrive.
+			if jsClient != nil && !useSpacedust {
 				for _, authorDID := range subMgr.GetAuthorDIDs() {
 					jsClient.AddDID(authorDID)
 				}

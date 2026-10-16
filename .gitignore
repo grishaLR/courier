@@ -34,3 +34,7 @@ ios/_Sources_backup/
 
 # OS
 .DS_Store
+
+# Internal audits
+AUDIT.md
+OPEN_SOURCE_AUDIT.md

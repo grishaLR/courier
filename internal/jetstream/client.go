@@ -63,23 +63,9 @@ func NewClient(url string, dids []string, onEvent func(*Event), opts ...Option) 
 func (c *Client) buildURL() string {
 	u := c.url + "?"
 
-	c.mu.RLock()
-	dids := make([]string, 0, len(c.dids))
-	for did := range c.dids {
-		dids = append(dids, did)
-	}
-	c.mu.RUnlock()
-
-	// Pass wantedDIDs when the set fits within Jetstream's 10k limit.
-	// This shifts DID filtering server-side, eliminating the O(N) scan per event.
-	if len(dids) > 0 && len(dids) <= 10000 {
-		for _, did := range dids {
-			u += "wantedDIDs=" + url.QueryEscape(did) + "&"
-		}
-	}
-
+	// No wantedDIDs — filter by collection type server-side, match DIDs in-process.
 	for _, col := range c.collections {
-		u += "wantedCollections=" + col + "&"
+		u += "wantedCollections=" + url.QueryEscape(col) + "&"
 	}
 
 	if c.cursor > 0 {

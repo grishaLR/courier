@@ -1,30 +1,56 @@
 package social.courier.app.service
 
+import android.app.ActivityManager
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import social.courier.app.R
+import social.courier.app.api.ApiClient
 
 class FCMService : FirebaseMessagingService() {
 
     override fun onMessageReceived(message: RemoteMessage) {
-        val title = message.notification?.title ?: message.data["title"] ?: "Courier"
-        val body = message.notification?.body ?: message.data["body"] ?: ""
+        val title = message.data["title"] ?: message.notification?.title ?: "Courier"
+        val body = message.data["body"] ?: message.notification?.body ?: ""
         val type = message.data["type"] ?: "generic"
         val uri = message.data["uri"] ?: ""
 
-        showNotification(title, body, type, uri)
+        // When the app is backgrounded/killed, the system already shows the notification
+        // via the AndroidNotification field. Only show manually when in the foreground.
+        if (isAppInForeground()) {
+            showNotification(title, body, type, uri)
+        }
+    }
+
+    private fun isAppInForeground(): Boolean {
+        val am = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val tasks = am.getRunningTasks(1)
+        return tasks.isNotEmpty() && tasks[0].topActivity?.packageName == packageName
     }
 
     override fun onNewToken(token: String) {
-        // Re-register with backend
         val prefs = getSharedPreferences("courier_auth", MODE_PRIVATE)
         prefs.edit().putString("fcm_token", token).apply()
-        // TODO: update token on server if already registered
+
+        // If the user is already signed in, push the rotated token to the server so
+        // delivery keeps working without waiting for the next login.
+        val sessionToken = prefs.getString("session_token", null) ?: return
+        CoroutineScope(Dispatchers.IO).launch {
+            runCatching {
+                ApiClient.api.updateDeviceToken(
+                    "Bearer $sessionToken",
+                    mapOf("deviceToken" to token),
+                )
+            }
+        }
     }
 
     private fun showNotification(title: String, body: String, type: String, uri: String) {

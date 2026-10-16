@@ -39,8 +39,20 @@ func ClassifyLink(event *Event) *classifier.Notification {
 		}
 	// Tangled
 	case collection == "sh.tangled.feed.reaction":
-		notif.Type = classifier.Like
+		notif.Type = classifier.Reaction
+	case collection == "sh.tangled.feed.star":
+		notif.Type = classifier.Star
 	case collection == "sh.tangled.repo.comment":
+		notif.Type = classifier.Reply
+	// Grain
+	case collection == "social.grain.favorite":
+		notif.Type = classifier.Favorite
+	case collection == "social.grain.comment":
+		notif.Type = classifier.Reply
+	// Arabica
+	case collection == "social.arabica.alpha.feed.like":
+		notif.Type = classifier.Like
+	case collection == "social.arabica.alpha.feed.reply":
 		notif.Type = classifier.Reply
 	default:
 		notif.Type = classifier.Generic

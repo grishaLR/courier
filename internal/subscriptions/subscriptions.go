@@ -46,9 +46,32 @@ var subscriptionCollections = []string{
 
 // Document collection NSIDs that produce blog post notifications
 var documentCollections = map[string]string{
-	"pub.leaflet.document":  "leaflet",
+	"pub.leaflet.document":   "leaflet",
 	"site.standard.document": "standard",
-	"com.whtwnd.blog.entry": "whitewind",
+	"com.whtwnd.blog.entry":  "whitewind",
+}
+
+// JetstreamCollections returns all collection NSIDs Jetstream should subscribe to:
+// blog documents, subscription records, and any non-bsky collections from the catalog.
+func JetstreamCollections(catalogPrefixes []string) []string {
+	seen := make(map[string]bool)
+	var cols []string
+	add := func(c string) {
+		if !seen[c] {
+			seen[c] = true
+			cols = append(cols, c)
+		}
+	}
+	for col := range documentCollections {
+		add(col)
+	}
+	for _, col := range subscriptionCollections {
+		add(col)
+	}
+	for _, prefix := range catalogPrefixes {
+		add(prefix)
+	}
+	return cols
 }
 
 func New(rdb *redis.Client) *Manager {

@@ -286,7 +286,10 @@
     "appUrl": "https://atmo.rsvp",
     "category": "Events",
     "description": "A decentralized events calendar for the AT Protocol. Create, discover, and join ",
-    "faviconUrl": "https://atmo.rsvp/favicon.svg"
+    "faviconUrl": "https://atmo.rsvp/favicon.svg",
+    "spacedustSources": [
+      "community.lexicon.calendar.event.rsvp:event"
+    ]
   },
   {
     "collectionPrefix": "tools.atmo",
@@ -620,7 +623,15 @@
     "category": "Client",
     "description": "A powerful alternative Bluesky client with advanced custom feed building and curation tools.",
     "faviconUrl": "https://skyfeed.app/android-chrome-512x512.png",
-    "alternativeFor": "app.bsky"
+    "alternativeFor": "app.bsky",
+    "spacedustSources": [
+      "app.bsky.feed.like:subject.uri",
+      "app.bsky.feed.repost:subject.uri",
+      "app.bsky.feed.post:reply.parent.uri",
+      "app.bsky.feed.post:embed.record.uri",
+      "app.bsky.feed.post:facets.features.did",
+      "app.bsky.graph.follow:subject"
+    ]
   },
   {
     "collectionPrefix": "app.bluemotion",
@@ -654,7 +665,15 @@
     "appUrl": "https://bsky.app",
     "category": "Social",
     "description": "The flagship microblogging social network built on AT Protocol for posting, following, and discovering conversations.",
-    "faviconUrl": "https://web-cdn.bsky.app/static/apple-touch-icon.png"
+    "faviconUrl": "https://web-cdn.bsky.app/static/apple-touch-icon.png",
+    "spacedustSources": [
+      "app.bsky.feed.like:subject.uri",
+      "app.bsky.feed.repost:subject.uri",
+      "app.bsky.feed.post:reply.parent.uri",
+      "app.bsky.feed.post:embed.record.uri",
+      "app.bsky.feed.post:facets.features.did",
+      "app.bsky.graph.follow:subject"
+    ]
   },
   {
     "collectionPrefix": "dev.bsky.main",
@@ -1286,7 +1305,11 @@
     "appUrl": "https://frontpage.fyi",
     "category": "News",
     "description": "A front page for your network: follow links and stories shared on ATproto without the endless scroll.",
-    "faviconUrl": ""
+    "faviconUrl": "",
+    "spacedustSources": [
+      "fyi.unravel.frontpage.feed.vote:subject.uri",
+      "fyi.unravel.frontpage.feed.comment:subject.uri"
+    ]
   },
   {
     "collectionPrefix": "blue.woof",
@@ -1336,7 +1359,11 @@
     "appUrl": "https://grain.social",
     "category": "Photos",
     "description": "1 & 2- deux photos publi\u00e9es par @somewhereinthedark2 dans un immense bunker souterrain situ\u00e9 en Haute-Normandie\n \n3- l'observation de l'\u00e9clipse partielle au parc Montsouris (le 29 mars)\n \n4- les journ\u00e9es portes ouvertes du tiers-lieu le Toboggan \u00e0 Malakoff (le 22 mars)\n \n5 & 7- la marche nocturne f\u00e9ministe et radicale organis\u00e9e par l'AG f\u00e9ministe Paris-banlieue et autoris\u00e9e \u00e0 la derni\u00e8re minute (le 7 mars)\n \n6- la fa\u00e7ade d'une maison pr\u00e8s de chez moi emport\u00e9e par un incendie, ayant caus\u00e9 la mort d'une petite fille pendant son sommeil (le 8 avril)\n \n8- les 10 ans du festival de musique Beat & Beer \u00e0 Malakoff (les 5 et 6 septembre)\n \n9- une photo de notre excursion avec ma moiti\u00e9 \u00e0 Colleville-sur-mer et Omaha Beach (au mois de mai)",
-    "faviconUrl": "https://grain.social/favicon.png"
+    "faviconUrl": "https://grain.social/favicon.png",
+    "spacedustSources": [
+      "social.grain.favorite:subject.uri",
+      "social.grain.comment:subject.uri"
+    ]
   },
   {
     "collectionPrefix": "dev.pages.grain-social-explorer",
@@ -1484,7 +1511,11 @@
     "appUrl": "https://alpha.arabica.social/",
     "category": "Other",
     "description": "Track your coffee brewing journey. Built on AT Protocol, your data stays yours.",
-    "faviconUrl": "https://arabica.social/favicon.ico"
+    "faviconUrl": "https://arabica.social/favicon.ico",
+    "spacedustSources": [
+      "social.arabica.alpha.feed.like:subject.uri",
+      "social.arabica.alpha.feed.reply:subject.uri"
+    ]
   },
   {
     "collectionPrefix": "club.atgarden",
@@ -2714,7 +2745,10 @@
     "category": "Events",
     "description": "An event creation and management app for organizing in-person or online gatherin",
     "faviconUrl": "https://smokesignal.events/static/icon.webp",
-    "alternativeFor": "community.lexicon.calendar"
+    "alternativeFor": "community.lexicon.calendar",
+    "spacedustSources": [
+      "events.smokesignal.calendar.rsvp:event"
+    ]
   },
   {
     "collectionPrefix": "st.snowpo",
@@ -2935,7 +2969,12 @@
     "appUrl": "https://tangled.org",
     "category": "Developer Tools",
     "description": "A decentralized, social code hosting platform for git repositories, built to kee",
-    "faviconUrl": "https://tangled.org/static/logos/dolly.png"
+    "faviconUrl": "https://tangled.org/static/logos/dolly.png",
+    "spacedustSources": [
+      "sh.tangled.feed.reaction:subject.uri",
+      "sh.tangled.feed.star:subject.uri",
+      "sh.tangled.repo.comment:issue"
+    ]
   },
   {
     "collectionPrefix": "at.atprotocol",

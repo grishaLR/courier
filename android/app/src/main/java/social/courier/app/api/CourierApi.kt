@@ -59,6 +59,12 @@ interface CourierApi {
         @Body preferences: Preferences
     ): StatusResponse
 
+    @PUT("device-token")
+    suspend fun updateDeviceToken(
+        @Header("Authorization") bearer: String,
+        @Body body: Map<String, String>
+    ): StatusResponse
+
     @DELETE("unregister")
     suspend fun unregister(@Header("X-DID") did: String): StatusResponse
 

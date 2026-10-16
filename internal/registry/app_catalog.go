@@ -3,6 +3,7 @@ package registry
 import (
 	"encoding/json"
 	"os"
+	"strings"
 )
 
 // AppCatalog contains the known ATProto app catalog with categories.
@@ -53,6 +54,9 @@ type CatalogApp struct {
 	// AlternativeFor marks this app as an alternative client for another collection prefix.
 	// e.g., Graysky is an alternative for "app.bsky"
 	AlternativeFor   string      `json:"alternativeFor,omitempty"`
+	// SpacedustSources lists the "collection:field" pairs Spacedust needs to deliver
+	// notifications for this app. Omit for apps with no interactive notification model.
+	SpacedustSources []string    `json:"spacedustSources,omitempty"`
 }
 
 // LoadCatalogFromFile loads the app catalog from a JSON file.
@@ -107,6 +111,45 @@ func CatalogByCollection() map[string]CatalogApp {
 		m[app.CollectionPrefix] = app
 	}
 	return m
+}
+
+// SpacedustSources returns the union of all SpacedustSources across the catalog.
+// Used to build the global Spacedust subscription.
+func SpacedustSources() []string {
+	seen := make(map[string]bool)
+	var out []string
+	for _, app := range CatalogAll() {
+		for _, src := range app.SpacedustSources {
+			if !seen[src] {
+				seen[src] = true
+				out = append(out, src)
+			}
+		}
+	}
+	return out
+}
+
+// NonBskyNotificationCollections returns the collection NSIDs (without field path)
+// for non-Bluesky apps that have SpacedustSources defined. Used for Jetstream fallback.
+func NonBskyNotificationCollections() []string {
+	seen := make(map[string]bool)
+	var out []string
+	for _, app := range CatalogAll() {
+		if strings.HasPrefix(app.CollectionPrefix, "app.bsky") {
+			continue
+		}
+		for _, src := range app.SpacedustSources {
+			col := src
+			if i := strings.Index(src, ":"); i >= 0 {
+				col = src[:i]
+			}
+			if !seen[col] {
+				seen[col] = true
+				out = append(out, col)
+			}
+		}
+	}
+	return out
 }
 
 // MatchApp finds the best matching app for a collection name.

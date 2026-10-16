@@ -69,7 +69,14 @@ var DefaultSources = []Source{
 	"app.bsky.graph.follow:subject",
 	// Tangled
 	"sh.tangled.feed.reaction:subject.uri",
-	"sh.tangled.repo.comment:issue",
+	"sh.tangled.feed.star:subject.uri",
+	"sh.tangled.repo.comment:subject.uri",
+	// Grain
+	"social.grain.comment:subject.uri",
+	"social.grain.favorite:subject.uri",
+	// Arabica
+	"social.arabica.alpha.feed.like:subject.uri",
+	"social.arabica.alpha.feed.reply:subject.uri",
 }
 
 type Client struct {

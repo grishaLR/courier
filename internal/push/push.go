@@ -163,6 +163,25 @@ func (d *Dispatcher) sendAPNs(notif *Notification) *Result {
 	return &Result{Token: notif.Token, Success: true}
 }
 
+func androidChannelID(category string) string {
+	switch category {
+	case "like":
+		return "likes"
+	case "reply":
+		return "replies"
+	case "follow":
+		return "follows"
+	case "repost":
+		return "reposts"
+	case "mention":
+		return "mentions"
+	case "quote":
+		return "quotes"
+	default:
+		return "other"
+	}
+}
+
 func (d *Dispatcher) sendFCM(notif *Notification) *Result {
 	if d.fcmClient == nil {
 		return &Result{Token: notif.Token, Err: fmt.Errorf("FCM not configured")}
@@ -175,11 +194,18 @@ func (d *Dispatcher) sendFCM(notif *Notification) *Result {
 	data["title"] = notif.Title
 	data["body"] = notif.Body
 
+	channelID := androidChannelID(notif.Category)
 	msg := &messaging.Message{
 		Token: notif.Token,
 		Data:  data,
 		Android: &messaging.AndroidConfig{
 			Priority: "high",
+			Notification: &messaging.AndroidNotification{
+				Title:     notif.Title,
+				Body:      notif.Body,
+				ChannelID: channelID,
+				Sound:     "default",
+			},
 		},
 	}
 
